@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wall Name Sticker Design</title>
+    <!-- Bootstrap CSS -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #fafafa;
+        }
+
+
+        .top-header-wrapper {
+            max-width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        @media (min-width: 992px) {
+            .top-header-wrapper {
+                max-width: 720px;
+            }
+        }
+
+
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .top-header-wrapper {
+                max-width: 600px;
+            }
+        }
+
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 1rem;
+            margin: 0 auto;
+            flex-wrap: nowrap;
+        }
+
+
+        @media (max-width: 767.98px) {
+            .top-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+
+            .btn-amazon {
+                margin-top: 1rem;
+            }
+        }
+
+
+        .sticker-logo {
+            height: 60px;
+            width: auto;
+        }
+
+
+        .btn-amazon {
+            background-color: #FF9900;
+            color: white;
+            border-radius: 5px;
+            font-weight: 600;
+            border: none;
+            padding: 12px 32px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+            transition: background-color 0.3s ease;
+        }
+
+
+        @media (max-width: 767.98px) {
+            .btn-amazon {
+                padding: 8px 20px;
+                font-size: 1.1rem;
+            }
+        }
+
+
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+
+        @media (max-width: 767.98px) {
+            .grid-item {
+                margin-bottom: 0.5in;
+            }
+        }
+
+
+        .float-btn {
+            position: fixed;
+            z-index: 1050;
+            display: none;
+            animation: glowing-yellow 2.5s infinite alternate;
+            box-shadow: 0 0 10px 2px #FFDD55;
+        }
+
+
+        @media (min-width: 768px) {
+            .float-btn {
+                bottom: 20px;
+                right: 20px;
+                width: auto;
+            }
+        }
+
+
+        @media (max-width: 767.98px) {
+            .float-btn {
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100% - 40px);
+                text-align: center;
+            }
+        }
+
+
+        @keyframes glowing-yellow {
+            0% {
+                box-shadow: 0 0 5px 2px #FFD54F;
+                background-color: #FF9900;
+            }
+
+
+            50% {
+                box-shadow: 0 0 15px 6px #FFEB3B;
+                background-color: #FFB300;
+            }
+
+
+            100% {
+                box-shadow: 0 0 5px 2px #FFD54F;
+                background-color: #FF9900;
+            }
+        }
+
+
+        .segment-section {
+            margin-bottom: 2rem;
+        }
+
+
+        a.segment-link {
+            display: block;
+            color: inherit;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            text-decoration: none;
+        }
+
+
+        a.segment-link:hover {
+            text-decoration: underline;
+        }
+
+
+        a.color-subsegment-link {
+            display: block;
+            margin-bottom: 1.5rem;
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        a.color-subsegment-link:hover {
+            text-decoration: underline;
+        }
+
+
+        a.color-subsegment-link h3 {
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+
+        .image-scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding-bottom: 0.5rem;
+        }
+
+
+        .image-scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+
+        .image-scroll-container::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 4px;
+        }
+
+
+        .image-card {
+            flex-shrink: 0;
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+            cursor: pointer;
+        }
+
+
+        .color-card {
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .color-cards-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+
+        @media (max-width: 767.98px) {
+            .color-cards-row {
+                flex-direction: column;
+            }
+        }
+
+
+        a.color-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .color-filtered-img {
+            width: 100% !important;
+            /* full width */
+            height: auto !important;
+            /* keep aspect ratio */
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+            display: block;
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+
+    <div class="top-header-wrapper">
+        <div class="top-header">
+            <img src="path_to_your_transparent_sticker.png" alt="Sticker Logo" class="sticker-logo" />
+            <a id="topCta" href="https://www.amazon.com/dp/your-product-ASIN" target="_blank" rel="noopener noreferrer"
+                class="btn-amazon">
+                Customize on Amazon &#8594;
+            </a>
+        </div>
+    </div>
+
+
+
+    <div id="stickers-sections" class="container my-4"></div>
+
+
+
+    <a id="floatCta" href="https://www.amazon.com/dp/your-product-ASIN" target="_blank" rel="noopener noreferrer"
+        class="btn-amazon float-btn">
+        Customize on Amazon &#8594;
+    </a>
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const topCta = document.getElementById('topCta');
+            const floatCta = document.getElementById('floatCta');
+
+
+
+            if (!topCta || !floatCta) return;
+
+
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            floatCta.style.display = 'none';
+                        } else {
+                            floatCta.style.display = 'block';
+                        }
+                    });
+                },
+                { threshold: 0.1 }
+            );
+            observer.observe(topCta);
+        });
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const sectionsContainer = document.getElementById('stickers-sections');
+            const urlParams = new URLSearchParams(window.location.search);
+            const filterFor = urlParams.get('for');
+            const filterColor = urlParams.get('color');
+
+
+
+            const products = {
+                laptop: ["silver", "black"],
+                tablet: ["silver", "light-pink"],
+                phone: [],
+                tumbler: []
+            };
+
+
+
+            const imageExtensions = ['jpg'];
+            const maxImagesToCheck = 3;
+
+
+
+            function formatColorName(color) {
+                return color.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+            }
+
+
+
+            function checkImageExists(url) {
+                return new Promise(resolve => {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = url;
+                });
+            }
+
+
+
+            async function scanImagesByPrefixAndColor(prefix, color = null) {
+                const foundImages = [];
+                const colorsFound = new Set();
+
+
+
+                const colorsToScan = color ? [color] : (products[prefix] || []);
+
+
+
+                for (let num = 1; num <= maxImagesToCheck; num++) {
+                    for (const clr of colorsToScan) {
+                        for (const ext of imageExtensions) {
+                            const url = `images/${prefix}-${clr}-${num}.${ext}`;
+                            // eslint-disable-next-line no-await-in-loop
+                            const exists = await checkImageExists(url);
+                            if (exists) {
+                                foundImages.push({ url, color: clr });
+                                colorsFound.add(clr);
+                            }
+                        }
+                    }
+                }
+                return { foundImages, colorsFound: Array.from(colorsFound) };
+            }
+
+
+
+            async function loadOtherProductsOverview(currentPrefix) {
+                for (const prefix of Object.keys(products)) {
+                    if (prefix === currentPrefix) continue;
+
+
+
+                    const { foundImages } = await scanImagesByPrefixAndColor(prefix);
+                    if (!foundImages.length) continue;
+
+
+
+                    const sectionDiv = document.createElement('div');
+                    sectionDiv.className = 'segment-section';
+
+
+
+                    const link = document.createElement('a');
+                    link.href = `?for=${prefix}`;
+                    link.className = 'segment-link';
+                    link.textContent = `For ${prefix.charAt(0).toUpperCase() + prefix.slice(1)}`;
+                    sectionDiv.appendChild(link);
+
+
+
+                    const imagesContainerLink = document.createElement('a');
+                    imagesContainerLink.href = `?for=${prefix}`;
+                    imagesContainerLink.className = 'image-scroll-container';
+                    imagesContainerLink.style.display = 'flex';
+                    imagesContainerLink.style.overflowX = 'auto';
+                    imagesContainerLink.style.gap = '1rem';
+                    imagesContainerLink.style.paddingBottom = '0.5rem';
+
+
+
+                    foundImages.slice(0, 4).forEach(({ url }) => {
+                        const imgEl = document.createElement('img');
+                        imgEl.className = 'image-card';
+                        imgEl.src = url;
+                        imgEl.alt = `Image of ${prefix}`;
+                        imagesContainerLink.appendChild(imgEl);
+                    });
+
+
+
+                    sectionDiv.appendChild(imagesContainerLink);
+                    sectionsContainer.appendChild(sectionDiv);
+                }
+            }
+
+
+
+            async function loadColorFilteredSegment(prefix, color) {
+                const { foundImages, colorsFound } = await scanImagesByPrefixAndColor(prefix, color);
+                if (!foundImages.length) {
+                    sectionsContainer.textContent = 'No images found for this color and product.';
+                    return;
+                }
+
+
+
+                sectionsContainer.innerHTML = '';
+
+
+
+                const mainTitle = document.createElement('h1');
+                mainTitle.className = 'mb-4';
+                mainTitle.textContent = `${formatColorName(color)} ${prefix.charAt(0).toUpperCase() + prefix.slice(1)}`;
+                sectionsContainer.appendChild(mainTitle);
+
+
+
+                const row = document.createElement('div');
+                row.className = 'row color-filtered-row';
+
+
+
+                foundImages.forEach(({ url }) => {
+                    const col = document.createElement('div');
+                    col.className = 'col-12 col-md-6 mb-3';
+
+
+
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.alt = `${formatColorName(color)} ${prefix} image`;
+                    img.className = 'color-filtered-img';
+
+
+
+                    col.appendChild(img);
+                    row.appendChild(col);
+                });
+
+
+
+                sectionsContainer.appendChild(row);
+
+
+
+                const otherColorsTitle = document.createElement('h3');
+                otherColorsTitle.textContent = 'Other Colors';
+                otherColorsTitle.className = 'mt-5 mb-3';
+                sectionsContainer.appendChild(otherColorsTitle);
+
+
+
+                for (const clr of products[prefix] || []) {
+                    if (clr === color) continue;
+
+
+
+                    const { foundImages: colorImgs } = await scanImagesByPrefixAndColor(prefix, clr);
+                    if (!colorImgs.length) continue;
+
+
+
+                    const colorSubsegmentLink = document.createElement('a');
+                    colorSubsegmentLink.href = `?for=${prefix}&color=${clr}`;
+                    colorSubsegmentLink.className = 'color-subsegment-link';
+
+
+
+                    const colorTitle = document.createElement('h3');
+                    colorTitle.textContent = formatColorName(clr);
+                    colorSubsegmentLink.appendChild(colorTitle);
+
+
+
+                    const imagesContainerLink = document.createElement('a');
+                    imagesContainerLink.href = `?for=${prefix}&color=${clr}`;
+                    imagesContainerLink.className = 'image-scroll-container';
+                    imagesContainerLink.style.display = 'flex';
+                    imagesContainerLink.style.overflowX = 'auto';
+                    imagesContainerLink.style.gap = '1rem';
+                    imagesContainerLink.style.paddingBottom = '0.5rem';
+
+
+
+                    colorImgs.slice(0, 4).forEach(({ url }) => {
+                        const imgEl = document.createElement('img');
+                        imgEl.className = 'image-card';
+                        imgEl.src = url;
+                        imgEl.alt = `${prefix} ${clr} image`;
+                        imagesContainerLink.appendChild(imgEl);
+                    });
+
+
+
+                    colorSubsegmentLink.appendChild(imagesContainerLink);
+                    sectionsContainer.appendChild(colorSubsegmentLink);
+                }
+
+
+
+                const otherProdsTitle = document.createElement('h3');
+                otherProdsTitle.textContent = 'Other Products';
+                otherProdsTitle.className = 'mt-5 mb-3';
+                sectionsContainer.appendChild(otherProdsTitle);
+
+
+
+                await loadOtherProductsOverview(prefix);
+            }
+
+
+
+            async function loadProductSegment(prefix) {
+                const { foundImages, colorsFound } = await scanImagesByPrefixAndColor(prefix);
+                if (!foundImages.length) {
+                    sectionsContainer.textContent = 'No images found for this product.';
+                    return;
+                }
+
+
+
+                sectionsContainer.innerHTML = '';
+
+
+
+                // Create product title link that wraps just the title text (not the entire container)
+                const productLink = document.createElement('a');
+                productLink.href = `?for=${prefix}`;
+                productLink.className = 'segment-link';
+
+
+
+                // Create title heading inside link
+                const title = document.createElement('span');
+                title.textContent = `Sticker For ${prefix.charAt(0).toUpperCase() + prefix.slice(1)}`;
+                productLink.appendChild(title);
+                sectionsContainer.appendChild(productLink);
+
+
+
+                // Scan images per color for layout decision
+                const colorImagesData = await Promise.all(colorsFound.map(color => scanImagesByPrefixAndColor(prefix, color)));
+
+
+
+                // Get images count array in same order
+                const imagesCountArr = colorImagesData.map(data => data.foundImages.length);
+
+
+
+                // Check if exactly 2 colors and both have max 2 images
+                if (colorsFound.length === 2 && imagesCountArr.every(c => c <= 2)) {
+                    // Horizontal row container for two cards
+                    const cardsRow = document.createElement('div');
+                    cardsRow.className = 'color-cards-row';
+
+
+
+                    colorsFound.forEach((color, i) => {
+                        const colorLink = document.createElement('a');
+                        colorLink.href = `?for=${prefix}&color=${color}`;
+                        colorLink.className = 'color-card-link';
+
+
+
+                        const colorCard = document.createElement('div');
+                        colorCard.className = 'color-card';
+
+
+
+                        const colorTitle = document.createElement('h3');
+                        colorTitle.textContent = formatColorName(color);
+                        colorCard.appendChild(colorTitle);
+
+
+
+                        const imagesContainer = document.createElement('div');
+                        imagesContainer.className = 'image-scroll-container';
+
+
+
+                        colorImagesData[i].foundImages.forEach(({ url }) => {
+                            const imgEl = document.createElement('img');
+                            imgEl.className = 'image-card';
+                            imgEl.src = url;
+                            imgEl.alt = `${prefix} ${formatColorName(color)} image`;
+                            imagesContainer.appendChild(imgEl);
+                        });
+
+
+
+                        colorCard.appendChild(imagesContainer);
+                        colorLink.appendChild(colorCard);
+                        cardsRow.appendChild(colorLink);
+                    });
+
+
+
+                    sectionsContainer.appendChild(cardsRow);
+                } else {
+                    // Vertical stack of cards for each color
+                    for (let i = 0; i < colorsFound.length; i++) {
+                        const color = colorsFound[i];
+                        const { foundImages } = colorImagesData[i];
+
+
+
+                        const colorLink = document.createElement('a');
+                        colorLink.href = `?for=${prefix}&color=${color}`;
+                        colorLink.className = 'color-card-link';
+
+
+
+                        const colorCard = document.createElement('div');
+                        colorCard.className = 'color-card';
+
+
+
+                        const colorTitle = document.createElement('h3');
+                        colorTitle.textContent = formatColorName(color);
+                        colorCard.appendChild(colorTitle);
+
+
+
+                        const imagesContainer = document.createElement('div');
+                        imagesContainer.className = 'image-scroll-container';
+
+
+
+                        foundImages.slice(0, 4).forEach(({ url }) => {
+                            const imgEl = document.createElement('img');
+                            imgEl.className = 'image-card';
+                            imgEl.src = url;
+                            imgEl.alt = `${prefix} ${formatColorName(color)} image`;
+                            imagesContainer.appendChild(imgEl);
+                        });
+
+
+
+                        colorCard.appendChild(imagesContainer);
+                        colorLink.appendChild(colorCard);
+                        sectionsContainer.appendChild(colorLink);
+                    }
+                }
+
+
+
+                // Other products title and overview
+                const otherProdsTitle = document.createElement('h3');
+                otherProdsTitle.textContent = 'Other Products';
+                otherProdsTitle.className = 'mt-5 mb-3';
+                sectionsContainer.appendChild(otherProdsTitle);
+
+
+
+                await loadOtherProductsOverview(prefix);
+            }
+
+
+
+            async function loadMainSegments() {
+                sectionsContainer.innerHTML = '';
+
+
+
+                for (const prefix of Object.keys(products)) {
+                    if (filterFor === prefix) continue;
+
+
+
+                    const { foundImages } = await scanImagesByPrefixAndColor(prefix);
+                    if (!foundImages.length) continue;
+
+
+
+                    const sectionDiv = document.createElement('div');
+                    sectionDiv.className = 'segment-section';
+
+
+
+                    const link = document.createElement('a');
+                    link.href = `?for=${prefix}`;
+                    link.className = 'segment-link';
+                    link.textContent = `For ${prefix.charAt(0).toUpperCase() + prefix.slice(1)}`;
+                    sectionDiv.appendChild(link);
+
+
+
+                    const imagesContainerLink = document.createElement('a');
+                    imagesContainerLink.href = `?for=${prefix}`;
+                    imagesContainerLink.className = 'image-scroll-container';
+                    imagesContainerLink.style.display = 'flex';
+                    imagesContainerLink.style.overflowX = 'auto';
+                    imagesContainerLink.style.gap = '1rem';
+                    imagesContainerLink.style.paddingBottom = '0.5rem';
+
+
+
+                    foundImages.slice(0, 4).forEach(({ url }) => {
+                        const imgEl = document.createElement('img');
+                        imgEl.className = 'image-card';
+                        imgEl.src = url;
+                        imgEl.alt = `Image of ${prefix}`;
+                        imagesContainerLink.appendChild(imgEl);
+                    });
+
+
+
+                    sectionDiv.appendChild(imagesContainerLink);
+                    sectionsContainer.appendChild(sectionDiv);
+                }
+            }
+
+
+
+            async function initialize() {
+                if (filterFor && filterColor && products[filterFor]?.includes(filterColor)) {
+                    await loadColorFilteredSegment(filterFor, filterColor);
+                } else if (filterFor && products[filterFor]) {
+                    await loadProductSegment(filterFor);
+                } else {
+                    await loadMainSegments();
+                }
+            }
+
+
+
+            initialize();
+        });
+    </script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+
+</html>
