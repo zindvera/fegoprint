@@ -318,7 +318,80 @@
         }
 
 
+        #phone {
+            width: 300px;
+            height: 600px;
+            border: 13px solid #424242;
+            border-radius: 46px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 28px 0px #bdbdbd40;
+            background: #000;
+            margin: 0 auto 44px;
+        }
 
+        #wallArt {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            transform: scale(0.4) translateY(-20%);
+            transform-origin: center center;
+            transition: transform 2s cubic-bezier(0.56, 0.1, 0.92, 0.9);
+        }
+
+        #openCameraBtn {
+            position: absolute;
+            text-decoration: none;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            padding: 18px 0;
+            background-image: linear-gradient(90deg, #5E60CE 0%, #3A0CA3 100%);
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.19rem;
+            border: none;
+            border-radius: 42px;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 4px 16px -2px #3a0ca352;
+            transition: background 0.3s, box-shadow 0.24s;
+            text-align: center;
+            letter-spacing: 0.04em;
+        }
+
+
+        #imageContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 110vh;
+            width: 100%;
+            transition: transform 8s cubic-bezier(0.62, 0.21, 0.38, 0.95);
+        }
+
+        #imageContainer img {
+            height: 100%;
+            width: 130%;
+            object-fit: cover;
+            display: block;
+            transition: transform 3s cubic-bezier(0.4, 0.72, 0.39, 0.98);
+            transform-origin: center center;
+        }
+
+
+        #openCameraBtn:hover {
+            background-image: linear-gradient(90deg, #7209b7 10%, #4361ee 90%);
+            color: #fff;
+            box-shadow: 0 2px 30px -3px #3a0ca338;
+        }
 
 
         /* Phone view: for screen widths up to 767px (small devices) */
@@ -410,7 +483,7 @@
 
     <!-- Original Open Camera Button -->
     <div id="cameraButtonWrapper">
-        <a href="mockoverflow.online" target="_blank" id="openCameraBtn" class="btn btn-primary">Open Camera</a>
+        <a href="mockoverflow.online" target="_blank" id="topenCameraBtn" class="btn btn-primary">Open Camera</a>
 
         <!-- Accordion, open by default -->
         <div id="cameraAccordion" class="accordion-expanded">
@@ -418,6 +491,16 @@
             <div class="accordion-content">
                 <!-- Put your camera UI or content here -->
                 <p>See how this sticker will look on your laptop, car or anything.</p>
+                <br>
+                <div id="phone">
+                    <div id="imageContainer">
+                        <img id="bedroomImage" src="../../../../../media/laptop-demo.jpg" alt="Bedroom" />
+                    </div>
+                    <div id="wallArt" style="background-image: url('../../../../../media/sticker-demo.png')">
+                    </div>
+                    <a href="wall-art/demo/index.html" id="openCameraBtn" aria-label="Open camera overlay preview">Open
+                        Camera</a>
+                </div>
 
             </div>
         </div>
@@ -932,6 +1015,90 @@
                 cameraAccordion.style.display = 'block';
                 setSessionCookie('cameraAccordionSeen', 'true');
             }
+        });
+
+
+
+
+
+
+
+        const imageContainer = document.getElementById('imageContainer');
+        const wallArtDiv = document.getElementById('wallArt');
+        let toLeft = true;
+        let step = 0;
+        let slideInterval, wallArtInterval;
+
+
+        function slideImage() {
+            switch (step) {
+                case 0:
+                    imageContainer.style.transform = "translateX(-40px) translateY(0px)";
+                    break;
+                case 1:
+                    imageContainer.style.transform = "translateX(-30px) translateY(0px)";
+                    break;
+                case 2:
+                    imageContainer.style.transform = "translateX(-40px) translateY(0px)";
+                    break;
+                case 3:
+                    imageContainer.style.transform = "translateX(-25px) translateY(0px)";
+                    break;
+                case 4:
+                    imageContainer.style.transform = "translateX(0) translateY(0)";
+                    break;
+            }
+            step = (step + 1) % 6;
+        }
+
+
+
+        function animateWallArt() {
+            switch (step) {
+
+                case 0:
+                    wallArtDiv.style.transform = "scale(0.6) translateY(-40%) ";
+                    break;
+                case 1:
+                    wallArtDiv.style.transform = "scale(0.4) translateY(-30%) ";
+                    break;
+                case 2:
+                    wallArtDiv.style.transform = "scale(0.55) translateY(-42%) ";
+                    break;
+                case 3:
+                    wallArtDiv.style.transform = "scale(0.6) translateY(-28%) ";
+                    break;
+                case 4:
+                    wallArtDiv.style.transform = "scale(0.45) translateY(-20%) ";
+                    break;
+                case 5:
+                    wallArtDiv.style.transform = "scale(0.38) translateY(-28%) ";
+                    break;
+                case 6:
+                    wallArtDiv.style.transform = "scale(0.5) translateY(-18%) ";
+                    break;
+                case 7:
+                    wallArtDiv.style.transform = "scale(0.4) translateY(-23%) ";
+                    break;
+                case 8:
+                    wallArtDiv.style.transform = "scale(0.55) translateY(-19%) ";
+                    break;
+                case 9:
+                    wallArtDiv.style.transform = "scale(0.4) translateY(-25%) ";
+                    break;
+
+            }
+            step = (step + 1) % 10;
+        }
+        function startAnimations() {
+            slideInterval = setInterval(slideImage, 5000);
+            wallArtInterval = setInterval(animateWallArt, 5000);
+            slideImage();
+            animateWallArt();
+        }
+        setTimeout(startAnimations, 2500);
+        document.getElementById('openCameraBtn').addEventListener('click', () => {
+            window.location.href = '/camera-overlay.html';
         });
 
 
