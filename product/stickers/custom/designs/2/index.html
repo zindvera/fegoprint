@@ -317,7 +317,7 @@
         .close-icon {
 
             font-size: 40px;
-           
+
             color: #333;
             cursor: pointer;
             user-select: none;
@@ -403,6 +403,10 @@
         /* Phone view: for screen widths up to 767px (small devices) */
         @media (max-width: 767px) {
 
+            .accordion-expanded {
+                margin-top: 25px;
+            }
+
             .btn-amazon {
                 min-width: 60vw;
                 margin: auto;
@@ -462,10 +466,8 @@
             #accordion-text {
                 padding-left: 10px;
                 padding-right: 10px;
-                font-size:24px;
+                font-size: 24px;
             }
-
-
 
         }
 
@@ -495,7 +497,7 @@
             #accordion-text {
                 padding-left: 10px;
                 padding-right: 10px;
-                font-size:25px;
+                font-size: 25px;
             }
 
 
@@ -534,7 +536,7 @@
                     <span class="close-icon" aria-label="Close accordion" role="button" tabindex="0">&times;</span>
                 </div>
                 <div class="textaccordion" style="text-align: start;">
-                <p id="accordion-text">See how this sticker will look on your laptop, car or anything.</p>
+                    <p id="accordion-text">See how this sticker will look on your laptop, car or anything.</p>
 
                 </div>
                 <!-- Put your camera UI or content here -->
@@ -1056,7 +1058,7 @@
 
             if (accordionSeen) {
                 // Remove accordion element if cookie found
-                // cameraAccordion.remove();
+                cameraAccordion.remove();
             } else {
                 // Show accordion and set session cookie
                 cameraAccordion.style.display = 'block';
@@ -1148,6 +1150,26 @@
             window.location.href = '/camera-overlay.html';
         });
 
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const closeIcon = document.querySelector('.accordion-content .close-icon');
+            if (!closeIcon) return;
+
+            closeIcon.addEventListener('click', () => {
+                const cameraAccordion = document.getElementById('cameraAccordion');
+                if (cameraAccordion) {
+                    cameraAccordion.remove();
+                }
+            });
+
+            // Optional: keyboard accessibility (Enter or Space to activate)
+            closeIcon.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    closeIcon.click();
+                }
+            });
+        });
 
 
     </script>
