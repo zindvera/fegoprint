@@ -274,7 +274,7 @@
         .accordion-expanded {
             margin-top: 8px;
             padding: 12px;
-            background: #eee;
+            background: #e0ebfd;
             border-radius: 4px;
             position: relative;
             width: 100%;
@@ -312,6 +312,13 @@
             padding-right: 14px;
         }
 
+        .accordion-content {
+            text-align: start;
+            font-size: 18px;
+        }
+
+
+
 
 
         /* Phone view: for screen widths up to 767px (small devices) */
@@ -327,6 +334,8 @@
             #cameraButtonWrapper {
                 width: 100vw;
                 margin-top: 0.25in;
+                padding-left: 14px;
+
             }
 
             .ctadiv {
@@ -355,6 +364,11 @@
                 width: 70vw;
 
             }
+
+            #cameraAccordion {
+                width: 60%;
+                margin-left: auto;
+            }
         }
 
         /* Desktop view: for screen widths 1024px and above */
@@ -365,6 +379,11 @@
             #cameraButtonWrapper {
                 width: 65vw;
 
+            }
+
+            #cameraAccordion {
+                width: 60%;
+                margin-left: auto;
             }
         }
     </style>
@@ -398,8 +417,8 @@
             <div class="triangle-arrow"></div>
             <div class="accordion-content">
                 <!-- Put your camera UI or content here -->
-                <p>Camera content visible on load, pushing page down.</p>
-                <p>Powered by <a href="" target="_blank">MockOverflow</a></p>
+                <p>See how this sticker will look on your laptop, car or anything.</p>
+
             </div>
         </div>
     </div>
@@ -907,7 +926,7 @@
 
             if (accordionSeen) {
                 // Remove accordion element if cookie found
-                cameraAccordion.remove();
+                // cameraAccordion.remove();
             } else {
                 // Show accordion and set session cookie
                 cameraAccordion.style.display = 'block';
