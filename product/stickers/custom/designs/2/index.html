@@ -269,6 +269,104 @@
             box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
             display: block;
         }
+
+
+        .accordion-expanded {
+            margin-top: 8px;
+            padding: 12px;
+            background: #eee;
+            border-radius: 4px;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Triangle arrow above accordion pointing to button */
+        .triangle-arrow {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #eee;
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            /* adjust horizontal position aligned with button */
+        }
+
+        /* Scroll fixed button style */
+        .fixed-scroll-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+            display: none;
+        }
+
+        #cameraButtonWrapper {
+            position: relative;
+            width: 70vw;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: end;
+            padding-right: 14px;
+        }
+
+
+
+        /* Phone view: for screen widths up to 767px (small devices) */
+        @media (max-width: 767px) {
+
+            .btn-amazon {
+                min-width: 60vw;
+                margin: auto;
+                text-align: center;
+            }
+
+            /* Phone-specific styles */
+            #cameraButtonWrapper {
+                width: 100vw;
+                margin-top: 0.25in;
+            }
+
+            .ctadiv {
+                display: flex;
+                justify-content: flex-end;
+                /* aligns content to the right */
+                align-items: center;
+                /* vertically centers content if needed */
+                padding-right: 15px;
+                margin-top: 0.2in;
+                /* optional padding */
+            }
+
+            .top-header {
+
+                align-items: center;
+            }
+        }
+
+        /* Tablet view: for screen widths between 768px and 1023px */
+        @media (min-width: 768px) and (max-width: 1023px) {
+
+            /* Tablet-specific styles */
+            /* Phone-specific styles */
+            #cameraButtonWrapper {
+                width: 70vw;
+
+            }
+        }
+
+        /* Desktop view: for screen widths 1024px and above */
+        @media (min-width: 1024px) {
+
+            /* Desktop-specific styles */
+            /* Phone-specific styles */
+            #cameraButtonWrapper {
+                width: 65vw;
+
+            }
+        }
     </style>
 </head>
 
@@ -280,12 +378,37 @@
     <div class="top-header-wrapper">
         <div class="top-header">
             <img src="images/sticker.png" alt="Sticker Logo" class="sticker-logo" />
-            <a id="topCta" href="https://www.amazon.com/dp/your-product-ASIN" target="_blank" rel="noopener noreferrer"
-                class="btn-amazon">
-                Get on Amazon &#8594;
-            </a>
+            <div class="ctadiv">
+                <a id="topCta" href="https://www.amazon.com/dp/your-product-ASIN" target="_blank"
+                    rel="noopener noreferrer" class="btn-amazon">
+                    Get on Amazon
+                </a>
+            </div>
+
         </div>
     </div>
+
+
+    <!-- Original Open Camera Button -->
+    <div id="cameraButtonWrapper">
+        <a href="mockoverflow.online" target="_blank" id="openCameraBtn" class="btn btn-primary">Open Camera</a>
+
+        <!-- Accordion, open by default -->
+        <div id="cameraAccordion" class="accordion-expanded">
+            <div class="triangle-arrow"></div>
+            <div class="accordion-content">
+                <!-- Put your camera UI or content here -->
+                <p>Camera content visible on load, pushing page down.</p>
+                <p>Powered by <a href="" target="_blank">MockOverflow</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll fixed button, hidden initially -->
+    <a href="mockoverflow.online" target="_blank" id="scrollOpenCameraBtn"
+        class="btn btn-primary fixed-scroll-btn hidden-btn" style="top: 20px; right: 20px;">
+        Open Camera
+    </a>
 
 
 
@@ -295,7 +418,7 @@
 
     <a id="floatCta" href="https://www.amazon.com/dp/your-product-ASIN" target="_blank" rel="noopener noreferrer"
         class="btn-amazon float-btn">
-        Get on Amazon &#8594;
+        Get on Amazon
     </a>
 
 
@@ -736,7 +859,64 @@
 
 
             initialize();
+
         });
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cameraWrapper = document.getElementById('cameraButtonWrapper');
+            const scrollOpenCameraBtn = document.getElementById('scrollOpenCameraBtn');
+
+            if (!cameraWrapper || !scrollOpenCameraBtn) return;
+
+            // Observe cameraButtonWrapper's visibility
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            scrollOpenCameraBtn.style.display = 'none';
+                        } else {
+                            scrollOpenCameraBtn.style.display = 'block';
+                        }
+                    });
+                },
+                { threshold: 0 }
+            );
+            observer.observe(cameraWrapper);
+        });
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cameraAccordion = document.getElementById('cameraAccordion');
+            if (!cameraAccordion) return;
+
+            // Function to set a session cookie (no expiration, destroyed on browser close)
+            function setSessionCookie(name, value) {
+                document.cookie = name + '=' + encodeURIComponent(value) + '; path=/';
+            }
+
+            // Function to get a cookie by name
+            function getCookie(name) {
+                return document.cookie.split('; ').reduce((r, v) => {
+                    const parts = v.split('=');
+                    return parts[0] === name ? decodeURIComponent(parts[1]) : r;
+                }, '');
+            }
+
+            const accordionSeen = getCookie('cameraAccordionSeen');
+
+            if (accordionSeen) {
+                // Remove accordion element if cookie found
+                cameraAccordion.remove();
+            } else {
+                // Show accordion and set session cookie
+                cameraAccordion.style.display = 'block';
+                setSessionCookie('cameraAccordionSeen', 'true');
+            }
+        });
+
+
+
     </script>
 
 
