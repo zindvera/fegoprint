@@ -285,12 +285,12 @@
         .triangle-arrow {
             width: 0;
             height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 10px solid #eee;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 25px solid #e0ebfd;
             position: absolute;
-            top: -10px;
-            right: 15px;
+            top: -24px;
+            right: 25px;
             /* adjust horizontal position aligned with button */
         }
 
@@ -312,11 +312,17 @@
             padding-right: 14px;
         }
 
-        .accordion-content {
-            text-align: start;
-            font-size: 18px;
-        }
 
+
+        .close-icon {
+
+            font-size: 40px;
+           
+            color: #333;
+            cursor: pointer;
+            user-select: none;
+
+        }
 
         #phone {
             width: 300px;
@@ -327,7 +333,7 @@
             position: relative;
             box-shadow: 0 0 28px 0px #bdbdbd40;
             background: #000;
-            margin: 0 auto 44px;
+            margin: 0 auto 5px;
         }
 
         #wallArt {
@@ -434,30 +440,65 @@
             /* Tablet-specific styles */
             /* Phone-specific styles */
             #cameraButtonWrapper {
-                width: 70vw;
+                /* width: 70vw; */
+                position: relative;
 
             }
 
             #cameraAccordion {
-                width: 60%;
-                margin-left: auto;
+                position: absolute;
+                top: 0;
+                right: 0;
+                /* align to right of cameraButtonWrapper */
+                width: 55%;
+                margin-left: 0;
+                margin-top: 60px;
+                /* remove auto margin */
+                z-index: 1055;
+                /* overlay */
+
             }
+
+            #accordion-text {
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size:24px;
+            }
+
+
+
         }
 
         /* Desktop view: for screen widths 1024px and above */
         @media (min-width: 1024px) {
 
-            /* Desktop-specific styles */
-            /* Phone-specific styles */
             #cameraButtonWrapper {
-                width: 65vw;
-
+                position: relative;
+                /* positioning context */
+                /* width: 65vw; */
             }
 
             #cameraAccordion {
-                width: 60%;
-                margin-left: auto;
+                position: absolute;
+                top: 0;
+                right: 0;
+                /* align to right of cameraButtonWrapper */
+                width: 50%;
+                margin-left: 0;
+                margin-top: 60px;
+                /* remove auto margin */
+                z-index: 1055;
+                /* overlay */
+
             }
+
+            #accordion-text {
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size:25px;
+            }
+
+
         }
     </style>
 </head>
@@ -489,8 +530,14 @@
         <div id="cameraAccordion" class="accordion-expanded">
             <div class="triangle-arrow"></div>
             <div class="accordion-content">
+                <div class="close-accordion-content">
+                    <span class="close-icon" aria-label="Close accordion" role="button" tabindex="0">&times;</span>
+                </div>
+                <div class="textaccordion" style="text-align: start;">
+                <p id="accordion-text">See how this sticker will look on your laptop, car or anything.</p>
+
+                </div>
                 <!-- Put your camera UI or content here -->
-                <p>See how this sticker will look on your laptop, car or anything.</p>
                 <br>
                 <div id="phone">
                     <div id="imageContainer">
