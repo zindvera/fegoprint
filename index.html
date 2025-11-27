@@ -31,6 +31,29 @@
             /* Light pink */
             color: #ffffff;
         }
+
+        #index-logo {
+            height: 60px;
+        }
+
+
+        /* Phone view: for screen widths up to 767px (small devices) */
+        @media (max-width: 767px) {
+            
+        #index-logo {
+            height: 40px;
+        }
+        }
+
+        /* Tablet view: for screen widths between 768px and 1023px */
+        @media (min-width: 768px) and (max-width: 1023px) {
+
+        }
+
+        /* Desktop view: for screen widths 1024px and above */
+        @media (min-width: 1024px) {
+            
+        }
     </style>
 </head>
 
@@ -38,12 +61,12 @@
 
     <div class="container py-3 fixed-nav">
         <div class="d-flex justify-content-center">
-            <img height="60px" src="media/logo/fegoprint.png" alt="Brand Logo" />
+            <img id="index-logo" src="media/logo/fegoprint.png" alt="Fegoprint Brand Logo" />
         </div>
     </div>
 
 
-     <div class="navdiv"></div>
+    <div class="navdiv"></div>
 
 
     <div class="container-fluid">
