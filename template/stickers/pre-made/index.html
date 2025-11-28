@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stickers</title>
   <!-- Bootstrap CSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -36,17 +37,28 @@
       display: none !important;
     }
 
-    /* Responsive column count */
-    @media (max-width: 992px) {
+    /* Phone view: width 100% (less than 600px) */
+    @media (max-width: 599px) {
       #design-list {
         column-count: 2;
       }
+
     }
 
-    @media (max-width: 576px) {
+    /* Tablet view: width 95% (600px to 1199px) */
+    @media (min-width: 600px) and (max-width: 1199px) {
       #design-list {
-        column-count: 1;
+        column-count: 4;
       }
+
+    }
+
+    /* Desktop view: width 90% (1200px and above) */
+    @media (min-width: 1200px) {
+      #design-list {
+        column-count: 4;
+      }
+
     }
   </style>
 </head>
