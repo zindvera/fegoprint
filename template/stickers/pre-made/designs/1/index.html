@@ -8,6 +8,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sticker Design 1</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../../media/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../../media/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../../media/favicon/favicon-180x180.png">
     <!-- Bootstrap CSS -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -579,7 +582,7 @@
 
 
 
-<script src="../../../../../nav.js"></script>
+    <script src="../../../../../nav.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const topCta = document.getElementById('topCta');
@@ -1087,16 +1090,16 @@
         function slideImage() {
             switch (step) {
                 case 0:
-                    imageContainer.style.transform = "translateX(-40px) translateY(0px)";
+                    imageContainer.style.transform = "translateX(-20px) translateY(0)";
                     break;
                 case 1:
-                    imageContainer.style.transform = "translateX(-30px) translateY(0px)";
+                    imageContainer.style.transform = "translateX(-10px) translateY(0)";
                     break;
                 case 2:
-                    imageContainer.style.transform = "translateX(-40px) translateY(0px)";
+                    imageContainer.style.transform = "translateX(-5px) translateY(-15px)";
                     break;
                 case 3:
-                    imageContainer.style.transform = "translateX(-25px) translateY(0px)";
+                    imageContainer.style.transform = "translateX(-10px) translateY(15px)";
                     break;
                 case 4:
                     imageContainer.style.transform = "translateX(0) translateY(0)";
@@ -1106,44 +1109,45 @@
         }
 
 
-
         function animateWallArt() {
             switch (step) {
 
                 case 0:
-                    wallArtDiv.style.transform = "scale(0.6) translateY(-40%) ";
+                    wallArtDiv.style.transform = "scale(0.6) translateY(-20%) rotate(50deg)";
                     break;
                 case 1:
-                    wallArtDiv.style.transform = "scale(0.4) translateY(-30%) ";
+                    wallArtDiv.style.transform = "scale(0.4) translateY(-30%) rotate(40deg)";
                     break;
                 case 2:
-                    wallArtDiv.style.transform = "scale(0.55) translateY(-42%) ";
+                    wallArtDiv.style.transform = "scale(0.55) translateY(-18%) rotate(25deg)";
                     break;
                 case 3:
-                    wallArtDiv.style.transform = "scale(0.6) translateY(-28%) ";
+                    wallArtDiv.style.transform = "scale(0.64) translateY(-21%) rotate(30deg)";
                     break;
                 case 4:
-                    wallArtDiv.style.transform = "scale(0.45) translateY(-20%) ";
+                    wallArtDiv.style.transform = "scale(0.45) translateY(-20%) rotate(35deg)";
                     break;
                 case 5:
-                    wallArtDiv.style.transform = "scale(0.38) translateY(-28%) ";
+                    wallArtDiv.style.transform = "scale(0.38) translateY(-28%) rotate(40deg)";
                     break;
                 case 6:
-                    wallArtDiv.style.transform = "scale(0.5) translateY(-18%) ";
+                    wallArtDiv.style.transform = "scale(0.5) translateY(-18%) rotate(6deg)";
                     break;
                 case 7:
-                    wallArtDiv.style.transform = "scale(0.4) translateY(-23%) ";
+                    wallArtDiv.style.transform = "scale(0.4) translateY(-23%) rotate(0deg)";
                     break;
                 case 8:
-                    wallArtDiv.style.transform = "scale(0.55) translateY(-19%) ";
+                    wallArtDiv.style.transform = "scale(0.55) translateY(-19%) rotate(50deg)";
                     break;
                 case 9:
-                    wallArtDiv.style.transform = "scale(0.4) translateY(-25%) ";
+                    wallArtDiv.style.transform = "scale(0.4) translateY(-25%) rotate(40deg)";
                     break;
 
             }
             step = (step + 1) % 10;
         }
+
+
         function startAnimations() {
             slideInterval = setInterval(slideImage, 5000);
             wallArtInterval = setInterval(animateWallArt, 5000);
