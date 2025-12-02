@@ -408,6 +408,13 @@
         /* Phone view: for screen widths up to 767px (small devices) */
         @media (max-width: 767px) {
 
+            .fixed-scroll-btn {
+
+                top: 7px;
+                right: 10px;
+
+            }
+
             .accordion-expanded {
                 margin-top: 25px;
             }
@@ -463,6 +470,13 @@
         /* Tablet view: for screen widths between 768px and 1023px */
         @media (min-width: 768px) and (max-width: 1023px) {
 
+            .fixed-scroll-btn {
+
+                top: 7px;
+                right: 20px;
+
+            }
+
             /* Tablet-specific styles */
             /* Phone-specific styles */
             #cameraButtonWrapper {
@@ -496,6 +510,13 @@
 
         /* Desktop view: for screen widths 1024px and above */
         @media (min-width: 1024px) {
+
+            .fixed-scroll-btn {
+
+                top: 7px;
+                right: 28px;
+
+            }
 
             #cameraButtonWrapper {
                 position: relative;
@@ -560,7 +581,7 @@
                     <span class="close-icon" aria-label="Close accordion" role="button" tabindex="0">&times;</span>
                 </div>
                 <div class="textaccordion" style="text-align: start;">
-                    <p id="accordion-text">See how this wall art will look on your wall.</p>
+                    <p id="accordion-text">Open the camera to see how this wall art will look on your wall.</p>
 
                 </div>
                 <!-- Put your camera UI or content here -->
@@ -581,7 +602,7 @@
 
     <!-- Scroll fixed button, hidden initially -->
     <a href="mockoverflow.online" target="_blank" id="scrollOpenCameraBtn"
-        class="btn btn-primary fixed-scroll-btn hidden-btn" style="top: 20px; right: 20px;">
+        class="btn btn-primary fixed-scroll-btn hidden-btn">
         Open Camera
     </a>
 
@@ -598,27 +619,61 @@
         Get on Amazon
     </a>
 
-      <footer style="margin-top: 1.5in; padding: 1.25rem 0; text-align: center; font-size: 0.9rem; color: #4b5563; background: linear-gradient(90deg,#e7f7ec,#f3f4f6); border-top: 1px solid #d1d5db;">
-  <div style="max-width: 900px; margin: 0 auto; padding: 0 1rem;">
-    <p style="margin: 0 0 0.25rem 0;">&copy; 2025 FegoPrint. All rights reserved.</p>
-    <p style="margin: 0;">
-      <a href="../../../../../about.html" style="color: #2563eb; text-decoration: none; margin: 0 0.5rem;">About</a>
-      <span style="color:#9ca3af;">|</span>
-      <a href="../../../../../privacy.html" style="color: #2563eb; text-decoration: none; margin: 0 0.5rem;">Privacy</a>
-      <span style="color:#9ca3af;">|</span>
-      <a href="../../../../../terms.html" style="color: #2563eb; text-decoration: none; margin: 0 0.5rem;">Terms</a>
-      <span style="color:#9ca3af;">|</span>
-      <a href="../../../../../cookies.html" style="color: #2563eb; text-decoration: none; margin: 0 0.5rem;">Cookies</a>
-      <span style="color:#9ca3af;">|</span>
-      <a href="../../../../../contact.html" style="color: #2563eb; text-decoration: none; margin: 0 0.5rem;">Contact</a>
-    </p>
-  </div>
-</footer>
+    <footer
+        style="margin-top: 1.5in; padding: 1.25rem 0; text-align: center; font-size: 0.9rem; color: #4b5563; background: linear-gradient(90deg,#e7f7ec,#f3f4f6); border-top: 1px solid #d1d5db;">
+        <div style="max-width: 900px; margin: 0 auto; padding: 0 1rem;">
+            <p style="margin: 0 0 0.25rem 0;">&copy; 2025 FegoPrint. All rights reserved.</p>
+            <p style="margin: 0;">
+                <a href="../../../../../about.html"
+                    style="color: #2563eb; text-decoration: none; margin: 0 0.5rem;">About</a>
+                <span style="color:#9ca3af;">|</span>
+                <a href="../../../../../privacy.html"
+                    style="color: #2563eb; text-decoration: none; margin: 0 0.5rem;">Privacy</a>
+                <span style="color:#9ca3af;">|</span>
+                <a href="../../../../../terms.html"
+                    style="color: #2563eb; text-decoration: none; margin: 0 0.5rem;">Terms</a>
+                <span style="color:#9ca3af;">|</span>
+                <a href="../../../../../cookies.html"
+                    style="color: #2563eb; text-decoration: none; margin: 0 0.5rem;">Cookies</a>
+                <span style="color:#9ca3af;">|</span>
+                <a href="../../../../../contact.html"
+                    style="color: #2563eb; text-decoration: none; margin: 0 0.5rem;">Contact</a>
+            </p>
+        </div>
+    </footer>
 
 
     <script src="../../../../../nav.js"></script>
 
     <script>
+
+
+        window.addEventListener('DOMContentLoaded', () => {
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+                return null;
+            }
+
+            function setCookie(name, value) {
+                const d = new Date();
+                d.setFullYear(d.getFullYear() + 10); // 10 years expiration
+                const expires = "expires=" + d.toUTCString();
+                document.cookie = `${name}=${value};${expires};path=/`;
+            }
+
+            const stickerCameraGuide = getCookie('wallartCameraGuide');
+
+            if (!stickerCameraGuide) {
+                setCookie('wallartCameraGuide', 'true');
+            } else {
+                const element = document.getElementById('accordion-text');
+                if (element) {
+                    element.remove();
+                }
+            }
+        });
 
         async function imageExists(url) {
             try {
@@ -710,34 +765,34 @@
         });
 
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const cameraAccordion = document.getElementById('cameraAccordion');
-            if (!cameraAccordion) return;
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     const cameraAccordion = document.getElementById('cameraAccordion');
+        //     if (!cameraAccordion) return;
 
-            // Function to set a session cookie (no expiration, destroyed on browser close)
-            function setSessionCookie(name, value) {
-                document.cookie = name + '=' + encodeURIComponent(value) + '; path=/';
-            }
+        //     // Function to set a session cookie (no expiration, destroyed on browser close)
+        //     function setSessionCookie(name, value) {
+        //         document.cookie = name + '=' + encodeURIComponent(value) + '; path=/';
+        //     }
 
-            // Function to get a cookie by name
-            function getCookie(name) {
-                return document.cookie.split('; ').reduce((r, v) => {
-                    const parts = v.split('=');
-                    return parts[0] === name ? decodeURIComponent(parts[1]) : r;
-                }, '');
-            }
+        //     // Function to get a cookie by name
+        //     function getCookie(name) {
+        //         return document.cookie.split('; ').reduce((r, v) => {
+        //             const parts = v.split('=');
+        //             return parts[0] === name ? decodeURIComponent(parts[1]) : r;
+        //         }, '');
+        //     }
 
-            const accordionSeen = getCookie('cameraAccordionSeen');
+        //     const accordionSeen = getCookie('cameraAccordionSeen');
 
-            if (accordionSeen) {
-                // Remove accordion element if cookie found
-                // cameraAccordion.remove();
-            } else {
-                // Show accordion and set session cookie
-                cameraAccordion.style.display = 'block';
-                setSessionCookie('cameraAccordionSeen', 'true');
-            }
-        });
+        //     if (accordionSeen) {
+        //         // Remove accordion element if cookie found
+        //         // cameraAccordion.remove();
+        //     } else {
+        //         // Show accordion and set session cookie
+        //         cameraAccordion.style.display = 'block';
+        //         setSessionCookie('cameraAccordionSeen', 'true');
+        //     }
+        // });
 
 
 
