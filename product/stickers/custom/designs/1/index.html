@@ -21,6 +21,38 @@
             background: #fafafa;
         }
 
+        
+        #loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .loader {
+            border: 6px solid #b6fad5;
+            /* Light blue background */
+            border-top: 6px solid #01ce7f;
+            /* Blue spinner color */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
         .imgcard {
             width: 100%;
             height: auto;
@@ -276,7 +308,9 @@
 
 
 <body>
-
+    <div id="loader-overlay">
+        <div class="loader"></div>
+    </div>
     <div class="navdiv" style="margin-bottom: 0.6in;"></div>
 
     <div class="top-header-wrapper">
@@ -756,6 +790,16 @@
 
             initialize();
         });
+
+                window.addEventListener('load', () => {
+            const loader = document.getElementById('loader-overlay');
+            if (loader) {
+                loader.style.display = 'none';
+            }
+        });
+
+
+
     </script>
 
 
