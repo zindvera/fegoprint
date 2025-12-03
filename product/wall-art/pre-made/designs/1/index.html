@@ -706,6 +706,13 @@
                 const element = document.getElementById('accordion-text');
                 if (element) {
                     element.remove();
+                    const phoneElement = document.getElementById("phone");
+                    if (phoneElement) {
+                        phoneElement.style.marginTop = "-35px";
+                        console.log("Margin applied to phone element");
+                    } else {
+                        console.log("Phone element not found");
+                    }
                 }
             }
         });
