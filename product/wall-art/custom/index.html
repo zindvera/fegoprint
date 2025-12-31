@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Wall Arts</title>
+  <title>Custom Wall Arts | FegoPrint</title>
   <link rel="icon" type="image/png" sizes="32x32" href="../../../media/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../../../media/favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../../../media/favicon/favicon-180x180.png">
@@ -34,13 +34,6 @@
       border-radius: 0;
       /* Optional: remove rounding if any */
     }
-
-    /* Hide buttons instead of disabling */
-    button.hidden {
-      display: none !important;
-    }
-
-
 
     #loader-overlay {
       position: fixed;
@@ -72,6 +65,10 @@
       }
     }
 
+    /* Hide buttons instead of disabling */
+    button.hidden {
+      display: none !important;
+    }
 
     /* Phone view: width 100% (less than 600px) */
     @media (max-width: 599px) {
@@ -135,7 +132,7 @@
   <script src="config.js"></script>
   <script src="../../../nav.js"></script>
   <script>
-    const designsPerPage = 15; // adjust as needed
+  
     let currentPage = 1;
     let availableDesigns = [];
 
@@ -159,6 +156,7 @@
       return images;
     }
 
+    // 2. UPDATED: Get random preview (unchanged but cleaner)
     async function getRandomPreviewImage(designNum) {
       const previews = await getPreviewImages(designNum);
       if (previews.length > 0) {
@@ -168,22 +166,32 @@
       return `designs/${designNum}/images/thumbnail.png`;
     }
 
+
+
     function getPageFromUrl() {
       const params = new URLSearchParams(window.location.search);
       const page = parseInt(params.get('page'));
       return isNaN(page) || page < 1 ? 1 : page;
     }
 
-    async function scanDesigns(maxDesign) {
+    async function scanDesigns() {
       const found = [];
-      for (let i = maxDesign; i > 0; i--) {
+      for (let i = lastDesign; i >= 1; i--) {
         try {
-          const res = await fetch(`designs/${i}/index.html`);
-          if (res.ok) found.push(i);
-        } catch { }
+          const res = await fetch(`designs/${i}/data.json`);
+          if (res.ok) {
+            found.push(i);
+            console.log(`✅ Found design ${i}`);
+          }
+        } catch {
+          // Silent fail - design doesn't exist
+        }
       }
+      console.log(`📊 Total active designs: ${found.length}`);
       return found;
     }
+
+
 
     async function renderPage(page) {
       const container = document.getElementById('design-list');
@@ -191,21 +199,12 @@
 
       const totalPages = Math.ceil(availableDesigns.length / designsPerPage);
 
-      // Show/hide Previous button
+      // Pagination buttons
       const prevBtn = document.getElementById('prev-btn');
-      if (page <= 1) {
-        prevBtn.classList.add('hidden');
-      } else {
-        prevBtn.classList.remove('hidden');
-      }
+      prevBtn.classList.toggle('hidden', page <= 1);
 
-      // Show/hide Next button
       const nextBtn = document.getElementById('next-btn');
-      if (page >= totalPages) {
-        nextBtn.classList.add('hidden');
-      } else {
-        nextBtn.classList.remove('hidden');
-      }
+      nextBtn.classList.toggle('hidden', page >= totalPages);
 
       const startIndex = (page - 1) * designsPerPage;
       const pageDesigns = availableDesigns.slice(startIndex, startIndex + designsPerPage);
@@ -217,29 +216,34 @@
 
       for (const designNum of pageDesigns) {
         try {
-          const res = await fetch(`designs/${designNum}/index.html`);
+          // Get title from data.json
+          const res = await fetch(`designs/${designNum}/data.json`);
           if (res.ok) {
-            const text = await res.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(text, 'text/html');
-            const title = doc.querySelector('title')?.innerText || `Design ${designNum}`;
+            const data = await res.json();
+            const title = data.title || `Design ${designNum}`;
             const imgSrc = await getRandomPreviewImage(designNum);
+
+            // CHANGED: presenting.html?d=n instead of index.html
             container.insertAdjacentHTML('beforeend', createDesignCard(title, imgSrc, designNum));
           }
-        } catch { }
+        } catch (error) {
+          console.log(`❌ Error loading design ${designNum}:`, error);
+        }
       }
     }
 
+    // 4. UPDATED: createDesignCard with presenting.html?d=n
     function createDesignCard(title, imageSrc, designNum) {
       return `
         <div class="design-card">
-          <a class="text-decoration-none text-dark" href="designs/${designNum}/index.html">
-              <img class="thumbnail img-fluid" src="${imageSrc}" alt="${title} preview" />
-              <h5 class="mt-3 text-center">${title}</h5>
-          </a>
+            <a class="text-decoration-none text-dark" href="presenting.html?d=${designNum}">
+                <img class="thumbnail img-fluid" src="${imageSrc}" alt="${title} preview" />
+                <h5 class="mt-3 text-center">${title}</h5>
+            </a>
         </div>
-      `;
+    `;
     }
+
 
     function updatePage(newPage) {
       currentPage = newPage;
@@ -260,16 +264,18 @@
 
     window.onload = async () => {
       currentPage = getPageFromUrl();
-      const lastDesign = 3; // Adjust this number as per your total design folders
-      availableDesigns = await scanDesigns(lastDesign);
-      updatePage(currentPage);
+      availableDesigns = await scanDesigns(); // Now uses config.js lastDesign
+      renderPage(currentPage);
     };
+
     window.addEventListener('load', () => {
       const loader = document.getElementById('loader-overlay');
       if (loader) {
         loader.style.display = 'none';
       }
     });
+
+
   </script>
 </body>
 

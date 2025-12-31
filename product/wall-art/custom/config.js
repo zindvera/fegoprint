@@ -1,2 +1,3 @@
 // config.js
-const lastDesign = 18; // Update this number manually when adding new designs
+const lastDesign = 5; // Total number of design folders
+const designsPerPage = 15;
