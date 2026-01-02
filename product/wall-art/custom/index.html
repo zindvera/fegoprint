@@ -11,10 +11,25 @@
   <!-- Bootstrap CSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
+    #special-list {
+      column-count: 3;
+      column-gap: 1rem;
+    }
+
     #design-list {
       column-count: 3;
       /* Number of masonry columns */
       column-gap: 1rem;
+    }
+
+    #special-list {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      /* Remove padding to allow full image display */
     }
 
     .design-card {
@@ -25,6 +40,33 @@
       box-shadow: none;
       padding: 0;
       /* Remove padding to allow full image display */
+    }
+
+
+    #special-list img.thumbnail {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 0;
+    }
+
+    /* Responsive - same as design-list */
+    @media (max-width: 599px) {
+      #special-list {
+        column-count: 2;
+      }
+    }
+
+    @media (min-width: 600px) and (max-width: 1199px) {
+      #special-list {
+        column-count: 4;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      #special-list {
+        column-count: 4;
+      }
     }
 
     img.thumbnail {
@@ -103,7 +145,19 @@
   <div class="navdiv" style="margin-bottom: 0.6in;"></div>
   <div class="container my-4">
     <h1 class="mb-4 fs-2">Custom Wall Arts</h1><br>
-    <div id="design-list"></div>
+    <div class="mb-4">
+      <div id="special-list-title" class="mb-3"></div>
+      <hr>
+      <div id="special-list"></div>
+    </div>
+
+
+    <div class="mt-4">
+      <div id="design-list-title" class="mb-3" style="margin-top: 0.95in;"></div>
+      <hr>
+      <div id="design-list"></div>
+    </div>
+
 
     <div id="pagination" class="d-flex justify-content-center mt-4">
       <button id="prev-btn" class="btn btn-primary me-2">Previous</button>
@@ -132,7 +186,7 @@
   <script src="config.js"></script>
   <script src="../../../nav.js"></script>
   <script>
-  
+
     let currentPage = 1;
     let availableDesigns = [];
 
@@ -196,7 +250,7 @@
     async function renderPage(page) {
       const container = document.getElementById('design-list');
       container.innerHTML = '';
-
+      const titleEl = document.getElementById('design-list-title');
       const totalPages = Math.ceil(availableDesigns.length / designsPerPage);
 
       // Pagination buttons
@@ -212,6 +266,9 @@
       if (pageDesigns.length === 0) {
         container.innerHTML = '<p class="text-center">No designs found on this page.</p>';
         return;
+      } else {
+
+        titleEl.innerHTML = '<h4>Latest</h4>';
       }
 
       for (const designNum of pageDesigns) {
@@ -262,11 +319,88 @@
       if (currentPage < totalPages) updatePage(currentPage + 1);
     });
 
+
+
+
+    let specialDesigns = [];
+
+    // Scan special folders (add lastSpecial to config.js)
+    async function scanSpecials() {
+      const found = [];
+      for (let i = lastSpecial; i >= 1; i--) {
+        try {
+          const res = await fetch(`special/${i}/index.html`);
+          if (res.ok) {
+            const htmlText = await res.text();
+            const titleMatch = htmlText.match(/<title[^>]*>([^<]+)<\/title>/i);
+            const title = titleMatch ? titleMatch[1].trim() : `Special ${i}`;
+
+            let thumbUrl = `special/${i}/images/thumbnail.png`;
+            try {
+              const check = await fetch(thumbUrl, { method: 'HEAD' });
+              if (!check.ok) thumbUrl = `special/${i}/images/thumbnail.jpg`;
+            } catch {
+              thumbUrl = `special/${i}/images/thumbnail.jpg`;
+            }
+
+            found.push({ num: i, title, thumb: thumbUrl });
+            console.log(`✅ Found special ${i}: ${title}`);
+          }
+        } catch { }
+      }
+      console.log(`📊 Total special designs: ${found.length}`);
+      return found;
+    }
+
+    // Render special cards (same card style)
+    async function renderSpecials() {
+      const titleEl = document.getElementById('special-list-title');
+      const container = document.getElementById('special-list');
+
+      if (specialDesigns.length === 0) {
+        titleEl.style.display = 'none';
+        container.style.display = 'none';
+        return;
+      } else {
+        titleEl.innerHTML = '<h4>Special</h4>';
+
+      }
+
+
+      container.style.display = 'block';
+      container.innerHTML = '';
+
+      for (const special of specialDesigns) {
+        container.insertAdjacentHTML('beforeend', createSpecialCard(special.title, special.thumb, special.num));
+      }
+    }
+
+
+    // Special card HTML (matches your design cards)
+    function createSpecialCard(title, imageSrc, specialNum) {
+      return `
+    <div class="design-card">
+      <a class="text-decoration-none text-dark" href="special/${specialNum}/index.html">
+        <img class="thumbnail img-fluid" src="${imageSrc}" alt="${title} preview" />
+        <h5 class="mt-3 text-center">${title}</h5>
+      </a>
+    </div>
+  `;
+    }
+
+
+
+
+
+
     window.onload = async () => {
       currentPage = getPageFromUrl();
-      availableDesigns = await scanDesigns(); // Now uses config.js lastDesign
+      specialDesigns = await scanSpecials();  // NEW
+      availableDesigns = await scanDesigns();
+      await renderSpecials();  // NEW - renders before designs
       renderPage(currentPage);
     };
+
 
     window.addEventListener('load', () => {
       const loader = document.getElementById('loader-overlay');
