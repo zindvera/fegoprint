@@ -53,9 +53,38 @@
         .price-badge {
             display: block;
             margin-top: 1.5rem;
-            font-weight: 600;
-            color: #6c757d;
+            font-weight: 500;
+            color: #888; /* Very light black / Grey */
             letter-spacing: 0.02em;
+            font-size: 18px; 
+            line-height: 1.4;
+        }
+
+        .price-value {
+            color: #000; /* Bold black */
+            font-weight: 800;
+            font-size: 22px; /* Little bigger font */
+        }
+
+        /* Trust Badge Styles */
+        .trust-badge-block {
+            display: flex;
+            flex-direction: row; /* Logo and rating in same line */
+            align-items: center;
+            margin-top: 24px;
+            gap: 12px;
+        }
+
+        .zazzle-logo {
+            width: 100px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .rating-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #495057;
         }
 
         /* Hero Slider Styles */
@@ -198,7 +227,7 @@
                 margin-bottom: 1rem;
             }
             .hero-text {
-                font-size: 0.9rem;
+                font-size: 1.1rem;
                 text-align: center;
                 line-height: 1.3;
                 margin-bottom: 1.5rem !important;
@@ -209,11 +238,11 @@
                 padding: 0.5rem 0.8rem;
             }
             .price-badge {
-                font-size: 0.85rem;
                 text-align: center;
             }
             .hero-actions {
                 text-align: center;
+                align-items: center;
             }
             .cta-button {
                 padding: 1rem 3rem;
@@ -230,6 +259,9 @@
                 height: 46px;
                 font-size: 1.2rem;
             }
+            .trust-badge-block {
+                justify-content: center;
+            }
         }
 
         @media (min-width: 768px) and (max-width: 991.98px) {
@@ -238,8 +270,14 @@
                 line-height: 1.2;
             }
             .hero-text {
-                font-size: 1.1rem;
+                font-size: 1.4rem;
                 line-height: 1.2;
+            }
+            .hero-actions {
+                align-items: center;
+            }
+            .trust-badge-block {
+                justify-content: center;
             }
         }
 
@@ -249,13 +287,23 @@
                 line-height: 1.2;
             }
             .hero-text {
-                font-size: 18px;
+                font-size: 24px;
                 line-height: 1.2;
             }
             .gradient-bg {
                 min-height: 70vh;
                 display: flex;
                 align-items: center;
+            }
+            /* Align actions to start on desktop */
+            .hero-actions {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .trust-badge-block {
+                justify-content: flex-start;
+                margin-left: 0;
             }
         }
     </style>
@@ -312,7 +360,16 @@
                         >
                             Customize
                         </a>
-                        <div class="price-badge">Print from $9 (24x36")</div>
+                        <div class="price-badge w-100">
+                            Wall Art Print – Ready to Hang from<br>
+                            <span class="price-value">$9 USD</span>
+                        </div>
+                        
+                        <!-- Trust Badge Block (Single Line) -->
+                        <div class="trust-badge-block">
+                            <img src="https://asset.zcache.com/assets/graphics/z4/uniquePages/zLogoDownload/logos/zazzleLetterform_black.png" alt="Zazzle" class="zazzle-logo">
+                            <div class="rating-text">4.8★ (27k+ reviews)</div>
+                        </div>
                     </div>
                 </div>
             </div>
