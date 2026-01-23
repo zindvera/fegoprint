@@ -742,43 +742,56 @@
                 const urls = await response.json();
                 console.log(`📡 Loaded urls:`, urls);
 
+                // --- NEW LOGIC: Check for Mockoverflow URL ---
+                const hasMockUrl = urls.mockoverflow_url && urls.mockoverflow_url.trim() !== "";
+
+                if (!hasMockUrl) {
+                    // Hide/Remove the main wrapper (this hides both the button and the accordion)
+                    const cameraWrapper = document.getElementById('cameraButtonWrapper');
+                    if (cameraWrapper) cameraWrapper.remove();
+
+                    // Hide/Remove the fixed scroll button
+                    const scrollCameraBtn = document.getElementById('scrollOpenCameraBtn');
+                    if (scrollCameraBtn) scrollCameraBtn.remove();
+
+                    console.log("🚫 Mockoverflow URL missing. Camera features disabled.");
+                    // Stop execution here so we don't try to update elements we just removed
+                    return;
+                }
+                // --- END OF NEW LOGIC ---
+
                 // 1. Update topCta (Amazon button)
                 const topCta = document.getElementById('topCta');
                 if (topCta && urls.cta_url) {
                     topCta.href = urls.cta_url;
-                    console.log(`✅ topCta: ${urls.cta_url}`);
                 }
 
                 // 2. Update floatCta (floating Amazon button)
                 const floatCta = document.getElementById('floatCta');
                 if (floatCta && urls.cta_url) {
                     floatCta.href = urls.cta_url;
-                    console.log(`✅ floatCta: ${urls.cta_url}`);
                 }
 
                 // 3. Update scrollOpenCameraBtn (fixed camera button)
                 const scrollCameraBtn = document.getElementById('scrollOpenCameraBtn');
                 if (scrollCameraBtn && urls.mockoverflow_url) {
                     scrollCameraBtn.href = urls.mockoverflow_url;
-                    console.log(`✅ scrollCamera: ${urls.mockoverflow_url}`);
                 }
 
                 // 4. Update topenCameraBtn (camera button wrapper)
                 const topCameraBtn = document.getElementById('topenCameraBtn');
                 if (topCameraBtn && urls.mockoverflow_url) {
                     topCameraBtn.href = urls.mockoverflow_url;
-                    console.log(`✅ topCameraBtn: ${urls.mockoverflow_url}`);
                 }
 
                 // 5. Update openCameraBtn (phone mockup button)
                 const phoneCameraBtn = document.getElementById('openCameraBtn');
                 if (phoneCameraBtn && urls.mockoverflow_url) {
                     phoneCameraBtn.href = urls.mockoverflow_url;
-                    console.log(`✅ phoneCameraBtn: ${urls.mockoverflow_url}`);
                 }
 
             } catch (error) {
-                console.log(`⚠️ url.json not found for ${designId}, using defaults`);
+                console.log(`⚠️ Error in loadDesignUrls:`, error);
             }
         }
 

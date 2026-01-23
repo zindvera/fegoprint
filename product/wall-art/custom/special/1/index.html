@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         /* Base Styles */
-        html, body {
-            overflow-x: hidden; /* Fixes horizontal scroll issues */
+        html,
+        body {
+            overflow-x: hidden;
+            /* Fixes horizontal scroll issues */
             width: 100%;
         }
 
@@ -29,14 +32,16 @@
             font-weight: 800;
             color: #1a1a1a;
             letter-spacing: -0.03em;
-            margin-bottom: 1.5rem; /* Space below title */
+            margin-bottom: 1.5rem;
+            /* Space below title */
         }
 
         .hero-text {
             color: #6c757d;
             font-weight: 500;
             margin-top: 0 !important;
-            margin-bottom: 2rem !important; /* Proper vertical margin below tagline */
+            margin-bottom: 2rem !important;
+            /* Proper vertical margin below tagline */
         }
 
         .wall-art-clarity {
@@ -54,22 +59,26 @@
             display: block;
             margin-top: 1.5rem;
             font-weight: 500;
-            color: #888; /* Very light black / Grey */
+            color: #888;
+            /* Very light black / Grey */
             letter-spacing: 0.02em;
-            font-size: 18px; 
+            font-size: 18px;
             line-height: 1.4;
         }
 
         .price-value {
-            color: #000; /* Bold black */
+            color: #000;
+            /* Bold black */
             font-weight: 800;
-            font-size: 22px; /* Little bigger font */
+            font-size: 22px;
+            /* Little bigger font */
         }
 
         /* Trust Badge Styles */
         .trust-badge-block {
             display: flex;
-            flex-direction: row; /* Logo and rating in same line */
+            flex-direction: row;
+            /* Logo and rating in same line */
             align-items: center;
             margin-top: 24px;
             gap: 12px;
@@ -106,7 +115,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             cursor: pointer;
             z-index: 10;
             transition: all 0.2s ease;
@@ -120,8 +129,13 @@
             transform: translateY(-50%) scale(1.1);
         }
 
-        .arrow-left { left: -27px; }
-        .arrow-right { right: -27px; }
+        .arrow-left {
+            left: -27px;
+        }
+
+        .arrow-right {
+            right: -27px;
+        }
 
         /* Pagination Dots */
         .slider-dots {
@@ -190,7 +204,7 @@
             overflow: hidden;
             border-radius: 0.75rem;
             margin-bottom: 1rem;
-         
+
         }
 
         .card-img {
@@ -225,39 +239,53 @@
                 text-align: center;
                 margin-bottom: 1rem;
             }
+
             .hero-text {
                 font-size: 1.1rem;
                 text-align: center;
                 line-height: 1.3;
                 margin-bottom: 1.5rem !important;
             }
+
             .wall-art-clarity {
                 font-size: 24px;
                 text-align: center;
                 padding: 0.5rem 0.8rem;
             }
+
             .price-badge {
                 text-align: center;
             }
+
             .hero-actions {
                 text-align: center;
                 align-items: center;
             }
+
             .cta-button {
                 padding: 1rem 3rem;
                 font-size: 1.25rem;
                 width: 100%;
             }
+
             .hero-img-container {
                 margin-bottom: 2rem;
             }
-            .arrow-left { left: 10px; }
-            .arrow-right { right: 10px; }
+
+            .arrow-left {
+                left: 10px;
+            }
+
+            .arrow-right {
+                right: 10px;
+            }
+
             .slider-arrow {
                 width: 46px;
                 height: 46px;
                 font-size: 1.2rem;
             }
+
             .trust-badge-block {
                 justify-content: center;
             }
@@ -268,38 +296,46 @@
                 font-size: 40px;
                 line-height: 1.2;
             }
+
             .hero-text {
                 font-size: 1.4rem;
                 line-height: 1.2;
             }
+
             .hero-actions {
                 align-items: center;
             }
+
             .trust-badge-block {
                 justify-content: center;
             }
         }
+
         /* Desktop View */
         @media (min-width: 992px) {
             .hero-title {
                 font-size: 45px;
                 line-height: 1.2;
             }
+
             .hero-text {
                 font-size: 24px;
                 line-height: 1.2;
             }
+
             .gradient-bg {
                 min-height: 70vh;
                 display: flex;
                 align-items: center;
             }
+
             /* Align actions to start on desktop */
             .hero-actions {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
             }
+
             .trust-badge-block {
                 justify-content: flex-start;
                 margin-left: 0;
@@ -307,6 +343,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Top Container: Hero Section -->
@@ -316,18 +353,15 @@
                 <!-- Left Side: Vision Board Slider -->
                 <div class="col-12 col-md-6 hero-img-container">
                     <div class="slider-container" id="mainSlider">
-                        <button class="slider-arrow arrow-left slider-nav" onclick="moveSlide(-1)" aria-label="Previous mockup">
+                        <button class="slider-arrow arrow-left slider-nav" onclick="moveSlide(-1)"
+                            aria-label="Previous mockup">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <img 
-                            id="heroImage"
-                            src="" 
-                            alt="Vision Board Preview" 
-                            class="img-fluid rounded-3 shadow-lg"
+                        <img id="heroImage" src="" alt="Vision Board Preview" class="img-fluid rounded-3 shadow-lg"
                             style=" object-fit: cover; width: 100%; transition: opacity 0.2s ease;"
-                            onerror="this.src='https://via.placeholder.com/600x800?text=Vision+Board'"
-                        />
-                        <button class="slider-arrow arrow-right slider-nav" onclick="moveSlide(1)" aria-label="Next mockup">
+                            onerror="this.src='https://via.placeholder.com/600x800?text=Vision+Board'" />
+                        <button class="slider-arrow arrow-right slider-nav" onclick="moveSlide(1)"
+                            aria-label="Next mockup">
                             <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
@@ -351,22 +385,18 @@
                         </div>
                     </div>
                     <div class="hero-actions">
-                        <a 
-                            id="heroCTA"
-                            href="#" 
-                            target="_blank"
-                            class="cta-button"
-                        >
+                        <a id="heroCTA" href="#" target="_blank" class="cta-button">
                             Customize
                         </a>
                         <div class="price-badge w-100">
                             Wall Art Print – Ready to Hang from<br>
                             <span class="price-value">$9 USD</span>
                         </div>
-                        
+
                         <!-- Trust Badge Block (Single Line) -->
                         <div class="trust-badge-block">
-                            <img src="https://asset.zcache.com/assets/graphics/z4/uniquePages/zLogoDownload/logos/zazzleLetterform_black.png" alt="Zazzle" class="zazzle-logo">
+                            <img src="https://asset.zcache.com/assets/graphics/z4/uniquePages/zLogoDownload/logos/zazzleLetterform_black.png"
+                                alt="Zazzle" class="zazzle-logo">
                             <div class="rating-text">4.8★ (27k+ reviews)</div>
                         </div>
                     </div>
@@ -421,7 +451,7 @@
         let currentMockups = [];
         let currentSlideIndex = 0;
         let slideInterval;
-        
+
         // Touch state
         let touchStartX = 0;
         let touchEndX = 0;
@@ -430,58 +460,39 @@
             "1": {
                 "1": {
                     images: [
-                        "images/mock-1.jpg",
-                        "images/mock-2.jpg",
-                        "images/mock-3.jpg"
-                 
+                        "images/1/mock-1.jpg",
+                        "images/1/mock-2.jpg",
+                        "images/1/mock-3.jpg"
+
                     ],
                     redirectUrl: "https://www.zazzle.com/create/custom_posters"
                 },
                 "2": {
                     images: [
-                        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600",
-                        "https://images.unsplash.com/photo-1551288049-bb8c803bd746?auto=format&fit=crop&q=80&w=600"
+                        "images/1/mock-4.jpg",
+                        "images/1/mock-5.jpg",
+                        "images/1/mock-6.jpg"
                     ],
                     redirectUrl: "https://www.zazzle.com/create/custom_posters?v=2"
-                },
-                "3": {
-                    images: [
-                        "https://images.unsplash.com/photo-1551288049-bb8c803bd746?auto=format&fit=crop&q=80&w=600"
-                    ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters?v=3"
-                },
-                "4": {
-                    images: [
-                        "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&q=80&w=600"
-                    ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters?v=4"
                 }
             },
             "2": {
                 "1": {
                     images: [
-                        "https://images.unsplash.com/photo-1454165833767-027eeed1b68e?auto=format&fit=crop&q=80&w=600",
-                        "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=600"
+                        "images/2/mock-1.jpg",
+                        "images/2/mock-2.jpg",
+                        "images/2/mock-3.jpg"
+
                     ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters?d=2"
+                    redirectUrl: "https://www.zazzle.com/create/custom_posters"
                 },
                 "2": {
                     images: [
-                        "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=600"
+                        "images/2/mock-4.jpg",
+                        "images/2/mock-5.jpg",
+                        "images/2/mock-6.jpg"
                     ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters?d=2&v=2"
-                },
-                "3": {
-                    images: [
-                        "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600"
-                    ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters?d=2&v=3"
-                },
-                "4": {
-                    images: [
-                        "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=600"
-                    ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters?d=2&v=4"
+                    redirectUrl: "https://www.zazzle.com/create/custom_posters?v=2"
                 }
             }
         };
@@ -562,10 +573,10 @@
             const urlParams = new URLSearchParams(window.location.search);
             const d = urlParams.get('d') || "1";
             const v = urlParams.get('v') || "1";
-            
+
             const designSet = visionBoardData[d] || visionBoardData["1"];
             const currentData = designSet[v] || designSet["1"];
-            
+
             currentMockups = currentData.images || [];
             currentSlideIndex = 0;
             updateSlide();
@@ -636,4 +647,5 @@
         window.addEventListener('DOMContentLoaded', initVersion);
     </script>
 </body>
+
 </html>
