@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vision Board Poster Digital Download</title>
+    <title>Vision Board Poster</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -24,14 +24,16 @@
 
         .gradient-bg {
             background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            padding: 0 0 80px 0; /* Removed top padding */
+            padding: 0 0 80px 0;
+            /* Removed top padding */
         }
 
         .hero-title {
             font-weight: 800;
             color: #1a1a1a;
             letter-spacing: -0.04em;
-            margin-top: 0; /* Removed top margin */
+            margin-top: 0;
+            /* Removed top margin */
             margin-bottom: 1rem;
             font-size: 3rem;
             line-height: 1.1;
@@ -84,7 +86,7 @@
             justify-content: center;
             color: #0d6efd;
             font-size: 1.25rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             margin-bottom: 8px;
             transition: all 0.3s ease;
         }
@@ -110,7 +112,7 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
             margin-bottom: 2.5rem;
         }
 
@@ -189,9 +191,10 @@
         .slider-container {
             position: relative;
             width: 100%;
-            overflow: hidden; /* Crucial for hiding other slides */
+            overflow: hidden;
+            /* Crucial for hiding other slides */
             border-radius: 1rem;
-            box-shadow: 0 1rem 3rem rgba(0,0,0,0.175);
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
         }
 
         .slider-track {
@@ -233,8 +236,13 @@
             color: #fff;
         }
 
-        .arrow-left { left: 10px; }
-        .arrow-right { right: 10px; }
+        .arrow-left {
+            left: 10px;
+        }
+
+        .arrow-right {
+            right: 10px;
+        }
 
         /* PAGINATION DOTS */
         .slider-dots {
@@ -288,18 +296,56 @@
             transition: transform 0.5s ease;
         }
 
-        .section-title { font-weight: 700; margin-bottom: 1rem; }
-        .title-accent { height: 4px; width: 80px; background-color: #0d6efd; margin: 1rem auto; border-radius: 2px; }
+        .section-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .title-accent {
+            height: 4px;
+            width: 80px;
+            background-color: #0d6efd;
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
 
         /* Mobile Adjustments */
         @media (max-width: 767.98px) {
-            .hero-title { font-size: 32px; text-align: center; }
-            .hero-text { font-size: 1.1rem; text-align: center; }
-            .process-steps { justify-content: center; }
-            .hero-actions { display: flex; flex-direction: column; align-items: center; }
-            .cta-button { width: 100%; padding: 1rem 3rem; font-size: 1.25rem; }
-            .clarity-feature { width: 100%; justify-content: center; }
-            .trust-badge-block { justify-content: center; width: 100%; }
+            .hero-title {
+                font-size: 32px;
+                text-align: center;
+            }
+
+            .hero-text {
+                font-size: 1.1rem;
+                text-align: center;
+            }
+
+            .process-steps {
+                justify-content: center;
+            }
+
+            .hero-actions {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 100%;
+                padding: 1rem 3rem;
+                font-size: 1.25rem;
+            }
+
+            .clarity-feature {
+                width: 100%;
+                text-align: start;
+            }
+
+            .trust-badge-block {
+                justify-content: center;
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -319,18 +365,20 @@
                 <!-- Image Slider Column (Order 2 on mobile, Order 1 on Desktop) -->
                 <div class="col-12 col-md-6 order-2 order-md-1 hero-img-container">
                     <div class="slider-container" id="mainSlider">
-                        <button class="slider-arrow arrow-left slider-nav" onclick="moveSlide(-1, false)"><i class="fas fa-chevron-left"></i></button>
+                        <button class="slider-arrow arrow-left slider-nav" onclick="moveSlide(-1, false)"><i
+                                class="fas fa-chevron-left"></i></button>
                         <div class="slider-track" id="sliderTrack">
                             <!-- Dynamic images will be injected here -->
                         </div>
-                        <button class="slider-arrow arrow-right slider-nav" onclick="moveSlide(1, false)"><i class="fas fa-chevron-right"></i></button>
+                        <button class="slider-arrow arrow-right slider-nav" onclick="moveSlide(1, false)"><i
+                                class="fas fa-chevron-right"></i></button>
                     </div>
                     <div id="sliderDots" class="slider-dots"></div>
                 </div>
 
                 <!-- Text Content Column (Order 3 on mobile, Order 2 on Desktop) -->
                 <div class="col-12 col-md-6 text-center text-md-start order-3 order-md-2 ps-lg-5">
-                    
+
                     <!-- Desktop Title (Only visible on Desktop) -->
                     <h1 id="heroTitle" class="hero-title d-none d-md-block">Custom 2026 Vision Board Poster</h1>
 
@@ -341,7 +389,7 @@
 
                     <!-- Description -->
                     <p class="hero-text">
-                        Customize images, text, and colors online in minutes. 
+                        Customize images, text, and colors online in minutes.
                         <strong>Order & get your poster delivered to your door.</strong>
                     </p>
 
@@ -374,14 +422,15 @@
                         <a id="heroCTA" href="#" target="_blank" class="cta-button">
                             Edit & Order Now
                         </a>
-                        
+
                         <div class="price-display w-100">
                             <span>Professional Physical Print — Multiple Sizes Available</span><br>
-                            <span class="price-value">$24.95 USD</span>
+                            <p>Start from <span class="price-value"> $2.68 USD</span></p>
                         </div>
 
                         <div class="trust-badge-block">
-                            <img src="https://asset.zcache.com/assets/graphics/z4/uniquePages/zLogoDownload/logos/zazzleLetterform_black.png" alt="Zazzle" class="zazzle-logo">
+                            <img src="https://asset.zcache.com/assets/graphics/z4/uniquePages/zLogoDownload/logos/zazzleLetterform_black.png"
+                                alt="Zazzle" class="zazzle-logo">
                             <div class="rating-text">Verified 4.8★ on Zazzle (27k+ reviews)</div>
                         </div>
                     </div>
@@ -440,8 +489,7 @@
         let touchStartX = 0;
         let touchEndX = 0;
 
-      
-        
+
         const visionBoardData = {
             "1": {
                 "1": {
@@ -450,7 +498,7 @@
                         "images/1/1/mock-2.jpg",
                         "images/1/1/mock-3.jpg"
                     ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters"
+                    redirectUrl: "https://www.zazzle.com/2026_vision_with_8_floating_photo_circles_poster-256670535215785188"
                 },
                 "2": {
                     images: [
@@ -458,7 +506,7 @@
                         "images/1/2/mock-2.jpg",
                         "images/1/2/mock-3.jpg"
                     ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters?v=2"
+                    redirectUrl: "https://www.zazzle.com/2026_aesthetic_pastel_circles_vision_poster-256414751404110828"
                 },
                 "3": {
                     images: [
@@ -466,7 +514,7 @@
                         "images/1/3/mock-2.jpg",
                         "images/1/3/mock-3.jpg"
                     ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters?v=2"
+                    redirectUrl: "https://www.zazzle.com/2026_modern_circle_photo_vision_board_poster-256434732169355074"
                 },
                 "4": {
                     images: [
@@ -474,7 +522,7 @@
                         "images/1/4/mock-2.jpg",
                         "images/1/4/mock-3.jpg"
                     ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters?v=2"
+                    redirectUrl: "https://www.zazzle.com/2026_soft_gradient_circle_proper_vision_poster-256610937228268983"
                 },
                 "5": {
                     images: [
@@ -482,7 +530,7 @@
                         "images/1/5/mock-2.jpg",
                         "images/1/5/mock-3.jpg"
                     ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters?v=2"
+                    redirectUrl: "https://www.zazzle.com/2026_random_modern_circle_photo_vision_poster-256884013622275743"
                 },
                 "6": {
                     images: [
@@ -490,7 +538,7 @@
                         "images/1/6/mock-2.jpg",
                         "images/1/6/mock-3.jpg"
                     ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters?v=2"
+                    redirectUrl: "https://www.zazzle.com/modern_2026_manifestation_poster_aesthetic_soft-256616314950169127"
                 },
                 "7": {
                     images: [
@@ -498,7 +546,7 @@
                         "images/1/7/mock-2.jpg",
                         "images/1/7/mock-3.jpg"
                     ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters?v=2"
+                    redirectUrl: "https://www.zazzle.com/rustic_timber_2026_manifestation_poster-256414404242519406"
                 },
                 "8": {
                     images: [
@@ -506,7 +554,7 @@
                         "images/1/8/mock-2.jpg",
                         "images/1/8/mock-3.jpg"
                     ],
-                    redirectUrl: "https://www.zazzle.com/create/custom_posters?v=2"
+                    redirectUrl: "https://www.zazzle.com/2026_aesthetic_pastel_manifestation_poster-256967896884377605"
                 }
             }
         };
@@ -560,16 +608,16 @@
 
         function moveSlide(direction, isAuto = false) {
             if (currentMockups.length <= 1) return;
-            
+
             currentSlideIndex += direction;
             if (currentSlideIndex >= currentMockups.length) {
                 currentSlideIndex = 0;
             } else if (currentSlideIndex < 0) {
                 currentSlideIndex = currentMockups.length - 1;
             }
-            
+
             updateSlide();
-            
+
             // If manual interaction, reset the auto-slide timer
             if (!isAuto) {
                 startAutoSlide();
@@ -595,10 +643,10 @@
 
             currentMockups = currentData.images || [];
             currentSlideIndex = 0;
-            
+
             // Inject images into track
             sliderTrack.innerHTML = currentMockups.map(src => `<img src="${src}" alt="Vision Board Preview" class="img-fluid">`).join('');
-            
+
             updateSlide();
             startAutoSlide();
 
@@ -636,7 +684,7 @@
             const templatesSect = document.getElementById('templatesSection');
             const templatesGrid = document.getElementById('templatesGrid');
             const sectionDivider = document.getElementById('sectionDivider');
-            
+
             if (otherDesigns.length === 0) {
                 if (templatesSect) templatesSect.style.display = 'none';
                 if (sectionDivider) sectionDivider.style.display = 'none';
