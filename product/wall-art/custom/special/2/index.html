@@ -387,7 +387,7 @@
             touch-action: none;
             cursor: grab;
         }
-
+        
         .modal-view-container:active {
             cursor: grabbing;
         }
@@ -573,7 +573,7 @@
                             </div>
                             <div class="rating-text">
                                 <p style="font-size:14px; margin:0;">Ratings on Zazzle</p>
-                                <h6 style="font-size:16px; margin:0;" class="review-count">27k+ reviews</h6>
+                                <h6 style="font-size:16px;" class="review-count">27k+ reviews</h6>
                             </div>
                         </div>
                     </a>
@@ -820,17 +820,35 @@
             updateZoom();
             modalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            // Push a state into history to intercept the back button
+            history.pushState({ modalOpen: true }, '');
         }
 
         function closeImageView() {
+            // Check if modal is actually open before trying to close
+            if (modalOverlay.classList.contains('active')) {
+                // Trigger browser "back" which will fire the popstate listener below
+                history.back();
+            }
+        }
+
+        // Dedicated listener for UI updates when closing
+        function performCloseUI() {
             modalOverlay.classList.remove('active');
             document.body.style.overflow = '';
             startAutoSlide();
         }
 
+        // Listen for back button (popstate event)
+        window.addEventListener('popstate', (e) => {
+            // If the modal is currently open, close it and prevent navigation
+            if (modalOverlay.classList.contains('active')) {
+                performCloseUI();
+            }
+        });
+
         function updateZoom() {
-            // Transform logic: scale then translate
-            // We use translate3d for better performance
             modalImg.style.transform = `translate3d(${currentPosX}px, ${currentPosY}px, 0) scale(${currentScale})`;
             zoomText.innerText = `${Math.round(currentScale * 100)}%`;
         }
@@ -858,13 +876,13 @@
             if (panLimits.x) {
                 currentPosX = clientX - startPanX;
             } else {
-                currentPosX = 0; // Lock if smaller than container
+                currentPosX = 0; 
             }
             
             if (panLimits.y) {
                 currentPosY = clientY - startPanY;
             } else {
-                currentPosY = 0; // Lock if smaller than container
+                currentPosY = 0;
             }
             
             updateZoom();
@@ -873,6 +891,23 @@
         function handlePanEnd() {
             isPanning = false;
         }
+
+        // Middle Mouse Scroll Logic
+        modalOverlay.addEventListener('wheel', (e) => {
+            if (!modalOverlay.classList.contains('active')) return;
+            
+            // Strictly prevent standard body scroll
+            e.preventDefault();
+
+            const limits = canPan();
+            if (limits.y) {
+                currentPosY -= e.deltaY;
+                updateZoom();
+            } else {
+                currentPosY = 0;
+                updateZoom();
+            }
+        }, { passive: false });
 
         // --- Init Function ---
         function initVersion() {
@@ -971,7 +1006,6 @@
             e.stopPropagation();
             if (currentScale > 0.5) {
                 currentScale -= 0.25;
-                // If zooming out makes it smaller than container, center it
                 const limits = canPan();
                 if (!limits.x) currentPosX = 0;
                 if (!limits.y) currentPosY = 0;
@@ -992,29 +1026,10 @@
 
         window.onmouseup = handlePanEnd;
 
-        // Middle Mouse Scroll Logic (Updated: Strict reservation for modal)
-        modalOverlay.addEventListener('wheel', (e) => {
-            // Only act if modal is active
-            if (!modalOverlay.classList.contains('active')) return;
-            
-            // Strictly prevent standard body scroll
-            e.preventDefault();
-
-            const limits = canPan();
-            if (limits.y) {
-                // Adjust position based on scroll wheel
-                currentPosY -= e.deltaY;
-                updateZoom();
-            } else {
-                currentPosY = 0;
-                updateZoom();
-            }
-        }, { passive: false });
-
         // Touch Interaction (Pinch & Pan)
         modalContainer.addEventListener('touchstart', (e) => {
             if (e.touches.length === 2) {
-                isPanning = false; // Disable panning while pinching
+                isPanning = false; 
                 lastPinchDistance = Math.hypot(
                     e.touches[0].pageX - e.touches[1].pageX,
                     e.touches[0].pageY - e.touches[1].pageY

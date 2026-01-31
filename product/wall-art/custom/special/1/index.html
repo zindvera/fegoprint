@@ -362,7 +362,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            z-index: 4000;
+            z-index: 5000;
             background-color: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
@@ -418,7 +418,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 4100;
+            z-index: 5100;
             transition: all 0.2s ease;
             font-size: 1.5rem;
         }
@@ -440,7 +440,7 @@
             padding: 0.8rem 1.5rem;
             border-radius: 100px;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            z-index: 4100;
+            z-index: 5100;
             align-items: center;
         }
 
@@ -533,9 +533,6 @@
                 margin-bottom: 0.3in;
             }
         }
-
-        /* For Desktop */
-        @media (min-width: 1025px) {}
     </style>
 </head>
 
@@ -566,7 +563,7 @@
                 <!-- Text Content Column -->
                 <div class="col-12 col-md-6 text-center text-md-start order-3 order-md-2 ps-lg-5">
 
-                    <!-- UPDATED: Interactive Trust Badge Link -->
+                    <!-- Interactive Trust Badge Link -->
                     <a id="trustLink" href="#" target="_blank" class="trust-badge-block">
                         <img src="https://asset.zcache.com/assets/graphics/z4/uniquePages/zLogoDownload/logos/zazzleLetterform_black.png"
                             alt="Zazzle" class="zazzle-logo">
@@ -692,7 +689,7 @@
     <script src="../../../../../nav.js"></script>
     <script>
         const heroCTA = document.getElementById('heroCTA');
-        const trustLink = document.getElementById('trustLink'); // Target link
+        const trustLink = document.getElementById('trustLink');
         const examplesGrid = document.getElementById('examplesGrid');
         const templatesGrid = document.getElementById('templatesGrid');
         const mainSlider = document.getElementById('mainSlider');
@@ -824,6 +821,19 @@
             }
         }
 
+        // --- History & Modal Closing ---
+        function performCloseUI() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            startAutoSlide();
+        }
+
+        window.addEventListener('popstate', (e) => {
+            if (modalOverlay.classList.contains('active')) {
+                performCloseUI();
+            }
+        });
+
         // --- Panning & Modal Functions ---
         function openImageView(src) {
             stopAutoSlide();
@@ -834,12 +844,15 @@
             updateZoom();
             modalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            // Push fake state for back button handling
+            history.pushState({ modalOpen: true }, '');
         }
 
         function closeImageView() {
-            modalOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-            startAutoSlide();
+            if (modalOverlay.classList.contains('active')) {
+                history.back();
+            }
         }
 
         function updateZoom() {
@@ -876,6 +889,20 @@
             isPanning = false;
         }
 
+        // Middle Mouse Scroll Logic (Reservation)
+        modalOverlay.addEventListener('wheel', (e) => {
+            if (!modalOverlay.classList.contains('active')) return;
+            e.preventDefault();
+            const panLimits = canPan();
+            if (panLimits.y) {
+                currentPosY -= e.deltaY;
+                updateZoom();
+            } else {
+                currentPosY = 0;
+                updateZoom();
+            }
+        }, { passive: false });
+
         function initVersion() {
             const urlParams = new URLSearchParams(window.location.search);
             const d = urlParams.get('d') || "1";
@@ -892,7 +919,6 @@
             updateSlide();
             startAutoSlide();
 
-            // Dynamic Redirection
             heroCTA.href = currentData.redirectUrl;
             trustLink.href = currentData.redirectUrl;
 
@@ -959,7 +985,7 @@
             }
         }
 
-        // Modal Event Listeners
+        // Event Listeners
         btnZoomIn.onclick = (e) => {
             e.stopPropagation();
             if (currentScale < 5) {
@@ -983,22 +1009,6 @@
         modalContainer.onmousedown = (e) => handlePanStart(e.clientX, e.clientY);
         window.onmousemove = (e) => { if (isPanning) handlePanMove(e.clientX, e.clientY); };
         window.onmouseup = handlePanEnd;
-
-        // Middle Mouse Scroll Logic (Updated: Strict reservation for modal)
-        modalOverlay.addEventListener('wheel', (e) => {
-            // Only act if modal is active
-            if (!modalOverlay.classList.contains('active')) return;
-
-            // Stop standard body scrolling effect strictly
-            e.preventDefault();
-
-            const panLimits = canPan();
-            if (panLimits.y) {
-                // Adjust currentPosY based on scroll direction
-                currentPosY -= e.deltaY;
-                updateZoom();
-            }
-        }, { passive: false });
 
         modalContainer.addEventListener('touchstart', (e) => {
             if (e.touches.length === 2) {
@@ -1027,7 +1037,6 @@
 
         modalContainer.addEventListener('touchend', (e) => { if (e.touches.length === 0) handlePanEnd(); }, { passive: true });
 
-        // Slider Touch
         mainSlider.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
         }, { passive: true });
