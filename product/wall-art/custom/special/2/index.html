@@ -356,6 +356,118 @@
             margin-bottom: 0.55in;
         }
 
+        /* IMAGE VIEW MODAL STYLES */
+        #img-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #img-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-view-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            touch-action: none;
+            cursor: grab;
+        }
+
+        .modal-view-container:active {
+            cursor: grabbing;
+        }
+
+        #modal-zoom-img {
+            max-width: 90%;
+            max-height: 85%;
+            object-fit: contain;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+
+        .modal-close-circle {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            background: rgba(51, 51, 51, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 5100;
+            transition: all 0.2s ease;
+            font-size: 1.5rem;
+        }
+
+        .modal-close-circle:hover {
+            background: #ef4444;
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        .modal-zoom-controls {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            background: rgba(51, 51, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            z-index: 5100;
+            align-items: center;
+        }
+
+        .modal-zoom-btn {
+            background: none;
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: background 0.2s;
+        }
+
+        .modal-zoom-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        #zoom-percent-text {
+            color: white;
+            font-weight: 600;
+            min-width: 60px;
+            text-align: center;
+        }
+
         /* Mobile Adjustments */
         @media (max-width: 767.98px) {
             .navdiv {
@@ -365,7 +477,6 @@
             .digital-badge {
                 margin-top: 0.2in;
             }
-
 
             .hero-title {
                 font-size: 32px;
@@ -404,6 +515,13 @@
                 border-bottom: 1px solid #dee2e6;
                 border-radius: 0;
             }
+
+            .modal-close-circle {
+                top: 1rem;
+                right: 1rem;
+                width: 48px;
+                height: 48px;
+            }
         }
 
         /* For tablet */
@@ -412,9 +530,6 @@
                 margin-bottom: 0.3in;
             }
         }
-
-        /* For Desktop */
-        @media (min-width: 1025px) {}
     </style>
 </head>
 
@@ -444,7 +559,6 @@
 
                 <!-- Text Content Column -->
                 <div class="col-12 col-md-6 text-center text-md-start order-3 order-md-2 ps-lg-5">
-                    <!-- UPDATED: Interactive Trust Badge Link -->
                     <a id="trustLink" href="#" target="_blank" class="trust-badge-block">
                         <img src="https://asset.zcache.com/assets/graphics/z4/uniquePages/zLogoDownload/logos/zazzleLetterform_black.png"
                             alt="Zazzle" class="zazzle-logo">
@@ -458,26 +572,22 @@
                                 <i class="fas fa-star"></i>
                             </div>
                             <div class="rating-text">
-                                <p style="font-size:14px;">Ratings on Zazzle</p>
-                                <h6 style="font-size:16px;" class="review-count">27k+ reviews</h6>
+                                <p style="font-size:14px; margin:0;">Ratings on Zazzle</p>
+                                <h6 style="font-size:16px; margin:0;" class="review-count">27k+ reviews</h6>
                             </div>
                         </div>
                     </a>
-                    <!-- Desktop Title -->
                     <h1 id="heroTitle" class="hero-title d-none d-md-block pt-3">Custom 2026 Vision Board Poster</h1>
 
-                    <!-- Badge -->
                     <div class="digital-badge">
                         <i class="fa-solid fa-download me-2"></i> Instant Digital Download
                     </div>
 
-                    <!-- Description -->
                     <p class="hero-text">
                         Customize images, text, and colors online in minutes.
                         <strong>No Shipping. No Waiting.</strong>
                     </p>
 
-                    <!-- Process Steps -->
                     <div class="process-steps">
                         <div class="step-item">
                             <div class="step-icon"><i class="fas fa-magic"></i></div>
@@ -495,13 +605,11 @@
                         </div>
                     </div>
 
-                    <!-- Clarity Box -->
                     <div class="clarity-feature">
                         <i class="fas fa-circle-check"></i>
                         <p class="clarity-text">High-Resolution PDF — Ready to Print</p>
                     </div>
 
-                    <!-- Actions -->
                     <div class="hero-actions">
                         <a id="heroCTA" href="#" target="_blank" class="cta-button">
                             Edit & Download Now
@@ -511,8 +619,6 @@
                             <span>Multiple Sizes Available For Prints</span><br>
                             <span class="price-value">$4.25 USD</span>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -545,11 +651,32 @@
         </div>
     </section>
 
+    <!-- MODAL OVERLAY -->
+    <div id="img-modal-overlay">
+        <button class="modal-close-circle" id="close-view-modal">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="modal-view-container" id="modal-container">
+            <img id="modal-zoom-img" src="" alt="Zoomed View">
+        </div>
+
+        <div class="modal-zoom-controls">
+            <button class="modal-zoom-btn" id="btn-zoom-out">
+                <i class="fas fa-minus"></i>
+            </button>
+            <span id="zoom-percent-text">100%</span>
+            <button class="modal-zoom-btn" id="btn-zoom-in">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- Note: nav.js placeholder -->
     <script src="../../../../../nav.js"></script>
     <script>
         const heroCTA = document.getElementById('heroCTA');
-        const trustLink = document.getElementById('trustLink'); // Target new link
+        const trustLink = document.getElementById('trustLink');
         const examplesGrid = document.getElementById('examplesGrid');
         const templatesGrid = document.getElementById('templatesGrid');
         const mainSlider = document.getElementById('mainSlider');
@@ -557,12 +684,32 @@
         const sliderDotsContainer = document.getElementById('sliderDots');
         const sliderNavButtons = document.querySelectorAll('.slider-nav');
 
+        // Modal Elements
+        const modalOverlay = document.getElementById('img-modal-overlay');
+        const modalImg = document.getElementById('modal-zoom-img');
+        const closeModalBtn = document.getElementById('close-view-modal');
+        const btnZoomIn = document.getElementById('btn-zoom-in');
+        const btnZoomOut = document.getElementById('btn-zoom-out');
+        const zoomText = document.getElementById('zoom-percent-text');
+        const modalContainer = document.getElementById('modal-container');
+
         let currentMockups = [];
         let currentSlideIndex = 0;
         let slideInterval;
 
         let touchStartX = 0;
         let touchEndX = 0;
+
+        // Modal Zoom & Pan Logic
+        let currentScale = 1;
+        let lastPinchDistance = 0;
+        
+        // Pan State
+        let isPanning = false;
+        let startPanX = 0;
+        let startPanY = 0;
+        let currentPosX = 0;
+        let currentPosY = 0;
 
         const visionBoardData = {
             "1": {
@@ -663,6 +810,71 @@
             }
         }
 
+        // --- Panning Logic & Modal Handling ---
+        function openImageView(src) {
+            stopAutoSlide();
+            modalImg.src = src;
+            currentScale = 1;
+            currentPosX = 0;
+            currentPosY = 0;
+            updateZoom();
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageView() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            startAutoSlide();
+        }
+
+        function updateZoom() {
+            // Transform logic: scale then translate
+            // We use translate3d for better performance
+            modalImg.style.transform = `translate3d(${currentPosX}px, ${currentPosY}px, 0) scale(${currentScale})`;
+            zoomText.innerText = `${Math.round(currentScale * 100)}%`;
+        }
+
+        function canPan() {
+            const imgRect = modalImg.getBoundingClientRect();
+            const containerRect = modalContainer.getBoundingClientRect();
+            return {
+                x: imgRect.width > containerRect.width,
+                y: imgRect.height > containerRect.height
+            };
+        }
+
+        function handlePanStart(clientX, clientY) {
+            isPanning = true;
+            startPanX = clientX - currentPosX;
+            startPanY = clientY - currentPosY;
+        }
+
+        function handlePanMove(clientX, clientY) {
+            if (!isPanning) return;
+            
+            const panLimits = canPan();
+            
+            if (panLimits.x) {
+                currentPosX = clientX - startPanX;
+            } else {
+                currentPosX = 0; // Lock if smaller than container
+            }
+            
+            if (panLimits.y) {
+                currentPosY = clientY - startPanY;
+            } else {
+                currentPosY = 0; // Lock if smaller than container
+            }
+            
+            updateZoom();
+        }
+
+        function handlePanEnd() {
+            isPanning = false;
+        }
+
+        // --- Init Function ---
         function initVersion() {
             const urlParams = new URLSearchParams(window.location.search);
             const d = urlParams.get('d') || "1";
@@ -674,12 +886,11 @@
             currentMockups = currentData.images || [];
             currentSlideIndex = 0;
 
-            sliderTrack.innerHTML = currentMockups.map(src => `<img src="${src}" alt="Vision Board Preview">`).join('');
+            sliderTrack.innerHTML = currentMockups.map(src => `<img src="${src}" alt="Vision Board Preview" onclick="openImageView('${src}')" style="cursor: zoom-in;">`).join('');
 
             updateSlide();
             startAutoSlide();
 
-            // UPDATED: Both CTA and Trust Block now point to the redirect URL
             heroCTA.href = currentData.redirectUrl;
             trustLink.href = currentData.redirectUrl;
 
@@ -745,6 +956,98 @@
             }
         }
 
+        // --- Event Listeners ---
+
+        // Button Zooming
+        btnZoomIn.onclick = (e) => {
+            e.stopPropagation();
+            if (currentScale < 5) {
+                currentScale += 0.25;
+                updateZoom();
+            }
+        };
+
+        btnZoomOut.onclick = (e) => {
+            e.stopPropagation();
+            if (currentScale > 0.5) {
+                currentScale -= 0.25;
+                // If zooming out makes it smaller than container, center it
+                const limits = canPan();
+                if (!limits.x) currentPosX = 0;
+                if (!limits.y) currentPosY = 0;
+                updateZoom();
+            }
+        };
+
+        closeModalBtn.onclick = closeImageView;
+        
+        // Dragging & Mouse Interaction
+        modalContainer.onmousedown = (e) => {
+            handlePanStart(e.clientX, e.clientY);
+        };
+
+        window.onmousemove = (e) => {
+            if (isPanning) handlePanMove(e.clientX, e.clientY);
+        };
+
+        window.onmouseup = handlePanEnd;
+
+        // Middle Mouse Scroll Logic (Updated: Strict reservation for modal)
+        modalOverlay.addEventListener('wheel', (e) => {
+            // Only act if modal is active
+            if (!modalOverlay.classList.contains('active')) return;
+            
+            // Strictly prevent standard body scroll
+            e.preventDefault();
+
+            const limits = canPan();
+            if (limits.y) {
+                // Adjust position based on scroll wheel
+                currentPosY -= e.deltaY;
+                updateZoom();
+            } else {
+                currentPosY = 0;
+                updateZoom();
+            }
+        }, { passive: false });
+
+        // Touch Interaction (Pinch & Pan)
+        modalContainer.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                isPanning = false; // Disable panning while pinching
+                lastPinchDistance = Math.hypot(
+                    e.touches[0].pageX - e.touches[1].pageX,
+                    e.touches[0].pageY - e.touches[1].pageY
+                );
+            } else if (e.touches.length === 1) {
+                handlePanStart(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
+
+        modalContainer.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const dist = Math.hypot(
+                    e.touches[0].pageX - e.touches[1].pageX,
+                    e.touches[0].pageY - e.touches[1].pageY
+                );
+                const delta = (dist - lastPinchDistance) * 0.005;
+                let newScale = currentScale + delta;
+                if (newScale >= 0.5 && newScale <= 5) {
+                    currentScale = newScale;
+                    updateZoom();
+                }
+                lastPinchDistance = dist;
+            } else if (e.touches.length === 1 && isPanning) {
+                handlePanMove(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: false });
+
+        modalContainer.addEventListener('touchend', (e) => {
+            if (e.touches.length === 0) handlePanEnd();
+        }, { passive: true });
+
+        // Slider Touch
         mainSlider.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
         }, { passive: true });
