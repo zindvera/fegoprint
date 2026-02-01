@@ -20,11 +20,30 @@
             background-color: #f8f9fa;
             color: #212529;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 70px;
+            /* Offset for sticky nav */
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            color: #0d6efd !important;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: #495057 !important;
         }
 
         .gradient-bg {
             background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            padding: 0 0 80px 0;
+
         }
 
         .hero-title {
@@ -44,7 +63,47 @@
             font-size: 1.25rem;
         }
 
-        /* Improved Badge */
+        /* Improved Format Switcher Styles */
+        .format-switcher {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 2rem;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .format-option {
+            flex: 1;
+            padding: 12px 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #495057;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 100px;
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+        }
+
+        .format-option:hover {
+            border-color: #0d6efd;
+            color: #0d6efd;
+        }
+
+        .format-option.active {
+            color: #fff;
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+        }
+
+        /* Improved Badge (Preserved Class) */
         .digital-badge {
             display: inline-flex;
             align-items: center;
@@ -354,7 +413,7 @@
         }
 
         .navdiv {
-            margin-bottom: 0.55in;
+            margin-bottom: 0.3in;
         }
 
         /* IMAGE VIEW MODAL STYLES (Added) */
@@ -473,7 +532,7 @@
         @media (max-width: 767.98px) {
 
             .navdiv {
-                margin-bottom: 0.9in;
+                margin-bottom: 0.2in;
             }
 
             .digital-badge {
@@ -482,8 +541,8 @@
 
             .hero-title {
                 font-size: 32px;
-
-            }
+                padding-bottom: 0.2in;
+            }   
 
             .hero-text {
                 font-size: 1.1rem;
@@ -525,18 +584,36 @@
                 width: 48px;
                 height: 48px;
             }
+
+            .format-switcher {
+                margin-top: 0.4in;
+            }
         }
 
         /* For tablet */
         @media (min-width: 768px) and (max-width: 1024px) {
             .navdiv {
-                margin-bottom: 0.3in;
+                margin-bottom: 0.1in;
             }
+
+            .format-switcher {
+                margin-top: 0.4in;
+            }
+        }
+
+        /* Desktop view: for screen widths 1024px and above */
+        @media (min-width: 1024px) {
+            .format-switcher {
+                margin-top: 0.4in;
+            }
+
         }
     </style>
 </head>
 
 <body>
+
+
 
     <div class="navdiv"></div>
 
@@ -549,7 +626,7 @@
                 </div>
 
                 <!-- Image Slider Column -->
-                <div class="col-12 col-md-6 order-2 order-md-1 hero-img-container">
+                <div class="mt-0 col-12 col-md-6 order-2 order-md-1 hero-img-container">
                     <div class="slider-container" id="mainSlider">
                         <button class="slider-arrow arrow-left slider-nav" onclick="moveSlide(-1, false)"><i
                                 class="fas fa-chevron-left"></i></button>
@@ -561,7 +638,7 @@
                 </div>
 
                 <!-- Text Content Column -->
-                <div class="col-12 col-md-6 text-center text-md-start order-3 order-md-2 ps-lg-5">
+                <div class="mt-0 col-12 col-md-6 text-center text-md-start order-3 order-md-2 ps-lg-5">
 
                     <!-- Interactive Trust Badge Link -->
                     <a id="trustLink" href="#" target="_blank" class="trust-badge-block">
@@ -586,19 +663,24 @@
                     <!-- Desktop Title -->
                     <h1 id="heroTitle" class="hero-title d-none d-md-block">Custom 2026 Vision Board Poster</h1>
 
-                    <!-- Badge -->
-                    <div class="digital-badge">
-                        <i class="fas fa-award me-2"></i> Premium Physical Poster
+                    <!-- FORMAT SWITCHER -->
+                    <div class="format-switcher">
+                        <div class="format-option active" id="opt-digital" onclick="switchFormat('digital')">
+                            <i class="fas fa-download"></i> Instant Digital
+                        </div>
+                        <div class="format-option" id="opt-physical" onclick="switchFormat('physical')">
+                            <i class="fa-solid fa-truck"></i> Physical Poster
+                        </div>
                     </div>
 
-                    <!-- Description -->
-                    <p class="hero-text">
+                    <!-- Description (Dynamic) -->
+                    <p class="hero-text" id="formatDesc">
                         Customize images, text, and colors online in minutes.
                         <strong>Order & get your poster delivered to your door.</strong>
                     </p>
 
-                    <!-- Process Steps -->
-                    <div class="process-steps">
+                    <!-- Process Steps (Dynamic) -->
+                    <div class="process-steps" id="processStepsContainer">
                         <div class="step-item">
                             <div class="step-icon"><i class="fas fa-paintbrush"></i></div>
                             <span class="step-label">Edit</span>
@@ -615,10 +697,10 @@
                         </div>
                     </div>
 
-                    <!-- Clarity Box -->
+                    <!-- Clarity Box (Dynamic) -->
                     <div class="clarity-feature">
                         <i class="fas fa-circle-check"></i>
-                        <p class="clarity-text">Professional Poster Print — Ready to Frame</p>
+                        <p class="clarity-text" id="clarityText">Professional Poster Print — Ready to Frame</p>
                     </div>
 
                     <!-- Actions -->
@@ -628,8 +710,9 @@
                         </a>
 
                         <div class="price-display w-100">
-                            <span>Professional Physical Print — Multiple Sizes Available</span><br>
-                            <p>Start from <span class="price-value"> $2.68 USD</span></p>
+                            <span id="priceLabel">Professional Physical Print — Multiple Sizes Available</span><br>
+                            <p id="priceValueContainer">Start from <span class="price-value" id="priceValue">$2.68
+                                    USD</span></p>
                         </div>
 
 
@@ -685,8 +768,9 @@
             </button>
         </div>
     </div>
-
     <script src="../../../../../nav.js"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const heroCTA = document.getElementById('heroCTA');
         const trustLink = document.getElementById('trustLink');
@@ -759,6 +843,49 @@
             }
         };
 
+        // Format Switching Logic
+        function switchFormat(format) {
+            const desc = document.getElementById('formatDesc');
+            const clarity = document.getElementById('clarityText');
+            const cta = document.getElementById('heroCTA');
+            const priceLabel = document.getElementById('priceLabel');
+            const priceContainer = document.getElementById('priceValueContainer');
+            const steps = document.getElementById('processStepsContainer');
+
+            document.getElementById('opt-digital').classList.toggle('active', format === 'digital');
+            document.getElementById('opt-physical').classList.toggle('active', format === 'physical');
+
+            if (format === 'digital') {
+                desc.innerHTML = `Customize images, text, and colors online in minutes. <strong>No Shipping. No Waiting.</strong>`;
+                clarity.innerText = `High-Resolution PDF — Ready to Print`;
+                cta.innerText = `Edit & Download Now`;
+                priceLabel.innerText = `Instant High-Res PDF Download`;
+                priceContainer.innerHTML = `<span class="price-value" id="priceValue">$4.25 USD</span>`;
+
+                steps.innerHTML = `
+                    <div class="step-item"><div class="step-icon"><i class="fas fa-magic"></i></div><span class="step-label">Edit</span></div>
+                    <i class="fas fa-chevron-right step-arrow"></i>
+                    <div class="step-item"><div class="step-icon"><i class="fas fa-file-export"></i></div><span class="step-label">Download</span></div>
+                    <i class="fas fa-chevron-right step-arrow"></i>
+                    <div class="step-item"><div class="step-icon"><i class="fas fa-print"></i></div><span class="step-label">Print</span></div>
+                `;
+            } else {
+                desc.innerHTML = `Customize images, text, and colors online in minutes. <strong>Order & get your poster delivered to your door.</strong>`;
+                clarity.innerText = `Professional Poster Print — Ready to Frame`;
+                cta.innerText = `Edit & Order Now`;
+                priceLabel.innerText = `Professional Physical Print — Multiple Sizes Available`;
+                priceContainer.innerHTML = `Start from <span class="price-value" id="priceValue">$2.68 USD</span>`;
+
+                steps.innerHTML = `
+                    <div class="step-item"><div class="step-icon"><i class="fas fa-paintbrush"></i></div><span class="step-label">Edit</span></div>
+                    <i class="fas fa-chevron-right step-arrow"></i>
+                    <div class="step-item"><div class="step-icon"><i class="fas fa-shopping-basket"></i></div><span class="step-label">Order</span></div>
+                    <i class="fas fa-chevron-right step-arrow"></i>
+                    <div class="step-item"><div class="step-icon"><i class="fas fa-truck-fast"></i></div><span class="step-label">Shipped</span></div>
+                `;
+            }
+        }
+
         function startAutoSlide() {
             stopAutoSlide();
             if (currentMockups.length > 1) {
@@ -821,7 +948,6 @@
             }
         }
 
-        // --- History & Modal Closing ---
         function performCloseUI() {
             modalOverlay.classList.remove('active');
             document.body.style.overflow = '';
@@ -834,7 +960,6 @@
             }
         });
 
-        // --- Panning & Modal Functions ---
         function openImageView(src) {
             stopAutoSlide();
             modalImg.src = src;
@@ -844,8 +969,6 @@
             updateZoom();
             modalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-
-            // Push fake state for back button handling
             history.pushState({ modalOpen: true }, '');
         }
 
@@ -889,7 +1012,6 @@
             isPanning = false;
         }
 
-        // Middle Mouse Scroll Logic (Reservation)
         modalOverlay.addEventListener('wheel', (e) => {
             if (!modalOverlay.classList.contains('active')) return;
             e.preventDefault();
@@ -907,6 +1029,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             const d = urlParams.get('d') || "1";
             const v = urlParams.get('v') || "1";
+            const typeParam = urlParams.get('type'); // Get type parameter
 
             const designSet = visionBoardData[d] || visionBoardData["1"];
             const currentData = designSet[v] || designSet["1"];
@@ -983,9 +1106,15 @@
                     `;
                 }).join('');
             }
+
+            // Handle type parameter for load state
+            if (typeParam && typeParam.toLowerCase() === 'physical') {
+                switchFormat('physical');
+            } else {
+                switchFormat('digital');
+            }
         }
 
-        // Event Listeners
         btnZoomIn.onclick = (e) => {
             e.stopPropagation();
             if (currentScale < 5) {
