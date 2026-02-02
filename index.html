@@ -11,9 +11,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         :root {
-            --brand-green: #10b981; /* Main Fegoprint Green */
-            --brand-blue: #3b82f6;  /* Accent Blue */
-            --brand-blue-dark: #2563eb; /* Slightly darker blue for hover */
+            --brand-green: #10b981;
+            /* Main Fegoprint Green */
+            --brand-blue: #3b82f6;
+            /* Accent Blue */
+            --brand-blue-dark: #2563eb;
+            /* Slightly darker blue for hover */
             --bg-light: #f9fafb;
             --text-dark: #1f2937;
             --text-muted: #6b7280;
@@ -110,25 +113,27 @@
             transform: translateY(-50%);
             width: 60px;
             height: 60px;
-            background: var(--brand-blue); /* Default Blue */
+            background: var(--brand-blue);
+            /* Default Blue */
             border-radius: 50%;
-            border: none; 
+            border: none;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             z-index: 25;
             color: #ffffff;
-            box-shadow: none; 
+            box-shadow: none;
             transition: all 0.3s ease;
             font-size: 1.5rem;
             font-weight: bold;
         }
 
         .nav-arrow:hover {
-            background: var(--brand-blue-dark); /* Slightly darker blue on hover */
+            background: var(--brand-blue-dark);
+            /* Slightly darker blue on hover */
             color: #ffffff;
             transform: translateY(-50%) scale(1.1);
-            box-shadow: none; 
+            box-shadow: none;
         }
 
         .nav-arrow.hidden {
@@ -199,11 +204,25 @@
             height: 24px;
         }
 
-        .step-edit svg { color: #3b82f6; }
-        .step-download svg { color: #10b981; }
-        .step-print svg { color: #0891b2; }
-        .step-order svg { color: #f59e0b; }
-        .step-deliver svg { color: #6366f1; }
+        .step-edit svg {
+            color: #3b82f6;
+        }
+
+        .step-download svg {
+            color: #10b981;
+        }
+
+        .step-print svg {
+            color: #0891b2;
+        }
+
+        .step-order svg {
+            color: #f59e0b;
+        }
+
+        .step-deliver svg {
+            color: #6366f1;
+        }
 
         .feature-step-arrow {
             color: #4b5563;
@@ -221,7 +240,8 @@
         }
 
         .segment-cta-btn {
-            background-color: var(--brand-blue); /* Default Blue */
+            background-color: var(--brand-blue);
+            /* Default Blue */
             color: white !important;
             border: none;
             padding: 0.75rem 1.5rem;
@@ -233,13 +253,14 @@
             align-items: center;
             gap: 0.5rem;
             transition: all 0.3s ease;
-            box-shadow: none; 
+            box-shadow: none;
         }
 
         .segment-cta-btn:hover {
-            background-color: var(--brand-blue-dark); /* Slightly darker blue on hover */
+            background-color: var(--brand-blue-dark);
+            /* Slightly darker blue on hover */
             transform: translateX(5px);
-            box-shadow: none; 
+            box-shadow: none;
         }
 
         /* General UI components */
@@ -271,7 +292,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Tablet View */
@@ -279,6 +302,7 @@
             .scroll-item {
                 flex: 0 0 calc(50% - 1rem);
             }
+
             .section-title {
                 font-size: 1.75rem;
             }
@@ -304,23 +328,28 @@
             /* Strict Paging Logic for Phone View */
             .scroll-item {
                 flex: 0 0 80%;
-                scroll-snap-align: center; /* Snaps to the center of viewport */
-                scroll-snap-stop: always;  /* CRITICAL: Prevents bypassing items during a swipe */
+                scroll-snap-align: center;
+                /* Snaps to the center of viewport */
+                scroll-snap-stop: always;
+                /* CRITICAL: Prevents bypassing items during a swipe */
             }
 
             .image-scroll-wrapper {
                 justify-content: flex-start;
                 padding-left: 0;
                 padding-right: 0;
-                scroll-snap-type: x mandatory; /* Enforces the snapping behavior */
-                -webkit-overflow-scrolling: touch; /* Ensures smooth touch physics */
+                scroll-snap-type: x mandatory;
+                /* Enforces the snapping behavior */
+                -webkit-overflow-scrolling: touch;
+                /* Ensures smooth touch physics */
             }
 
             /* Padding equivalents to allow the 80% wide card to center perfectly */
             .image-scroll-wrapper::before,
             .image-scroll-wrapper::after {
                 content: '';
-                flex: 0 0 10%; /* (100% viewport width - 80% card width) / 2 */
+                flex: 0 0 10%;
+                /* (100% viewport width - 80% card width) / 2 */
             }
 
             .feature-step-arrow {
@@ -350,7 +379,11 @@
         <!-- Segment 1: Digital Download -->
         <section class="mb-5 pb-5">
             <div class="section-header text-center">
-                <h2 class="section-title">Vision Boards</h2>
+                <h2 class="section-title">Custom Vision Boards</h2>
+                <p class="section-subtitle" style="color: var(--text-muted); font-size: 1.1rem; margin-top: -1rem; ">
+                    Customize text, images & anything and get your poster.
+                </p>
+
 
             </div>
 
@@ -390,12 +423,32 @@
                             </div>
                         </a>
                     </div>
-                    <!-- Card 5 -->
+
                     <div class="scroll-item">
                         <a href="product/wall-art/custom/special/1/" class="card-link">
-                            <div class="card-custom">
-                                <img src="https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?auto=format&amp;fit=crop&amp;q=80&amp;w=500"
-                                    alt="Vision Board 5">
+                            <div class="card-custom" style="background: rgba(255, 255, 255, 0.15); 
+                   backdrop-filter: blur(12px); 
+                   -webkit-backdrop-filter: blur(12px); 
+                   border: 1px solid rgba(255, 255, 255, 0.4); 
+                   display: flex; 
+                   align-items: center; 
+                   justify-content: center; 
+                   min-height: 300px;
+                   box-shadow: none;">
+                                <div class="text-center p-4">
+                                    <h3
+                                        style="color: var(--brand-blue); font-weight: 700; font-size: 2.5rem; margin-bottom: 0.5rem;">
+                                        +6
+                                    </h3>
+                                    <p
+                                        style="color: var(--text-dark); font-weight: 600; font-size: 1.1rem; line-height: 1.2; margin-bottom: 0.8rem;">
+                                        More Vision Board<br>Templates
+                                    </p>
+                                    <span
+                                        style="color: var(--brand-green); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        View All &rarr;
+                                    </span>
+                                </div>
                             </div>
                         </a>
                     </div>
@@ -415,7 +468,7 @@
             </div>
         </section>
 
-    
+
 
     </div>
 
@@ -424,15 +477,20 @@
         <div style="max-width: 900px; margin: 0 auto; padding: 0 1rem;">
             <p style="margin: 0 0 1rem 0; font-weight: 600;">&copy; 2025 FegoPrint. All rights reserved.</p>
             <p style="margin: 0;">
-                <a href="about.html" style="color: var(--brand-blue); text-decoration: none; margin: 0 0.75rem;">About</a>
+                <a href="about.html"
+                    style="color: var(--brand-blue); text-decoration: none; margin: 0 0.75rem;">About</a>
                 <span style="color:#e5e7eb;">|</span>
-                <a href="privacy.html" style="color: var(--brand-blue); text-decoration: none; margin: 0 0.75rem;">Privacy</a>
+                <a href="privacy.html"
+                    style="color: var(--brand-blue); text-decoration: none; margin: 0 0.75rem;">Privacy</a>
                 <span style="color:#e5e7eb;">|</span>
-                <a href="terms.html" style="color: var(--brand-blue); text-decoration: none; margin: 0 0.75rem;">Terms</a>
+                <a href="terms.html"
+                    style="color: var(--brand-blue); text-decoration: none; margin: 0 0.75rem;">Terms</a>
                 <span style="color:#e5e7eb;">|</span>
-                <a href="cookies.html" style="color: var(--brand-blue); text-decoration: none; margin: 0 0.75rem;">Cookies</a>
+                <a href="cookies.html"
+                    style="color: var(--brand-blue); text-decoration: none; margin: 0 0.75rem;">Cookies</a>
                 <span style="color:#e5e7eb;">|</span>
-                <a href="contact.html" style="color: var(--brand-blue); text-decoration: none; margin: 0 0.75rem;">Contact</a>
+                <a href="contact.html"
+                    style="color: var(--brand-blue); text-decoration: none; margin: 0 0.75rem;">Contact</a>
             </p>
         </div>
     </footer>
