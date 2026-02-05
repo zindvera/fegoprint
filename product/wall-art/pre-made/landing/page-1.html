@@ -42,6 +42,7 @@
 
         .gradient-bg {
             background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            padding: 4rem 0;
         }
 
         .hero-title {
@@ -49,9 +50,8 @@
             color: #1a1a1a;
             letter-spacing: -0.04em;
             margin-top: 0;
-            margin-bottom: 1.6rem;
-            font-size: 32px;
-            /* Desktop View */
+            margin-bottom: 1rem;
+            font-size: 32px; /* Desktop View */
             line-height: 1.1;
             min-height: 1.2em;
         }
@@ -67,7 +67,7 @@
         .format-switcher {
             display: flex;
             gap: 12px;
-            margin-bottom: 2.2rem;
+            margin-bottom: 2rem;
             width: 100%;
             max-width: 480px;
         }
@@ -140,7 +140,7 @@
         }
 
         .step-arrow {
-            color: #afafaf;
+            color: #000;
             font-size: 1rem;
             margin-bottom: 25px;
         }
@@ -229,7 +229,7 @@
 
         /* Trust Section */
         .trust-badge-block {
-            display: none;
+            display: none; 
             align-items: center;
             margin-bottom: 2rem;
             gap: 15px;
@@ -349,13 +349,8 @@
             color: #fff;
         }
 
-        .arrow-left {
-            left: 15px;
-        }
-
-        .arrow-right {
-            right: 15px;
-        }
+        .arrow-left { left: 15px; }
+        .arrow-right { right: 15px; }
 
         .slider-dots {
             display: flex;
@@ -432,11 +427,10 @@
             object-fit: contain;
             transition: transform 0.2s ease-out;
             cursor: grab;
+            will-change: transform;
         }
 
-        #modal-zoom-img:active {
-            cursor: grabbing;
-        }
+        #modal-zoom-img:active { cursor: grabbing; }
 
         .modal-close-circle {
             position: absolute;
@@ -487,33 +481,27 @@
         /* Responsive Breakpoints */
         @media (max-width: 991.98px) {
             .hero-title {
-                font-size: 28px;
-                /* Tablet View */
+                font-size: 28px; /* Tablet View */
             }
         }
 
         @media (max-width: 767.98px) {
-
-            .gradient-bg {
-                margin-top: 0.7in;
-            }
-
             .hero-title {
-                font-size: 25px;
-                /* Phone View */
+                font-size: 25px; /* Phone View */
                 text-align: center;
             }
 
-            header .row>* {
-                margin-top: 0 !important;
-                /* Remove top gutter margin in phone view */
+            header .row > * {
+                margin-top: 0 !important; /* Remove top gutter margin in phone view */
             }
 
             .hero-text {
                 text-align: center;
             }
 
-
+            .format-switcher {
+                margin: 1.5rem auto;
+            }
 
             .trust-badge-block {
                 margin: 0 auto 2rem auto;
@@ -555,13 +543,14 @@
 
             /* Floating CTA Full Width at Center on Phone */
             .floating-cta {
-                left: 20px;
-                right: 20px;
+                left: 6px;
+                right: 6px;
                 bottom: 10px;
-                padding: 0.6rem;
+                padding: 0.8rem 1rem;
                 font-size: 1rem;
                 text-align: center;
                 border-radius: 12px;
+                width: calc(100% - 12px);
             }
         }
     </style>
@@ -582,26 +571,23 @@
                 <!-- Image Slider -->
                 <div class="col-12 col-md-6">
                     <div class="slider-container" id="mainSlider">
-                        <button class="slider-arrow arrow-left" onclick="moveSlide(-1, true)"><i
-                                class="fas fa-chevron-left"></i></button>
+                        <button class="slider-arrow arrow-left" onclick="moveSlide(-1, true)"><i class="fas fa-chevron-left"></i></button>
                         <div class="slider-track" id="sliderTrack"></div>
-                        <button class="slider-arrow arrow-right" onclick="moveSlide(1, true)"><i
-                                class="fas fa-chevron-right"></i></button>
+                        <button class="slider-arrow arrow-right" onclick="moveSlide(1, true)"><i class="fas fa-chevron-right"></i></button>
                     </div>
                     <div id="sliderDots" class="slider-dots"></div>
                 </div>
 
                 <!-- Text Content -->
                 <div class="col-12 col-md-6 ps-lg-5">
-
+                    
                     <!-- Dynamic Trust Badge Link -->
                     <a id="trustLink" href="#" target="_blank" class="trust-badge-block">
                         <img id="brandLogo" src="" alt="Brand Logo" class="brand-logo-img">
                         <div class="rating-container" id="ratingContainer">
                             <div class="star-row" id="starRow">
                                 <span class="rating-score" id="ratingScoreText"></span>
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </div>
                             <div class="rating-text">
                                 <p style="margin:0;" id="brandRatingsLabel">Ratings</p>
@@ -610,7 +596,7 @@
                         </div>
                     </a>
 
-                    <h1 class="hero-title d-none d-md-block"></h1>
+                    <h1 class="hero-title d-none d-md-block"></h1> 
 
                     <div class="format-switcher">
                         <div class="format-option active" id="opt-digital" onclick="switchFormat('digital')">
@@ -622,8 +608,8 @@
                     </div>
 
                     <p class="hero-text" id="formatDesc">
-                        Download the high-resolution file instantly.
-                        <strong>Perfect for printing yourself.</strong>
+                        Download the high-resolution file instantly. 
+                        <strong>Perfect for printing yourself or using as a desktop wallpaper.</strong>
                     </p>
 
                     <!-- Process Steps -->
@@ -653,8 +639,7 @@
                         <a id="heroCTA" href="#" target="_blank" class="cta-button">Download File</a>
                         <div class="price-display">
                             <span id="priceLabel">Digital Master File — Lifetime Access</span><br>
-                            <p id="priceValueContainer">Price: <span class="price-value" id="priceValue">$10.50
-                                    USD</span></p>
+                            <p id="priceValueContainer">Price: <span class="price-value" id="priceValue">$10.50 USD</span></p>
                         </div>
                     </div>
                 </div>
@@ -701,7 +686,7 @@
 
         const formats = {
             digital: {
-                desc: "Download the high-resolution file instantly. <strong>Perfect for printing yourself.</strong>",
+                desc: "Download the high-resolution file instantly. <strong>Perfect for printing yourself or using as a desktop wallpaper.</strong>",
                 steps: [{ icon: 'fa-credit-card', label: 'Pay' }, { icon: 'fa-download', label: 'Download' }, { icon: 'fa-print', label: 'Print' }],
                 clarity: "Instant 300 DPI High-Res Download",
                 cta: "Download File",
@@ -710,7 +695,7 @@
                 link: "#"
             },
             physical: {
-                desc: "Professional printing on premium paper. <strong>Order & get your poster delivered to your door.</strong>",
+                desc: "Professional gallery-grade printing on premium paper. <strong>Order & get your poster delivered to your door.</strong>",
                 steps: [{ icon: 'fa-shopping-basket', label: 'Order' }, { icon: 'fa-credit-card', label: 'Pay' }, { icon: 'fa-truck-fast', label: 'Shipped' }],
                 clarity: "Professional Poster Print — Ready to Frame",
                 cta: "Order Now",
@@ -721,7 +706,7 @@
         };
 
         window.onload = async () => {
-            await fetchDesignData();
+            await fetchDesignData(); 
             await loadImages();
             await loadMockups();
             switchFormat('digital');
@@ -741,19 +726,16 @@
                 let brandsList = [];
                 if (brandsRes.ok) brandsList = await brandsRes.json();
 
-                // Title
                 const titleElements = document.querySelectorAll('.hero-title');
                 const finalTitle = designData.title || "Custom 2026 Vision Board Poster";
                 titleElements.forEach(el => el.innerText = finalTitle);
                 document.title = finalTitle + " | Vision Board Poster";
 
-                // CTA
                 if (designData.cta_url) {
                     formats.digital.link = designData.cta_url;
                     formats.physical.link = designData.cta_url;
                 }
 
-                // Brand Logic
                 const trustLink = document.getElementById('trustLink');
                 const brandLogo = document.getElementById('brandLogo');
                 const ratingContainer = document.getElementById('ratingContainer');
@@ -772,8 +754,7 @@
                     brandLogo.style.display = 'block';
                     brandRatingsLabel.innerText = `Ratings on ${matchedBrand.brand_name}`;
 
-                    // Ratings/Reviews Fallback
-                    const fallback = matchedBrand.categories["posters"] || {};
+                    const fallback = matchedBrand.categories["wall-art"] || {};
                     const finalRatings = designData.ratings ?? fallback.ratings;
                     const finalReviews = designData.reviews ?? fallback.reviews;
 
@@ -795,7 +776,6 @@
                         ratingContainer.style.display = 'none';
                     }
                 } else {
-                    // No brand match: ONLY show ratings if explicitly in designData
                     if (designData.ratings || designData.reviews) {
                         trustLink.style.display = 'flex';
                         trustLink.href = ctaUrl;
@@ -933,7 +913,7 @@
             const modalImg = document.getElementById('modal-zoom-img');
             modalImg.src = src;
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden'; 
             resetZoom();
             if (autoSlideTimer) clearInterval(autoSlideTimer);
         }
@@ -950,27 +930,68 @@
         function initModalEvents() {
             const modal = document.getElementById('img-modal-overlay');
             const container = document.getElementById('modal-container');
+            const modalImg = document.getElementById('modal-zoom-img');
             document.getElementById('close-view-modal').onclick = closeModal;
+            
             document.getElementById('btn-zoom-in').onclick = () => { zoomLevel = Math.min(zoomLevel + 0.5, 4); updateZoomTransform(); };
             document.getElementById('btn-zoom-out').onclick = () => { zoomLevel = Math.max(zoomLevel - 0.5, 1); if (zoomLevel === 1) { translateX = 0; translateY = 0; } updateZoomTransform(); };
+            
             container.addEventListener('wheel', (e) => { e.preventDefault(); if (e.deltaY < 0) zoomLevel = Math.min(zoomLevel + 0.25, 4); else { zoomLevel = Math.max(zoomLevel - 0.25, 1); if (zoomLevel === 1) { translateX = 0; translateY = 0; } } updateZoomTransform(); }, { passive: false });
-            const toggleZoom = () => { if (zoomLevel > 1) { zoomLevel = 1; translateX = 0; translateY = 0; } else { zoomLevel = 2; } updateZoomTransform(); };
+
+            // Behavior 1: Double Click / Double Tap Toggle
+            const toggleZoom = () => {
+                if (zoomLevel > 1) { zoomLevel = 1; translateX = 0; translateY = 0; }
+                else { zoomLevel = 2; }
+                updateZoomTransform();
+            };
+
             container.addEventListener('dblclick', toggleZoom);
+
+            // Behavior 2: Pinch to Zoom & Drag
             let lastTap = 0;
+            let initialPinchDist = null;
+            let startZoomLevel = 1;
+
             container.addEventListener('touchstart', (e) => {
-                const now = Date.now();
-                if (now - lastTap < 300) { toggleZoom(); e.preventDefault(); }
-                lastTap = now;
-                if (zoomLevel <= 1) return;
-                isDragging = true;
-                startX = e.touches[0].clientX - translateX;
-                startY = e.touches[0].clientY - translateY;
+                if (e.touches.length === 1) {
+                    const now = Date.now();
+                    if (now - lastTap < 300) { toggleZoom(); e.preventDefault(); }
+                    lastTap = now;
+
+                    if (zoomLevel > 1) {
+                        isDragging = true;
+                        startX = e.touches[0].clientX - translateX;
+                        startY = e.touches[0].clientY - translateY;
+                    }
+                } else if (e.touches.length === 2) {
+                    isDragging = false;
+                    initialPinchDist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+                    startZoomLevel = zoomLevel;
+                }
             }, { passive: false });
+
+            container.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1 && isDragging) {
+                    translateX = e.touches[0].clientX - startX;
+                    translateY = e.touches[0].clientY - startY;
+                    updateZoomTransform();
+                } else if (e.touches.length === 2 && initialPinchDist) {
+                    const currentDist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+                    const scale = currentDist / initialPinchDist;
+                    zoomLevel = Math.min(Math.max(startZoomLevel * scale, 1), 5);
+                    updateZoomTransform();
+                }
+            }, { passive: false });
+
+            container.addEventListener('touchend', () => {
+                isDragging = false;
+                initialPinchDist = null;
+            });
+
+            // Desktop Drag
             container.onmousedown = (e) => { if (zoomLevel <= 1) return; isDragging = true; startX = e.clientX - translateX; startY = e.clientY - translateY; };
             window.onmousemove = (e) => { if (!isDragging) return; translateX = e.clientX - startX; translateY = e.clientY - startY; updateZoomTransform(); };
             window.onmouseup = () => isDragging = false;
-            container.ontouchmove = (e) => { if (!isDragging) return; translateX = e.touches[0].clientX - startX; translateY = e.touches[0].clientY - startY; updateZoomTransform(); };
-            container.ontouchend = () => isDragging = false;
         }
     </script>
 </body>
