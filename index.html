@@ -297,6 +297,13 @@
             }
         }
 
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-top: -0.5rem;
+        }
+
         /* Tablet View */
         @media (max-width: 992px) {
             .scroll-item {
@@ -317,6 +324,18 @@
 
         /* Phone View */
         @media (max-width: 767px) {
+
+            .section-title {
+                text-align: start;
+                padding: 0px 3px 0px 3px;
+            }
+
+            .section-subtitle {
+                text-align: start;
+                padding: 0px 3px 0px 3px;
+            }
+
+
             #index-logo {
                 height: 45px;
             }
@@ -380,7 +399,7 @@
         <section class="mb-5 pb-5">
             <div class="section-header text-center">
                 <h2 class="section-title">Custom Vision Boards</h2>
-                <p class="section-subtitle" style="color: var(--text-muted); font-size: 1.1rem; margin-top: -1rem; ">
+                <p class="section-subtitle">
                     Customize text, images & anything and get your poster.
                 </p>
 
@@ -468,6 +487,70 @@
             </div>
         </section>
 
+        <!-- Segment 1: Digital Download -->
+        <section class="mb-5 pb-5">
+            <div class="section-header text-center">
+                <h2 class="section-title">Keep Calm & Stay Happy Poster</h2>
+                <p class="section-subtitle">
+                    Instant Digital Download or Order For Physical Delivery
+                </p>
+
+
+            </div>
+
+            <div class="scroll-container-relative">
+                <button class="nav-arrow arrow-left hidden" aria-label="Scroll left"
+                    onclick="event.preventDefault();">&#10094;</button>
+                <div class="image-scroll-wrapper">
+                    <!-- Card 1 -->
+                    <div class="scroll-item">
+                        <a href="product/wall-art/pre-made/landing/page-1.html" class="card-link">
+                            <div class="card-custom">
+                                <img src="product/wall-art/pre-made/designs/1/images/1.png" alt="Vision Board 1">
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="scroll-item">
+
+                        <div class="card-custom">
+                            <img src="product/wall-art/pre-made/designs/1/images/2.png" alt="Vision Board 2">
+                        </div>
+
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="scroll-item">
+
+                        <div class="card-custom">
+                            <img src="product/wall-art/pre-made/designs/1/images/3.png" alt="Vision Board 3">
+                        </div>
+
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="scroll-item">
+
+                        <div class="card-custom">
+                            <img src="product/wall-art/pre-made/designs/1/images/4.png" alt="Vision Board 4">
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <button class="nav-arrow arrow-right" aria-label="Scroll right"
+                    onclick="event.preventDefault();">&#10095;</button>
+            </div>
+
+            <div class="segment-cta-container">
+                <a href="product/wall-art/pre-made/landing/page-1.html" class="segment-cta-btn">
+                    See This Poster
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </a>
+            </div>
+        </section>
 
 
     </div>
