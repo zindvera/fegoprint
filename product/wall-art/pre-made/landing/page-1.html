@@ -275,9 +275,13 @@
             margin-bottom: 2px;
         }
 
-        .fa-star {
+        .fa-star, .fa-star-half-alt {
             color: #ffc107;
             font-size: 0.9rem;
+        }
+        
+        .far.fa-star {
+            color: #dee2e6; /* Empty star color */
         }
 
         .rating-score {
@@ -289,7 +293,7 @@
         .rating-text {
             font-size: 0.85rem;
             font-weight: 600;
-            color: #000;
+            color: #000; /* Ratings label always black as requested */
             line-height: 1;
         }
 
@@ -558,113 +562,115 @@
 
 <body>
 
-    <div class="navdiv"></div>
+    <div id="main-content">
+        <div class="navdiv"></div>
 
-    <header class="gradient-bg" id="topSection">
-        <div class="container">
-            <div class="row g-5 align-items-center">
-                <!-- Mobile Title -->
-                <div class="col-12 d-md-none text-center">
-                    <h1 class="hero-title"></h1>
-                </div>
-
-                <!-- Image Slider -->
-                <div class="col-12 col-md-6">
-                    <div class="slider-container" id="mainSlider">
-                        <button class="slider-arrow arrow-left" onclick="moveSlide(-1, true)"><i class="fas fa-chevron-left"></i></button>
-                        <div class="slider-track" id="sliderTrack"></div>
-                        <button class="slider-arrow arrow-right" onclick="moveSlide(1, true)"><i class="fas fa-chevron-right"></i></button>
+        <header class="gradient-bg" id="topSection">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <!-- Mobile Title -->
+                    <div class="col-12 d-md-none text-center">
+                        <h1 class="hero-title"></h1>
                     </div>
-                    <div id="sliderDots" class="slider-dots"></div>
-                </div>
 
-                <!-- Text Content -->
-                <div class="col-12 col-md-6 ps-lg-5">
-                    
-                    <!-- Dynamic Trust Badge Link -->
-                    <a id="trustLink" href="#" target="_blank" class="trust-badge-block">
-                        <img id="brandLogo" src="" alt="Brand Logo" class="brand-logo-img">
-                        <div class="rating-container" id="ratingContainer">
-                            <div class="star-row" id="starRow">
-                                <span class="rating-score" id="ratingScoreText"></span>
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <!-- Image Slider -->
+                    <div class="col-12 col-md-6">
+                        <div class="slider-container" id="mainSlider">
+                            <button class="slider-arrow arrow-left" onclick="moveSlide(-1, true)"><i class="fas fa-chevron-left"></i></button>
+                            <div class="slider-track" id="sliderTrack"></div>
+                            <button class="slider-arrow arrow-right" onclick="moveSlide(1, true)"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div id="sliderDots" class="slider-dots"></div>
+                    </div>
+
+                    <!-- Text Content -->
+                    <div class="col-12 col-md-6 ps-lg-5">
+                        
+                        <!-- Dynamic Trust Badge Link -->
+                        <a id="trustLink" href="#" target="_blank" class="trust-badge-block">
+                            <img id="brandLogo" src="" alt="Brand Logo" class="brand-logo-img">
+                            <div class="rating-container" id="ratingContainer">
+                                <div class="star-row" id="starRow">
+                                    <!-- Ratings and stars loaded via JS -->
+                                </div>
+                                <div class="rating-text">
+                                    <p style="margin:0;" id="brandRatingsLabel">Ratings</p>
+                                    <h6 style="margin:0;" class="review-count" id="reviewCountText"></h6>
+                                </div>
                             </div>
-                            <div class="rating-text">
-                                <p style="margin:0;" id="brandRatingsLabel">Ratings</p>
-                                <h6 style="margin:0;" class="review-count" id="reviewCountText"></h6>
+                        </a>
+
+                        <h1 class="hero-title d-none d-md-block"></h1> 
+
+                        <div class="format-switcher">
+                            <div class="format-option active" id="opt-digital" onclick="switchFormat('digital')">
+                                <i class="fas fa-download"></i> Instant Digital
+                            </div>
+                            <div class="format-option" id="opt-physical" onclick="switchFormat('physical')">
+                                <i class="fa-solid fa-truck"></i> Physical Poster
                             </div>
                         </div>
-                    </a>
 
-                    <h1 class="hero-title d-none d-md-block"></h1> 
+                        <p class="hero-text" id="formatDesc">
+                            Download the high-resolution file instantly. 
+                            <strong>Perfect for printing yourself or using as a desktop wallpaper.</strong>
+                        </p>
 
-                    <div class="format-switcher">
-                        <div class="format-option active" id="opt-digital" onclick="switchFormat('digital')">
-                            <i class="fas fa-download"></i> Instant Digital
+                        <!-- Process Steps -->
+                        <div class="process-steps" id="processStepsContainer">
+                            <div class="step-item">
+                                <div class="step-icon"><i class="fas fa-credit-card"></i></div>
+                                <span class="step-label">Pay</span>
+                            </div>
+                            <i class="fas fa-chevron-right step-arrow"></i>
+                            <div class="step-item">
+                                <div class="step-icon"><i class="fas fa-download"></i></div>
+                                <span class="step-label">Download</span>
+                            </div>
+                            <i class="fas fa-chevron-right step-arrow"></i>
+                            <div class="step-item">
+                                <div class="step-icon"><i class="fas fa-print"></i></div>
+                                <span class="step-label">Print</span>
+                            </div>
                         </div>
-                        <div class="format-option" id="opt-physical" onclick="switchFormat('physical')">
-                            <i class="fa-solid fa-truck"></i> Physical Poster
-                        </div>
-                    </div>
 
-                    <p class="hero-text" id="formatDesc">
-                        Download the high-resolution file instantly. 
-                        <strong>Perfect for printing yourself or using as a desktop wallpaper.</strong>
-                    </p>
-
-                    <!-- Process Steps -->
-                    <div class="process-steps" id="processStepsContainer">
-                        <div class="step-item">
-                            <div class="step-icon"><i class="fas fa-credit-card"></i></div>
-                            <span class="step-label">Pay</span>
+                        <div class="clarity-feature">
+                            <i class="fas fa-circle-check"></i>
+                            <p class="clarity-text" id="clarityText">Instant 300 DPI High-Res Download</p>
                         </div>
-                        <i class="fas fa-chevron-right step-arrow"></i>
-                        <div class="step-item">
-                            <div class="step-icon"><i class="fas fa-download"></i></div>
-                            <span class="step-label">Download</span>
-                        </div>
-                        <i class="fas fa-chevron-right step-arrow"></i>
-                        <div class="step-item">
-                            <div class="step-icon"><i class="fas fa-print"></i></div>
-                            <span class="step-label">Print</span>
-                        </div>
-                    </div>
 
-                    <div class="clarity-feature">
-                        <i class="fas fa-circle-check"></i>
-                        <p class="clarity-text" id="clarityText">Instant 300 DPI High-Res Download</p>
-                    </div>
-
-                    <div class="hero-actions">
-                        <a id="heroCTA" href="#" target="_blank" class="cta-button">Download File</a>
-                        <div class="price-display">
-                            <span id="priceLabel">Digital Master File — Lifetime Access</span><br>
-                            <p id="priceValueContainer">Price: <span class="price-value" id="priceValue">$10.50 USD</span></p>
+                        <div class="hero-actions">
+                            <a id="heroCTA" href="#" target="_blank" class="cta-button">Download File</a>
+                            <div class="price-display">
+                                <span id="priceLabel">Digital Master File — Lifetime Access</span><br>
+                                <p id="priceValueContainer">Price: <span class="price-value" id="priceValue">$10.50 USD</span></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <section class="mockup-container">
-        <div class="container">
-            <div class="row g-md-4 g-2" id="mockupGrid"></div>
-        </div>
-    </section>
+        <section class="mockup-container">
+            <div class="container">
+                <div class="row g-md-4 g-2" id="mockupGrid"></div>
+            </div>
+        </section>
 
-    <div id="floatingCTA" class="cta-button floating-cta">Get this Poster</div>
+        <!-- Floating CTA (Link to platform) -->
+        <a id="floatingCTA" href="#" target="_blank" class="cta-button floating-cta">Get this Poster</a>
 
-    <!-- Image Modal -->
-    <div id="img-modal-overlay">
-        <button class="modal-close-circle" id="close-view-modal"><i class="fas fa-times"></i></button>
-        <div class="modal-view-container" id="modal-container">
-            <img id="modal-zoom-img" src="" alt="Zoomed View">
-        </div>
-        <div class="modal-zoom-controls">
-            <button class="modal-zoom-btn" id="btn-zoom-out"><i class="fas fa-minus"></i></button>
-            <span id="zoom-percent-text">100%</span>
-            <button class="modal-zoom-btn" id="btn-zoom-in"><i class="fas fa-plus"></i></button>
+        <!-- Image Modal -->
+        <div id="img-modal-overlay">
+            <button class="modal-close-circle" id="close-view-modal"><i class="fas fa-times"></i></button>
+            <div class="modal-view-container" id="modal-container">
+                <img id="modal-zoom-img" src="" alt="Zoomed View">
+            </div>
+            <div class="modal-zoom-controls">
+                <button class="modal-zoom-btn" id="btn-zoom-out"><i class="fas fa-minus"></i></button>
+                <span id="zoom-percent-text">100%</span>
+                <button class="modal-zoom-btn" id="btn-zoom-in"><i class="fas fa-plus"></i></button>
+            </div>
         </div>
     </div>
 
@@ -672,7 +678,8 @@
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const designId = urlParams.get('n') || '1';
+        // Default to design '1' if the parameter is not provided
+        const designId = urlParams.get('design') || '1'; 
         const baseDir = `../designs/${designId}/images/`;
         const jsonPath = `../designs/${designId}/data.json`;
         const brandsJsonPath = `../../../../brands.json`;
@@ -706,20 +713,54 @@
         };
 
         window.onload = async () => {
-            await fetchDesignData(); 
+            const success = await fetchDesignData(); 
+            if (!success) {
+                showErrorPage();
+                return;
+            }
             await loadImages();
             await loadMockups();
             switchFormat('digital');
             initModalEvents();
             startAutoSlide();
             initCTAObserver();
-            document.getElementById('floatingCTA').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
         };
+
+        function showErrorPage() {
+            document.body.innerHTML = `
+                <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+                    <div class="text-center">
+                        <h1 class="display-1 fw-bold text-primary">404</h1>
+                        <p class="fs-3 fw-semibold">Page Not Found</p>
+                        <p class="lead text-muted">The design you are looking for does not exist or the link is invalid.</p>
+                        <a href="/" class="btn btn-primary rounded-pill px-5 py-2 mt-3 fw-bold">Return Home</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getStarsHtml(rating) {
+            let html = `<span class="rating-score">${rating}</span>`;
+            for (let i = 1; i <= 5; i++) {
+                if (i <= Math.floor(rating)) {
+                    html += `<i class="fas fa-star"></i>`;
+                } else if (i === Math.floor(rating) + 1 && (rating % 1) >= 0.5) {
+                    html += `<i class="fas fa-star-half-alt"></i>`;
+                } else {
+                    html += `<i class="far fa-star"></i>`;
+                }
+            }
+            return html;
+        }
 
         async function fetchDesignData() {
             try {
-                const [designRes, brandsRes] = await Promise.all([fetch(jsonPath), fetch(brandsJsonPath)]);
-                if (!designRes.ok) throw new Error('Design JSON not found');
+                const [designRes, brandsRes] = await Promise.all([
+                    fetch(jsonPath),
+                    fetch(brandsJsonPath)
+                ]);
+
+                if (!designRes.ok) return false;
                 const designArray = await designRes.json();
                 const designData = Array.isArray(designArray) ? designArray[0] : designArray;
 
@@ -734,12 +775,12 @@
                 if (designData.cta_url) {
                     formats.digital.link = designData.cta_url;
                     formats.physical.link = designData.cta_url;
+                    document.getElementById('floatingCTA').href = designData.cta_url;
                 }
 
                 const trustLink = document.getElementById('trustLink');
                 const brandLogo = document.getElementById('brandLogo');
                 const ratingContainer = document.getElementById('ratingContainer');
-                const ratingScoreText = document.getElementById('ratingScoreText');
                 const reviewCountText = document.getElementById('reviewCountText');
                 const starRow = document.getElementById('starRow');
                 const brandRatingsLabel = document.getElementById('brandRatingsLabel');
@@ -754,17 +795,16 @@
                     brandLogo.style.display = 'block';
                     brandRatingsLabel.innerText = `Ratings on ${matchedBrand.brand_name}`;
 
-                    const fallback = matchedBrand.categories["wall-art"] || {};
+                    const fallback = matchedBrand.categories["posters"] || matchedBrand.categories["wall-art"] || {};
                     const finalRatings = designData.ratings ?? fallback.ratings;
                     const finalReviews = designData.reviews ?? fallback.reviews;
 
                     if (finalRatings || finalReviews) {
                         ratingContainer.style.display = 'flex';
                         if (finalRatings) {
-                            starRow.style.display = 'flex';
-                            ratingScoreText.innerText = finalRatings;
+                            starRow.innerHTML = getStarsHtml(finalRatings);
                         } else {
-                            starRow.style.display = 'none';
+                            starRow.innerHTML = "";
                         }
                         if (finalReviews) {
                             reviewCountText.style.display = 'block';
@@ -783,10 +823,7 @@
                         brandRatingsLabel.innerText = "Verified Ratings";
                         ratingContainer.style.display = 'flex';
                         if (designData.ratings) {
-                            starRow.style.display = 'flex';
-                            ratingScoreText.innerText = designData.ratings;
-                        } else {
-                            starRow.style.display = 'none';
+                            starRow.innerHTML = getStarsHtml(designData.ratings);
                         }
                         if (designData.reviews) {
                             reviewCountText.style.display = 'block';
@@ -796,10 +833,10 @@
                         trustLink.style.display = 'none';
                     }
                 }
+                return true;
             } catch (error) {
                 console.error("Initialization error:", error);
-                document.querySelectorAll('.hero-title').forEach(el => el.innerText = "Custom 2026 Vision Board Poster");
-                document.getElementById('trustLink').style.display = 'none';
+                return false;
             }
         }
 
@@ -894,9 +931,14 @@
             document.getElementById('opt-physical').classList.toggle('active', type === 'physical');
             document.getElementById('formatDesc').innerHTML = data.desc;
             document.getElementById('clarityText').innerText = data.clarity;
+            
             const heroCTA = document.getElementById('heroCTA');
             heroCTA.innerText = data.cta;
             heroCTA.href = data.link;
+
+            const floatingCTA = document.getElementById('floatingCTA');
+            floatingCTA.href = data.link;
+
             document.getElementById('priceLabel').innerText = data.priceLabel;
             document.getElementById('priceValue').innerText = data.price;
             const stepsContainer = document.getElementById('processStepsContainer');
@@ -938,16 +980,13 @@
             
             container.addEventListener('wheel', (e) => { e.preventDefault(); if (e.deltaY < 0) zoomLevel = Math.min(zoomLevel + 0.25, 4); else { zoomLevel = Math.max(zoomLevel - 0.25, 1); if (zoomLevel === 1) { translateX = 0; translateY = 0; } } updateZoomTransform(); }, { passive: false });
 
-            // Behavior 1: Double Click / Double Tap Toggle
             const toggleZoom = () => {
                 if (zoomLevel > 1) { zoomLevel = 1; translateX = 0; translateY = 0; }
                 else { zoomLevel = 2; }
                 updateZoomTransform();
             };
-
             container.addEventListener('dblclick', toggleZoom);
 
-            // Behavior 2: Pinch to Zoom & Drag
             let lastTap = 0;
             let initialPinchDist = null;
             let startZoomLevel = 1;
@@ -983,12 +1022,8 @@
                 }
             }, { passive: false });
 
-            container.addEventListener('touchend', () => {
-                isDragging = false;
-                initialPinchDist = null;
-            });
+            container.addEventListener('touchend', () => { isDragging = false; initialPinchDist = null; });
 
-            // Desktop Drag
             container.onmousedown = (e) => { if (zoomLevel <= 1) return; isDragging = true; startX = e.clientX - translateX; startY = e.clientY - translateY; };
             window.onmousemove = (e) => { if (!isDragging) return; translateX = e.clientX - startX; translateY = e.clientY - startY; updateZoomTransform(); };
             window.onmouseup = () => isDragging = false;
