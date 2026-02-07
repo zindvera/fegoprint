@@ -42,7 +42,7 @@
 
         .gradient-bg {
             background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            padding: 4rem 0;
+
         }
 
         .hero-title {
@@ -51,7 +51,8 @@
             letter-spacing: -0.04em;
             margin-top: 0;
             margin-bottom: 1rem;
-            font-size: 32px; /* Desktop View */
+            font-size: 32px;
+            /* Desktop View */
             line-height: 1.1;
             min-height: 1.2em;
         }
@@ -229,7 +230,7 @@
 
         /* Trust Section */
         .trust-badge-block {
-            display: none; 
+            display: none;
             align-items: center;
             margin-bottom: 2rem;
             gap: 15px;
@@ -275,13 +276,15 @@
             margin-bottom: 2px;
         }
 
-        .fa-star, .fa-star-half-alt {
+        .fa-star,
+        .fa-star-half-alt {
             color: #ffc107;
             font-size: 0.9rem;
         }
-        
+
         .far.fa-star {
-            color: #dee2e6; /* Empty star color */
+            color: #dee2e6;
+            /* Empty star color */
         }
 
         .rating-score {
@@ -293,7 +296,8 @@
         .rating-text {
             font-size: 0.85rem;
             font-weight: 600;
-            color: #000; /* Ratings label always black as requested */
+            color: #000;
+            /* Ratings label always black as requested */
             line-height: 1;
         }
 
@@ -353,8 +357,13 @@
             color: #fff;
         }
 
-        .arrow-left { left: 15px; }
-        .arrow-right { right: 15px; }
+        .arrow-left {
+            left: 15px;
+        }
+
+        .arrow-right {
+            right: 15px;
+        }
 
         .slider-dots {
             display: flex;
@@ -434,7 +443,9 @@
             will-change: transform;
         }
 
-        #modal-zoom-img:active { cursor: grabbing; }
+        #modal-zoom-img:active {
+            cursor: grabbing;
+        }
 
         .modal-close-circle {
             position: absolute;
@@ -485,30 +496,39 @@
         /* Responsive Breakpoints */
         @media (max-width: 991.98px) {
             .hero-title {
-                font-size: 28px; /* Tablet View */
+                font-size: 28px;
+                /* Tablet View */
             }
         }
 
         @media (max-width: 767.98px) {
             .hero-title {
-                font-size: 25px; /* Phone View */
+                font-size: 25px;
+                /* Phone View */
                 text-align: center;
             }
 
-            header .row > * {
-                margin-top: 0 !important; /* Remove top gutter margin in phone view */
+            .gradient-bg {
+                padding: 4rem 0;
+            }
+
+            header .row>* {
+                margin-top: 0 !important;
+                /* Remove top gutter margin in phone view */
             }
 
             .hero-text {
                 text-align: center;
+                padding-top: 0.2in;
+                padding-bottom: 0.15in;
             }
 
             .format-switcher {
-                margin: 1.5rem auto;
+                margin: 2rem auto 1.35rem auto;
             }
 
             .trust-badge-block {
-                margin: 0 auto 2rem auto;
+                margin: 20px auto 0 auto;
             }
 
             .process-steps {
@@ -576,16 +596,18 @@
                     <!-- Image Slider -->
                     <div class="col-12 col-md-6">
                         <div class="slider-container" id="mainSlider">
-                            <button class="slider-arrow arrow-left" onclick="moveSlide(-1, true)"><i class="fas fa-chevron-left"></i></button>
+                            <button class="slider-arrow arrow-left" onclick="moveSlide(-1, true)"><i
+                                    class="fas fa-chevron-left"></i></button>
                             <div class="slider-track" id="sliderTrack"></div>
-                            <button class="slider-arrow arrow-right" onclick="moveSlide(1, true)"><i class="fas fa-chevron-right"></i></button>
+                            <button class="slider-arrow arrow-right" onclick="moveSlide(1, true)"><i
+                                    class="fas fa-chevron-right"></i></button>
                         </div>
                         <div id="sliderDots" class="slider-dots"></div>
                     </div>
 
                     <!-- Text Content -->
                     <div class="col-12 col-md-6 ps-lg-5">
-                        
+
                         <!-- Dynamic Trust Badge Link -->
                         <a id="trustLink" href="#" target="_blank" class="trust-badge-block">
                             <img id="brandLogo" src="" alt="Brand Logo" class="brand-logo-img">
@@ -600,7 +622,7 @@
                             </div>
                         </a>
 
-                        <h1 class="hero-title d-none d-md-block"></h1> 
+                        <h1 class="hero-title d-none d-md-block"></h1>
 
                         <div class="format-switcher">
                             <div class="format-option active" id="opt-digital" onclick="switchFormat('digital')">
@@ -612,8 +634,8 @@
                         </div>
 
                         <p class="hero-text" id="formatDesc">
-                            Download the high-resolution file instantly. 
-                            <strong>Perfect for printing yourself or using as a desktop wallpaper.</strong>
+                            Download the high-resolution file instantly.
+                            <strong>Perfect for printing yourself.</strong>
                         </p>
 
                         <!-- Process Steps -->
@@ -643,7 +665,8 @@
                             <a id="heroCTA" href="#" target="_blank" class="cta-button">Download File</a>
                             <div class="price-display">
                                 <span id="priceLabel">Digital Master File — Lifetime Access</span><br>
-                                <p id="priceValueContainer">Price: <span class="price-value" id="priceValue">$10.50 USD</span></p>
+                                <p id="priceValueContainer">Price: <span class="price-value" id="priceValue">$10.50
+                                        USD</span></p>
                             </div>
                         </div>
                     </div>
@@ -679,7 +702,7 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         // Default to design '1' if the parameter is not provided
-        const designId = urlParams.get('design') || '1'; 
+        const designId = urlParams.get('design') || '1';
         const baseDir = `../designs/${designId}/images/`;
         const jsonPath = `../designs/${designId}/data.json`;
         const brandsJsonPath = `../../../../brands.json`;
@@ -693,7 +716,7 @@
 
         const formats = {
             digital: {
-                desc: "Download the high-resolution file instantly. <strong>Perfect for printing yourself or using as a desktop wallpaper.</strong>",
+                desc: "Download the high-resolution file instantly. <strong>Perfect for printing yourself.</strong>",
                 steps: [{ icon: 'fa-credit-card', label: 'Pay' }, { icon: 'fa-download', label: 'Download' }, { icon: 'fa-print', label: 'Print' }],
                 clarity: "Instant 300 DPI High-Res Download",
                 cta: "Download File",
@@ -702,7 +725,7 @@
                 link: "#"
             },
             physical: {
-                desc: "Professional gallery-grade printing on premium paper. <strong>Order & get your poster delivered to your door.</strong>",
+                desc: "Professional printing on premium paper. <strong>Order & get your poster delivered to your door.</strong>",
                 steps: [{ icon: 'fa-shopping-basket', label: 'Order' }, { icon: 'fa-credit-card', label: 'Pay' }, { icon: 'fa-truck-fast', label: 'Shipped' }],
                 clarity: "Professional Poster Print — Ready to Frame",
                 cta: "Order Now",
@@ -713,7 +736,7 @@
         };
 
         window.onload = async () => {
-            const success = await fetchDesignData(); 
+            const success = await fetchDesignData();
             if (!success) {
                 showErrorPage();
                 return;
@@ -931,7 +954,7 @@
             document.getElementById('opt-physical').classList.toggle('active', type === 'physical');
             document.getElementById('formatDesc').innerHTML = data.desc;
             document.getElementById('clarityText').innerText = data.clarity;
-            
+
             const heroCTA = document.getElementById('heroCTA');
             heroCTA.innerText = data.cta;
             heroCTA.href = data.link;
@@ -955,7 +978,7 @@
             const modalImg = document.getElementById('modal-zoom-img');
             modalImg.src = src;
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; 
+            document.body.style.overflow = 'hidden';
             resetZoom();
             if (autoSlideTimer) clearInterval(autoSlideTimer);
         }
@@ -974,10 +997,10 @@
             const container = document.getElementById('modal-container');
             const modalImg = document.getElementById('modal-zoom-img');
             document.getElementById('close-view-modal').onclick = closeModal;
-            
+
             document.getElementById('btn-zoom-in').onclick = () => { zoomLevel = Math.min(zoomLevel + 0.5, 4); updateZoomTransform(); };
             document.getElementById('btn-zoom-out').onclick = () => { zoomLevel = Math.max(zoomLevel - 0.5, 1); if (zoomLevel === 1) { translateX = 0; translateY = 0; } updateZoomTransform(); };
-            
+
             container.addEventListener('wheel', (e) => { e.preventDefault(); if (e.deltaY < 0) zoomLevel = Math.min(zoomLevel + 0.25, 4); else { zoomLevel = Math.max(zoomLevel - 0.25, 1); if (zoomLevel === 1) { translateX = 0; translateY = 0; } } updateZoomTransform(); }, { passive: false });
 
             const toggleZoom = () => {
