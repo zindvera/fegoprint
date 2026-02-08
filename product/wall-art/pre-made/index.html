@@ -140,7 +140,7 @@
       const images = [];
       let n = 1;
       while (true) {
-        const imgUrl = `designs/${designNum}/images/preview-lg-${n}.png`;
+        const imgUrl = `designs/${designNum}/images/${n}.png`;
         try {
           const res = await fetch(imgUrl, { method: 'HEAD' });
           if (res.ok) {
@@ -163,7 +163,7 @@
         const randomIndex = Math.floor(Math.random() * previews.length);
         return previews[randomIndex];
       }
-      return `designs/${designNum}/images/thumbnail.png`;
+      return `designs/${designNum}/images/1.png`;
     }
 
 
@@ -223,7 +223,7 @@
             const title = data.title || `Design ${designNum}`;
             const imgSrc = await getRandomPreviewImage(designNum);
 
-            // CHANGED: presenting.html?d=n instead of index.html
+            // CHANGED: landing/page-1.html?d=n instead of index.html
             container.insertAdjacentHTML('beforeend', createDesignCard(title, imgSrc, designNum));
           }
         } catch (error) {
@@ -232,11 +232,11 @@
       }
     }
 
-    // 4. UPDATED: createDesignCard with presenting.html?d=n
+    // 4. UPDATED: createDesignCard with landing/page-1.html?d=n
     function createDesignCard(title, imageSrc, designNum) {
       return `
         <div class="design-card">
-            <a class="text-decoration-none text-dark" href="presenting.html?d=${designNum}">
+            <a class="text-decoration-none text-dark" href="landing/page-1.html?design=${designNum}">
                 <img class="thumbnail img-fluid" src="${imageSrc}" alt="${title} preview" />
                 <h5 class="mt-3 text-center">${title}</h5>
             </a>

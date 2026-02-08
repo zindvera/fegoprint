@@ -487,12 +487,12 @@
             </div>
         </section>
 
-        <!-- Segment 1: Digital Download -->
+
         <section class="mb-5 pb-5">
             <div class="section-header text-center">
                 <h2 class="section-title">Keep Calm & Stay Happy Poster</h2>
                 <p class="section-subtitle">
-                    Instant Digital Download or Order For Physical Delivery
+                    Instant Digital Download & Order For Physical Delivery - Both Option Available
                 </p>
 
 
@@ -504,11 +504,11 @@
                 <div class="image-scroll-wrapper">
                     <!-- Card 1 -->
                     <div class="scroll-item">
-                        <a href="product/wall-art/pre-made/landing/page-1.html" class="card-link">
-                            <div class="card-custom">
-                                <img src="product/wall-art/pre-made/designs/1/images/1.png" alt="Vision Board 1">
-                            </div>
-                        </a>
+
+                        <div class="card-custom">
+                            <img src="product/wall-art/pre-made/designs/1/images/1.png" alt="Vision Board 1">
+                        </div>
+
                     </div>
                     <!-- Card 2 -->
                     <div class="scroll-item">
@@ -553,6 +553,112 @@
         </section>
 
 
+        <section class="mb-5 pb-5">
+            <div class="section-header text-center">
+                <h2 class="section-title">Posters For Home Decor</h2>
+                <p class="section-subtitle">
+                    Browse Visual Appealing Posters for Home Decor.
+                </p>
+
+
+            </div>
+
+            <div class="scroll-container-relative">
+                <button class="nav-arrow arrow-left hidden" aria-label="Scroll left"
+                    onclick="event.preventDefault();">&#10094;</button>
+                <div class="image-scroll-wrapper">
+
+                    <!-- Card 2 -->
+                    <div class="scroll-item">
+                        <a href="product/wall-art/pre-made/landing/page-1.html?design=7" class="card-link">
+                            <div class="card-custom">
+                                <img src="product/wall-art/pre-made/designs/7/images/1.png" alt="Vision Board 2">
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="scroll-item">
+
+                        <a href="product/wall-art/pre-made/landing/page-1.html?design=2" class="card-link">
+                            <div class="card-custom">
+                                <img src="product/wall-art/pre-made/designs/2/images/1.png" alt="Vision Board 2">
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <!-- Card 1 -->
+                    <div class="scroll-item">
+                        <a href="product/wall-art/pre-made/landing/page-1.html" class="card-link">
+                            <div class="card-custom">
+                                <img src="product/wall-art/pre-made/designs/1/images/1.png" alt="Vision Board 1">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Card 3 -->
+
+                    <!-- Card 4 -->
+                    <div class="scroll-item">
+
+                        <a href="product/wall-art/pre-made/landing/page-1.html?design=3" class="card-link">
+                            <div class="card-custom">
+                                <img src="product/wall-art/pre-made/designs/3/images/1.png" alt="Vision Board 2">
+                            </div>
+                        </a>
+
+                    </div>
+
+
+                    <div class="scroll-item">
+                        <a href="product/wall-art/pre-made/" class="card-link">
+                            <div class="card-custom" style="background: rgba(255, 255, 255, 0.15); 
+                   backdrop-filter: blur(12px); 
+                   -webkit-backdrop-filter: blur(12px); 
+                   border: 1px solid rgba(255, 255, 255, 0.4); 
+                   display: flex; 
+                   align-items: center; 
+                   justify-content: center; 
+                   min-height: 300px;
+                   box-shadow: none;">
+                                <div class="text-center p-4">
+                                    <h3
+                                        style="color: var(--brand-blue); font-weight: 700; font-size: 2.5rem; margin-bottom: 0.5rem;">
+                                        +4
+                                    </h3>
+                                    <p
+                                        style="color: var(--text-dark); font-weight: 600; font-size: 1.1rem; line-height: 1.2; margin-bottom: 0.8rem;">
+                                        More Poster Designs
+                                    </p>
+                                    <span
+                                        style="color: var(--brand-green); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        View All &rarr;
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                </div>
+                <button class="nav-arrow arrow-right" aria-label="Scroll right"
+                    onclick="event.preventDefault();">&#10095;</button>
+            </div>
+
+            <div class="segment-cta-container">
+                <a href="product/wall-art/pre-made/" class="segment-cta-btn">
+                    Explore Posters
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </a>
+            </div>
+
+
+        </section>
+
+
     </div>
 
     <footer
@@ -590,6 +696,47 @@
                     loader.style.display = 'none';
                 }, 500);
             }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section.mb-5');
+
+            sections.forEach(section => {
+                // 1. Get the link from the CTA button in this section
+                const ctaBtn = section.querySelector('.segment-cta-btn');
+                if (!ctaBtn) return;
+
+                const sectionUrl = ctaBtn.getAttribute('href');
+                const scrollItems = section.querySelectorAll('.scroll-item');
+
+                scrollItems.forEach(item => {
+                    // 2. CRITICAL: Only proceed if there is NO <a> tag inside this scroll-item
+                    const existingLink = item.querySelector('a');
+
+                    if (!existingLink) {
+                        // Apply cursor pointer to indicate it's clickable
+                        item.style.cursor = 'pointer';
+
+                        // 3. Assign the click event to the div
+                        item.addEventListener('click', () => {
+                            window.location.href = sectionUrl;
+                        });
+
+                        // 4. Manual Hover Effect (replicates your CSS .card-custom:hover)
+                        const card = item.querySelector('.card-custom');
+                        if (card) {
+                            item.addEventListener('mouseenter', () => {
+                                card.style.transform = 'translateY(-8px)';
+                                card.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1)';
+                            });
+                            item.addEventListener('mouseleave', () => {
+                                card.style.transform = 'none';
+                                card.style.boxShadow = 'none';
+                            });
+                        }
+                    }
+                });
+            });
         });
 
         // Navigation visibility logic
