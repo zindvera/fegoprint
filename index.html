@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Landing Page - FegoPrint</title>
+    <title>FegoPrint - Product Landing Pages</title>
     <link rel="icon" type="image/png" sizes="32x32" href="media/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="media/favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="media/favicon/favicon-180x180.png">
@@ -85,12 +85,14 @@
         }
 
         .card-custom {
+            position: relative; /* Added for loader positioning */
             border: none;
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             background: white;
+            min-height: 250px; /* Ensures space before image loads */
         }
 
         .card-custom:hover {
@@ -103,6 +105,46 @@
             height: auto;
             object-fit: cover;
             display: block;
+            opacity: 0; /* Hidden initially */
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .card-custom img.loaded {
+            opacity: 1; /* Fade in when loaded */
+        }
+
+        /* Per-image Loader UI */
+        .image-loader-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f3f4f6;
+            z-index: 5;
+            transition: opacity 0.3s ease;
+        }
+
+        .loader-spinner-small {
+            border: 3px solid #e5e7eb;
+            border-top: 3px solid var(--brand-green);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 8px;
+        }
+
+        .loader-text-small {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         /* Desktop Navigation Arrows (Blue to Dark Blue, No Shadow/Border) */
@@ -268,20 +310,6 @@
             height: 60px;
         }
 
-        #loader-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
         .loader {
             border: 4px solid #f3f3f3;
             border-top: 4px solid var(--brand-green);
@@ -380,9 +408,6 @@
 
 <body>
 
-    <div id="loader-overlay">
-        <div class="loader"></div>
-    </div>
 
     <div class="container py-4 fixed-nav">
         <div class="d-flex justify-content-center">
@@ -395,7 +420,6 @@
 
     <div class="home-page-content container py-5">
 
-        <!-- Segment 1: Digital Download -->
         <section class="mb-5 pb-5">
             <div class="section-header text-center">
                 <h2 class="section-title">Custom Vision Boards</h2>
@@ -410,35 +434,35 @@
                 <button class="nav-arrow arrow-left hidden" aria-label="Scroll left"
                     onclick="event.preventDefault();">&#10094;</button>
                 <div class="image-scroll-wrapper">
-                    <!-- Card 1 -->
                     <div class="scroll-item">
                         <a href="product/wall-art/custom/special/1/" class="card-link">
                             <div class="card-custom">
-                                <img src="product/wall-art/custom/special/1/images/1/1/mock-1.jpg" alt="Vision Board 1">
+                                <div class="image-loader-overlay"><div class="loader-spinner-small"></div><div class="loader-text-small">Loading Image</div></div>
+                                <img src="product/wall-art/custom/special/1/images/1/1/mock-1.jpg" alt="Vision Board 1" class="scroll-img">
                             </div>
                         </a>
                     </div>
-                    <!-- Card 2 -->
                     <div class="scroll-item">
                         <a href="product/wall-art/custom/special/1/" class="card-link">
                             <div class="card-custom">
-                                <img src="product/wall-art/custom/special/1/images/1/1/mock-2.jpg" alt="Vision Board 2">
+                                <div class="image-loader-overlay"><div class="loader-spinner-small"></div><div class="loader-text-small">Loading Image</div></div>
+                                <img src="product/wall-art/custom/special/1/images/1/1/mock-2.jpg" alt="Vision Board 2" class="scroll-img">
                             </div>
                         </a>
                     </div>
-                    <!-- Card 3 -->
                     <div class="scroll-item">
                         <a href="product/wall-art/custom/special/1/?d=1&v=2" class="card-link">
                             <div class="card-custom">
-                                <img src="product/wall-art/custom/special/1/images/1/2/mock-1.jpg" alt="Vision Board 3">
+                                <div class="image-loader-overlay"><div class="loader-spinner-small"></div><div class="loader-text-small">Loading Image</div></div>
+                                <img src="product/wall-art/custom/special/1/images/1/2/mock-1.jpg" alt="Vision Board 3" class="scroll-img">
                             </div>
                         </a>
                     </div>
-                    <!-- Card 4 -->
                     <div class="scroll-item">
                         <a href="product/wall-art/custom/special/1/?d=1&v=2" class="card-link">
                             <div class="card-custom">
-                                <img src="product/wall-art/custom/special/1/images/1/2/mock-2.jpg" alt="Vision Board 4">
+                                <div class="image-loader-overlay"><div class="loader-spinner-small"></div><div class="loader-text-small">Loading Image</div></div>
+                                <img src="product/wall-art/custom/special/1/images/1/2/mock-2.jpg" alt="Vision Board 4" class="scroll-img">
                             </div>
                         </a>
                     </div>
@@ -446,14 +470,14 @@
                     <div class="scroll-item">
                         <a href="product/wall-art/custom/special/1/" class="card-link">
                             <div class="card-custom" style="background: rgba(255, 255, 255, 0.15); 
-                   backdrop-filter: blur(12px); 
-                   -webkit-backdrop-filter: blur(12px); 
-                   border: 1px solid rgba(255, 255, 255, 0.4); 
-                   display: flex; 
-                   align-items: center; 
-                   justify-content: center; 
-                   min-height: 300px;
-                   box-shadow: none;">
+                    backdrop-filter: blur(12px); 
+                    -webkit-backdrop-filter: blur(12px); 
+                    border: 1px solid rgba(255, 255, 255, 0.4); 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center; 
+                    min-height: 300px;
+                    box-shadow: none;">
                                 <div class="text-center p-4">
                                     <h3
                                         style="color: var(--brand-blue); font-weight: 700; font-size: 2.5rem; margin-bottom: 0.5rem;">
@@ -502,35 +526,35 @@
                 <button class="nav-arrow arrow-left hidden" aria-label="Scroll left"
                     onclick="event.preventDefault();">&#10094;</button>
                 <div class="image-scroll-wrapper">
-                    <!-- Card 1 -->
                     <div class="scroll-item">
 
                         <div class="card-custom">
-                            <img src="product/wall-art/pre-made/designs/1/images/1.png" alt="Vision Board 1">
+                            <div class="image-loader-overlay"><div class="loader-spinner-small"></div><div class="loader-text-small">Loading Image</div></div>
+                            <img src="product/wall-art/pre-made/designs/1/images/1.png" alt="Vision Board 1" class="scroll-img">
                         </div>
 
                     </div>
-                    <!-- Card 2 -->
                     <div class="scroll-item">
 
                         <div class="card-custom">
-                            <img src="product/wall-art/pre-made/designs/1/images/2.png" alt="Vision Board 2">
+                            <div class="image-loader-overlay"><div class="loader-spinner-small"></div><div class="loader-text-small">Loading Image</div></div>
+                            <img src="product/wall-art/pre-made/designs/1/images/2.png" alt="Vision Board 2" class="scroll-img">
                         </div>
 
                     </div>
-                    <!-- Card 3 -->
                     <div class="scroll-item">
 
                         <div class="card-custom">
-                            <img src="product/wall-art/pre-made/designs/1/images/3.png" alt="Vision Board 3">
+                            <div class="image-loader-overlay"><div class="loader-spinner-small"></div><div class="loader-text-small">Loading Image</div></div>
+                            <img src="product/wall-art/pre-made/designs/1/images/3.png" alt="Vision Board 3" class="scroll-img">
                         </div>
 
                     </div>
-                    <!-- Card 4 -->
                     <div class="scroll-item">
 
                         <div class="card-custom">
-                            <img src="product/wall-art/pre-made/designs/1/images/4.png" alt="Vision Board 4">
+                            <div class="image-loader-overlay"><div class="loader-spinner-small"></div><div class="loader-text-small">Loading Image</div></div>
+                            <img src="product/wall-art/pre-made/designs/1/images/4.png" alt="Vision Board 4" class="scroll-img">
                         </div>
 
                     </div>
@@ -568,11 +592,11 @@
                     onclick="event.preventDefault();">&#10094;</button>
                 <div class="image-scroll-wrapper">
 
-                    <!-- Card 2 -->
                     <div class="scroll-item">
                         <a href="product/wall-art/pre-made/landing/page-1.html?design=7" class="card-link">
                             <div class="card-custom">
-                                <img src="product/wall-art/pre-made/designs/7/images/1.png" alt="Vision Board 2">
+                                <div class="image-loader-overlay"><div class="loader-spinner-small"></div><div class="loader-text-small">Loading Image</div></div>
+                                <img src="product/wall-art/pre-made/designs/7/images/1.png" alt="Vision Board 2" class="scroll-img">
                             </div>
                         </a>
                     </div>
@@ -581,29 +605,28 @@
 
                         <a href="product/wall-art/pre-made/landing/page-1.html?design=2" class="card-link">
                             <div class="card-custom">
-                                <img src="product/wall-art/pre-made/designs/2/images/1.png" alt="Vision Board 2">
+                                <div class="image-loader-overlay"><div class="loader-spinner-small"></div><div class="loader-text-small">Loading Image</div></div>
+                                <img src="product/wall-art/pre-made/designs/2/images/1.png" alt="Vision Board 2" class="scroll-img">
                             </div>
                         </a>
 
                     </div>
 
-                    <!-- Card 1 -->
                     <div class="scroll-item">
                         <a href="product/wall-art/pre-made/landing/page-1.html" class="card-link">
                             <div class="card-custom">
-                                <img src="product/wall-art/pre-made/designs/1/images/1.png" alt="Vision Board 1">
+                                <div class="image-loader-overlay"><div class="loader-spinner-small"></div><div class="loader-text-small">Loading Image</div></div>
+                                <img src="product/wall-art/pre-made/designs/1/images/1.png" alt="Vision Board 1" class="scroll-img">
                             </div>
                         </a>
                     </div>
 
-                    <!-- Card 3 -->
-
-                    <!-- Card 4 -->
                     <div class="scroll-item">
 
                         <a href="product/wall-art/pre-made/landing/page-1.html?design=3" class="card-link">
                             <div class="card-custom">
-                                <img src="product/wall-art/pre-made/designs/3/images/1.png" alt="Vision Board 2">
+                                <div class="image-loader-overlay"><div class="loader-spinner-small"></div><div class="loader-text-small">Loading Image</div></div>
+                                <img src="product/wall-art/pre-made/designs/3/images/1.png" alt="Vision Board 2" class="scroll-img">
                             </div>
                         </a>
 
@@ -613,14 +636,14 @@
                     <div class="scroll-item">
                         <a href="product/wall-art/pre-made/" class="card-link">
                             <div class="card-custom" style="background: rgba(255, 255, 255, 0.15); 
-                   backdrop-filter: blur(12px); 
-                   -webkit-backdrop-filter: blur(12px); 
-                   border: 1px solid rgba(255, 255, 255, 0.4); 
-                   display: flex; 
-                   align-items: center; 
-                   justify-content: center; 
-                   min-height: 300px;
-                   box-shadow: none;">
+                    backdrop-filter: blur(12px); 
+                    -webkit-backdrop-filter: blur(12px); 
+                    border: 1px solid rgba(255, 255, 255, 0.4); 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center; 
+                    min-height: 300px;
+                    box-shadow: none;">
                                 <div class="text-center p-4">
                                     <h3
                                         style="color: var(--brand-blue); font-weight: 700; font-size: 2.5rem; margin-bottom: 0.5rem;">
@@ -687,16 +710,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="nav.js"></script>
     <script>
-        // Loader functionality
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader-overlay');
-            if (loader) {
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 500);
-            }
-        });
 
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('section.mb-5');
@@ -736,6 +749,33 @@
                         }
                     }
                 });
+            });
+
+            // Per-image Loading Logic
+            const images = document.querySelectorAll('.scroll-img');
+            images.forEach(img => {
+                const overlay = img.previousElementSibling; // The .image-loader-overlay
+
+                const handleLoad = () => {
+                    img.classList.add('loaded');
+                    if (overlay) {
+                        overlay.style.opacity = '0';
+                        setTimeout(() => overlay.remove(), 300);
+                    }
+                };
+
+                if (img.complete) {
+                    handleLoad();
+                } else {
+                    img.addEventListener('load', handleLoad);
+                    // Handle broken images
+                    img.addEventListener('error', () => {
+                        if (overlay) {
+                            overlay.querySelector('.loader-spinner-small').style.display = 'none';
+                            overlay.querySelector('.loader-text-small').innerText = 'Error Loading';
+                        }
+                    });
+                }
             });
         });
 
