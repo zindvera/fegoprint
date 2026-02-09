@@ -69,7 +69,7 @@
             display: flex;
             gap: 12px;
             margin-bottom: 2rem;
-                margin-top: 1.75rem;
+            margin-top: 1.75rem;
             width: 100%;
             max-width: 480px;
         }
@@ -142,7 +142,7 @@
         }
 
         .step-arrow {
-            color: #000;
+            color: #a8a8a8;
             font-size: 1rem;
             margin-bottom: 25px;
         }
@@ -494,6 +494,40 @@
             justify-content: center;
         }
 
+
+
+        /* Loading Spinner Styles */
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            background: #f0f0f0;
+        }
+
+        .spinner-border-custom {
+            width: 3rem;
+            height: 3rem;
+            border: 0.25em solid #dee2e6;
+            border-right-color: #0d6efd;
+            border-radius: 50%;
+            animation: spinner-border .75s linear infinite;
+        }
+
+        @keyframes spinner-border {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .mockup-item {
+            min-height: 300px;
+            /* Prevents layout shift while loading */
+            position: relative;
+        }
+
+
         /* Responsive Breakpoints */
         @media (max-width: 991.98px) {
             .hero-title {
@@ -736,6 +770,39 @@
             }
         };
 
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        // Update your window.onload or simply add these listeners
+        async function initTouchSlider() {
+            const track = document.getElementById('sliderTrack');
+
+            track.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                // Pause auto-slide when user interacts
+                if (autoSlideTimer) clearInterval(autoSlideTimer);
+            }, { passive: true });
+
+            track.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+                startAutoSlide(); // Resume auto-slide
+            }, { passive: true });
+        }
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // Minimum distance in pixels to count as a swipe
+            if (touchStartX - touchEndX > swipeThreshold) {
+                // Swiped Left -> Next Slide
+                moveSlide(1, true);
+            } else if (touchEndX - touchStartX > swipeThreshold) {
+                // Swiped Right -> Previous Slide
+                moveSlide(-1, true);
+            }
+        }
+
+
         window.onload = async () => {
             const success = await fetchDesignData();
             if (!success) {
@@ -746,6 +813,7 @@
             await loadMockups();
             switchFormat('digital');
             initModalEvents();
+            initTouchSlider(); // <--- Add this call here
             startAutoSlide();
             initCTAObserver();
         };
@@ -884,21 +952,44 @@
             return foundPaths;
         }
 
+
         async function loadImages() {
             const track = document.getElementById('sliderTrack');
             const dots = document.getElementById('sliderDots');
+
+            // Show a global loader for the slider initially
+            track.innerHTML = `<div class="loading-spinner"><div class="spinner-border-custom"></div></div>`;
+
             const designPaths = await tryFiles('design');
             designPaths.forEach(p => images.push(p));
+
             let i = 1;
             while (i < 15) {
                 const paths = await tryFiles(i);
                 if (paths.length > 0) { paths.forEach(p => images.push(p)); i++; } else break;
             }
+
+            // Clear loader and populate
+            track.innerHTML = '';
             images.forEach((src, idx) => {
+                const imgContainer = document.createElement('div');
+                imgContainer.style.minWidth = "100%";
+                imgContainer.style.height = "100%";
+                imgContainer.innerHTML = `<div class="loading-spinner"><div class="spinner-border-custom"></div></div>`;
+
                 const img = document.createElement('img');
                 img.src = src;
+                img.style.display = 'none'; // Hide until loaded
                 img.onclick = () => openModal(src);
-                track.appendChild(img);
+
+                img.onload = () => {
+                    imgContainer.innerHTML = ''; // Remove spinner
+                    imgContainer.appendChild(img);
+                    img.style.display = 'block';
+                };
+
+                track.appendChild(imgContainer);
+
                 const dot = document.createElement('div');
                 dot.className = `dot ${idx === 0 ? 'active' : ''}`;
                 dot.onclick = () => goToSlide(idx, true);
@@ -909,30 +1000,52 @@
 
         async function loadMockups() {
             const grid = document.getElementById('mockupGrid');
-            let mockups = [];
+            let mockupPaths = [];
+
+            // 1. Gather all valid paths first
             const designPaths = await tryFiles('design');
-            designPaths.forEach(p => mockups.push(p));
+            designPaths.forEach(p => mockupPaths.push(p));
+
             let j = 1;
             while (j < 15) {
                 const paths = await tryFiles(j);
-                if (paths.length > 0) { paths.forEach(p => mockups.push(p)); j++; } else break;
+                if (paths.length > 0) { paths.forEach(p => mockupPaths.push(p)); j++; } else break;
             }
+
             let k = 1;
             while (k < 15) {
                 const mockPaths = await tryFiles(`mock-${k}`);
-                if (mockPaths.length > 0) { mockPaths.forEach(p => mockups.push(p)); k++; } else break;
+                if (mockPaths.length > 0) { mockPaths.forEach(p => mockupPaths.push(p)); k++; } else break;
             }
-            mockups.forEach(src => {
+
+            // 2. Create the placeholder divs with spinners
+            mockupPaths.forEach(src => {
                 const col = document.createElement('div');
                 col.className = 'col-12 col-md-6 mockup-item';
+
+                // Add Loading Circle
+                const loader = document.createElement('div');
+                loader.className = 'loading-spinner';
+                loader.innerHTML = '<div class="spinner-border-custom"></div>';
+                col.appendChild(loader);
+
                 const img = document.createElement('img');
                 img.src = src;
                 img.className = 'mockup-img';
+                img.style.display = 'none';
                 img.onclick = () => openModal(src);
+
+                // 3. Logic to swap spinner for image once rendered
+                img.onload = () => {
+                    loader.remove();
+                    img.style.display = 'block';
+                };
+
                 col.appendChild(img);
                 grid.appendChild(col);
             });
         }
+
 
         function moveSlide(dir, manual = false) { if (manual) startAutoSlide(); currentSlide = (currentSlide + dir + images.length) % images.length; updateSlider(); }
         function goToSlide(index, manual = false) { if (manual) startAutoSlide(); currentSlide = index; updateSlider(); }
