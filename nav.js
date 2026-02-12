@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollNavHTML = `
       <div class="scroll-nav" style="width: 100vw; position: fixed; top: 0; left: 0; background: white; z-index: 1000; padding: 0.5rem 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
         <div class="d-flex align-items-center">
-          <a href="${relativePrefix}index.html" style="text-decoration: none;">
-            <img id="logo" src="${relativePrefix}media/logo/fegoprint.png" alt="Logo" style="height: 35px; margin-right: 10px;">
+          <a href="https://fegoprint.info/" style="text-decoration: none;">
+            <img id="logo" src="https://fegoprint.info/media/logo/fegoprint.png" alt="Logo" style="height: 35px; margin-right: 10px;">
           </a>
           <div class="fsearch-container flex-grow-1">
             <!-- Additional content -->
