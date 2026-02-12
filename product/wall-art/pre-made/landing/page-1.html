@@ -703,7 +703,7 @@
                         <div class="hero-actions">
                             <a id="heroCTA" href="#" target="_blank" class="cta-button">Download File</a>
                             <div class="price-display">
-                                <span id="priceLabel">Multiple Sizes Available</span><br>
+                               
                                 <p id="priceValueContainer">Price: <span class="price-value" id="priceValue">$10.50
                                         USD</span></p>
                             </div>
@@ -753,27 +753,35 @@
         let startX, startY, translateX = 0, translateY = 0;
         let autoSlideTimer = null;
 
+
         const formats = {
             digital: {
                 desc: "Download the high-resolution file instantly. <strong>Perfect for printing yourself.</strong>",
-                steps: [{ icon: 'fa-credit-card', label: 'Pay' }, { icon: 'fa-download', label: 'Download' }, { icon: 'fa-print', label: 'Print' }],
+                steps: [
+                    { icon: 'fa-credit-card', label: 'Pay' },
+                    { icon: 'fa-download', label: 'Download' },
+                    { icon: 'fa-print', label: 'Print' }
+                ],
                 clarity: "High Quality PDF File - Ready For Print",
                 cta: "Download File",
-                priceLabel: "Multiple Sizes Available",
-                price: "$10.50 USD",
+               
+                price: "", // Filled from JSON
                 link: "#"
             },
             physical: {
                 desc: "Professional printing on premium paper. <strong>Order & get your poster delivered to your door.</strong>",
-                steps: [{ icon: 'fa-shopping-basket', label: 'Order' }, { icon: 'fa-credit-card', label: 'Pay' }, { icon: 'fa-truck-fast', label: 'Shipped' }],
+                steps: [
+                    { icon: 'fa-shopping-basket', label: 'Order' },
+                    { icon: 'fa-credit-card', label: 'Pay' },
+                    { icon: 'fa-truck-fast', label: 'Shipped' }
+                ],
                 clarity: "Physical Wall Art Delivery — Ready to Frame",
                 cta: "Order Now",
-                priceLabel: "Physical Poster — Multiple Sizes Available",
-                price: "$2.68 USD",
+           
+                price: "", // Filled from JSON
                 link: "#"
             }
         };
-
 
         let touchStartX = 0;
         let touchEndX = 0;
@@ -857,6 +865,11 @@
             return html;
         }
 
+
+
+        // Immediately nullify price on load to prevent flash of default text
+        document.getElementById('priceValue').innerText = "";
+
         async function fetchDesignData() {
             try {
                 const [designRes, brandsRes] = await Promise.all([
@@ -868,19 +881,82 @@
                 const designArray = await designRes.json();
                 const designData = Array.isArray(designArray) ? designArray[0] : designArray;
 
+                // 1. AVAILABILITY & BUTTON REMOVAL LOGIC
+                const digitalAvailable = designData.digital_availability !== "no";
+                const physicalAvailable = designData.physical_availability !== "no";
+
+                const digitalBtn = document.getElementById('opt-digital');
+                const physicalBtn = document.getElementById('opt-physical');
+                const switcherContainer = document.querySelector('.format-switcher');
+
+                if (!digitalAvailable && digitalBtn) digitalBtn.remove();
+                if (!physicalAvailable && physicalBtn) physicalBtn.remove();
+
+                // 2. GLOBAL ALERT: If both formats are "no", show Unavailable Alert
+                if (!digitalAvailable && !physicalAvailable) {
+                    const actions = document.querySelector('.hero-actions');
+                    const heroText = document.getElementById('formatDesc');
+                    const steps = document.getElementById('processStepsContainer');
+                    const clarity = document.querySelector('.clarity-feature');
+
+                    if (switcherContainer) switcherContainer.remove();
+                    if (heroText) heroText.remove();
+                    if (steps) steps.remove();
+                    if (clarity) clarity.remove();
+
+                    if (actions) {
+                        actions.innerHTML = `
+                    <div class="alert alert-warning border-0 shadow-sm p-4 text-center" style="border-radius: 20px; width: 100%;">
+                        <i class="fas fa-exclamation-circle mb-2" style="font-size: 2rem; color: #856404;"></i>
+                        <h4 class="fw-bold">Product Not Available</h4>
+                        <p class="mb-0">This design is currently not available for purchase.</p>
+                    </div>
+                `;
+                    }
+                    const floating = document.getElementById('floatingCTA');
+                    if (floating) floating.style.display = 'none';
+
+                    const titleElements = document.querySelectorAll('.hero-title');
+                    titleElements.forEach(el => el.innerText = designData.title || "Wall Art Decor");
+                    return true;
+                }
+
+                // 3. DATA MAPPING: Prices & Links
+                formats.digital.price = (designData.digital_price && designData.digital_price.trim() !== "")
+                    ? designData.digital_price : null;
+                formats.physical.price = (designData.physical_price && designData.physical_price.trim() !== "")
+                    ? designData.physical_price : null;
+
+                formats.digital.link = (designData.digital_link && designData.digital_link.trim() !== "")
+                    ? designData.digital_link : designData.cta_url;
+                formats.physical.link = (designData.physical_link && designData.physical_link.trim() !== "")
+                    ? designData.physical_link : designData.cta_url;
+
+                // 4. AUTO-INITIALIZE & FORCE ACTIVE CLASS
+                if (digitalAvailable) {
+                    switchFormat('digital');
+                    if (digitalBtn) digitalBtn.classList.add('active'); // Ensure visual state
+                } else if (physicalAvailable) {
+                    switchFormat('physical');
+                    // If we are here, digital was removed, so physical MUST be active
+                    const remainingPhysicalBtn = document.getElementById('opt-physical');
+                    if (remainingPhysicalBtn) remainingPhysicalBtn.classList.add('active');
+                }
+
+                // Center switcher if only one option exists
+                if (switcherContainer && (!digitalAvailable || !physicalAvailable)) {
+                    switcherContainer.style.justifyContent = 'center';
+                }
+
+                // 5. UPDATE TITLES
+                const titleElements = document.querySelectorAll('.hero-title');
+                const finalTitle = designData.title || "Wall Art Decor";
+                titleElements.forEach(el => el.innerText = finalTitle);
+                document.title = finalTitle;
+
+                // 6. BRAND TRUST BADGE & RATINGS LOGIC
                 let brandsList = [];
                 if (brandsRes.ok) brandsList = await brandsRes.json();
-
-                const titleElements = document.querySelectorAll('.hero-title');
-                const finalTitle = designData.title || "Custom 2026 Vision Board Poster";
-                titleElements.forEach(el => el.innerText = finalTitle);
-                document.title = finalTitle + " | Vision Board Poster";
-
-                if (designData.cta_url) {
-                    formats.digital.link = designData.cta_url;
-                    formats.physical.link = designData.cta_url;
-                    document.getElementById('floatingCTA').href = designData.cta_url;
-                }
 
                 const trustLink = document.getElementById('trustLink');
                 const brandLogo = document.getElementById('brandLogo');
@@ -905,42 +981,89 @@
 
                     if (finalRatings || finalReviews) {
                         ratingContainer.style.display = 'flex';
-                        if (finalRatings) {
-                            starRow.innerHTML = getStarsHtml(finalRatings);
-                        } else {
-                            starRow.innerHTML = "";
-                        }
+                        if (finalRatings) starRow.innerHTML = getStarsHtml(finalRatings);
                         if (finalReviews) {
                             reviewCountText.style.display = 'block';
                             reviewCountText.innerText = finalReviews + " reviews";
-                        } else {
-                            reviewCountText.style.display = 'none';
                         }
-                    } else {
-                        ratingContainer.style.display = 'none';
+                    }
+                } else if (designData.ratings || designData.reviews) {
+                    trustLink.style.display = 'flex';
+                    trustLink.href = ctaUrl;
+                    brandLogo.style.display = 'none';
+                    brandRatingsLabel.innerText = "Verified Ratings";
+                    if (designData.ratings) starRow.innerHTML = getStarsHtml(designData.ratings);
+                    if (designData.reviews) {
+                        reviewCountText.style.display = 'block';
+                        reviewCountText.innerText = designData.reviews + " reviews";
                     }
                 } else {
-                    if (designData.ratings || designData.reviews) {
-                        trustLink.style.display = 'flex';
-                        trustLink.href = ctaUrl;
-                        brandLogo.style.display = 'none';
-                        brandRatingsLabel.innerText = "Verified Ratings";
-                        ratingContainer.style.display = 'flex';
-                        if (designData.ratings) {
-                            starRow.innerHTML = getStarsHtml(designData.ratings);
-                        }
-                        if (designData.reviews) {
-                            reviewCountText.style.display = 'block';
-                            reviewCountText.innerText = designData.reviews + " reviews";
-                        }
-                    } else {
-                        trustLink.style.display = 'none';
-                    }
+                    trustLink.style.display = 'none';
                 }
+
                 return true;
             } catch (error) {
                 console.error("Initialization error:", error);
                 return false;
+            }
+        }
+
+        function switchFormat(type) {
+            const data = formats[type];
+
+            // 1. Target all UI elements
+            const desc = document.getElementById('formatDesc');
+            const clarity = document.getElementById('clarityText');
+            const stepsContainer = document.getElementById('processStepsContainer');
+            const heroCTA = document.getElementById('heroCTA');
+           
+            const priceValue = document.getElementById('priceValue');
+            const priceContainer = document.getElementById('priceValueContainer');
+            const floatingCTA = document.getElementById('floatingCTA');
+
+            // 2. Update Button Active States (Navigation)
+            const optDigital = document.getElementById('opt-digital');
+            const optPhysical = document.getElementById('opt-physical');
+            if (optDigital) optDigital.classList.toggle('active', type === 'digital');
+            if (optPhysical) optPhysical.classList.toggle('active', type === 'physical');
+
+            // 3. Update Hero Text & Clarity Feature
+            if (desc) desc.innerHTML = data.desc;
+            if (clarity) clarity.innerText = data.clarity;
+
+            // 4. Update Process Steps (Icons & Labels)
+            if (stepsContainer) {
+                let stepsHtml = '';
+                data.steps.forEach((step, idx) => {
+                    stepsHtml += `
+                <div class="step-item">
+                    <div class="step-icon"><i class="fas ${step.icon}"></i></div>
+                    <span class="step-label">${step.label}</span>
+                </div>`;
+                    if (idx < data.steps.length - 1) {
+                        stepsHtml += `<i class="fas fa-chevron-right step-arrow"></i>`;
+                    }
+                });
+                stepsContainer.innerHTML = stepsHtml;
+            }
+
+            // 5. Update Hero Actions (CTA Text & Links)
+            if (heroCTA) {
+                heroCTA.innerText = data.cta;
+                heroCTA.href = data.link;
+            }
+            if (floatingCTA) {
+                floatingCTA.innerText = `Get this ${type === 'digital' ? 'Digital File' : 'Poster'}`;
+                floatingCTA.href = data.link;
+            }
+
+            // 6. Update Price Display
+         
+            if (data.price) {
+                if (priceValue) priceValue.innerText = data.price;
+                if (priceContainer) priceContainer.style.display = 'block';
+            } else {
+                if (priceContainer) priceContainer.style.display = 'none';
             }
         }
 
@@ -1074,30 +1197,6 @@
             autoSlideTimer = setInterval(() => moveSlide(1), 5000);
         }
 
-        function switchFormat(type) {
-            const data = formats[type];
-            document.getElementById('opt-digital').classList.toggle('active', type === 'digital');
-            document.getElementById('opt-physical').classList.toggle('active', type === 'physical');
-            document.getElementById('formatDesc').innerHTML = data.desc;
-            document.getElementById('clarityText').innerText = data.clarity;
-
-            const heroCTA = document.getElementById('heroCTA');
-            heroCTA.innerText = data.cta;
-            heroCTA.href = data.link;
-
-            const floatingCTA = document.getElementById('floatingCTA');
-            floatingCTA.href = data.link;
-
-            document.getElementById('priceLabel').innerText = data.priceLabel;
-            document.getElementById('priceValue').innerText = data.price;
-            const stepsContainer = document.getElementById('processStepsContainer');
-            let stepsHtml = '';
-            data.steps.forEach((step, idx) => {
-                stepsHtml += `<div class="step-item"><div class="step-icon"><i class="fas ${step.icon}"></i></div><span class="step-label">${step.label}</span></div>`;
-                if (idx < data.steps.length - 1) stepsHtml += `<i class="fas fa-chevron-right step-arrow"></i>`;
-            });
-            stepsContainer.innerHTML = stepsHtml;
-        }
 
         function openModal(src) {
             const modal = document.getElementById('img-modal-overlay');
