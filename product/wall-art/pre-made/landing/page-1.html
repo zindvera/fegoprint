@@ -696,11 +696,12 @@
                         <h1 class="hero-title d-none d-md-block"></h1>
 
                         <div class="format-switcher">
-                            <div class="format-option active" id="opt-digital" onclick="switchFormat('digital')">
-                                <i class="fas fa-download"></i> Instant Digital
-                            </div>
-                            <div class="format-option" id="opt-physical" onclick="switchFormat('physical')">
+
+                            <div class="format-option active" id="opt-physical" onclick="switchFormat('physical')">
                                 <i class="fa-solid fa-truck"></i> Physical Poster
+                            </div>
+                            <div class="format-option " id="opt-digital" onclick="switchFormat('digital')">
+                                <i class="fas fa-download"></i> Instant Digital
                             </div>
                         </div>
 
@@ -976,7 +977,8 @@
                 formats.digital.link = designData.digital_link || ctaUrl;
                 formats.physical.link = designData.physical_link || ctaUrl;
 
-                let initialType = (digitalAvailable && !physicalAvailable) ? 'digital' :
+                let initialType = (physicalAvailable) ? 'physical' : 'digital'
+                    (digitalAvailable && !physicalAvailable) ? 'digital' :
                     (!digitalAvailable && physicalAvailable) ? 'physical' :
                         (urlParams.get('type') === 'physical') ? 'physical' : 'digital';
 
@@ -1026,7 +1028,7 @@
             const priceContainer = document.getElementById('priceValueContainer');
             const floatingCTA = document.getElementById('floatingCTA');
 
-            // Toggle active classes for switcher buttons (if they exist)
+            // Toggle active classes
             const optDigital = document.getElementById('opt-digital');
             const optPhysical = document.getElementById('opt-physical');
             if (optDigital) optDigital.classList.toggle('active', type === 'digital');
@@ -1034,22 +1036,28 @@
 
             if (desc) desc.innerHTML = data.desc;
 
-            // Update Checklist Feature
+            // --- Updated Checklist Logic with 3 Points ---
             if (clarityContainer) {
                 const sizeText = type === 'digital' ? 'Multiple Sizes Available' : 'Multiple Sizes & Frames Available';
+                const priceDependsText = type === 'digital' ? 'Price depends on Size' : 'Price depends on Size & Frame';
+
                 clarityContainer.style.display = 'flex';
                 clarityContainer.style.flexDirection = 'column';
                 clarityContainer.style.alignItems = 'flex-start';
                 clarityContainer.style.gap = '8px';
 
                 clarityContainer.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom:0.07in;">
                 <i class="fas fa-circle-check" style="color: #198754;"></i>
                 <p class="clarity-text" style="margin: 0;">${data.clarity}</p>
             </div>
-            <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom:0.07in;">
                 <i class="fas fa-circle-check" style="color: #198754;"></i>
                 <p style="font-size: 1.1rem; font-weight: 700; color: #1a1a1a; margin: 0;">${sizeText}</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <i class="fas fa-circle-check" style="color: #198754;"></i>
+                <p style="font-size: 1.1rem; font-weight: 700; color: #1a1a1a; margin: 0;">${priceDependsText}</p>
             </div>`;
             }
 
@@ -1064,12 +1072,11 @@
         `).join('');
             }
 
-            // Update CTA Buttons
+            // Update CTA and Price
             const label = `Shop on ${platformText}`;
             if (heroCTA) { heroCTA.innerText = label; heroCTA.href = data.link; }
             if (floatingCTA) { floatingCTA.innerText = label; floatingCTA.href = data.link; }
 
-            // Update Price
             if (priceContainer) {
                 if (data.price) {
                     priceContainer.style.display = 'block';
