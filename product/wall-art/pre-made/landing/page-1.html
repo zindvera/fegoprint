@@ -1036,30 +1036,40 @@
 
             if (desc) desc.innerHTML = data.desc;
 
-            // --- Updated Checklist Logic with 3 Points ---
+            // --- Updated Checklist Logic ---
             if (clarityContainer) {
-                const sizeText = type === 'digital' ? 'Multiple Sizes Available' : 'Multiple Sizes & Frames Available';
-                const priceDependsText = type === 'digital' ? 'Price depends on Size' : 'Price depends on Size & Frame';
+                const isDigital = type === 'digital';
+                const sizeText = isDigital ? 'Multiple Sizes Available' : 'Multiple Sizes & Frames Available';
+                const priceDependsText = 'Price depends on Size & Frame';
 
                 clarityContainer.style.display = 'flex';
                 clarityContainer.style.flexDirection = 'column';
                 clarityContainer.style.alignItems = 'flex-start';
                 clarityContainer.style.gap = '8px';
 
-                clarityContainer.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 12px; margin-bottom:0.07in;">
-                <i class="fas fa-circle-check" style="color: #198754;"></i>
-                <p class="clarity-text" style="margin: 0;">${data.clarity}</p>
-            </div>
-            <div style="display: flex; align-items: center; gap: 12px; margin-bottom:0.07in;">
-                <i class="fas fa-circle-check" style="color: #198754;"></i>
-                <p style="font-size: 1.1rem; font-weight: 700; color: #1a1a1a; margin: 0;">${sizeText}</p>
-            </div>
-            <div style="display: flex; align-items: center; gap: 12px;">
-                <i class="fas fa-circle-check" style="color: #198754;"></i>
-                <p style="font-size: 1.1rem; font-weight: 700; color: #1a1a1a; margin: 0;">${priceDependsText}</p>
-            </div>`;
+                // Build the list items
+                let listHtml = `
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom:0.07in;">
+            <i class="fas fa-circle-check" style="color: #198754;"></i>
+            <p class="clarity-text" style="margin: 0;">${data.clarity}</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; ${!isDigital ? 'margin-bottom:0.07in;' : ''}">
+            <i class="fas fa-circle-check" style="color: #198754;"></i>
+            <p style="font-size: 1.1rem; font-weight: 700; color: #1a1a1a; margin: 0;">${sizeText}</p>
+        </div>`;
+
+                // Only add the third point if it is NOT digital
+                if (!isDigital) {
+                    listHtml += `
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <i class="fas fa-circle-check" style="color: #198754;"></i>
+            <p style="font-size: 1.1rem; font-weight: 700; color: #1a1a1a; margin: 0;">${priceDependsText}</p>
+        </div>`;
+                }
+
+                clarityContainer.innerHTML = listHtml;
             }
+
 
             // Update Process Steps
             if (stepsContainer) {
