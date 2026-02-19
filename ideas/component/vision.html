@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FegoPrint | Vision Board Strategy</title>
+
+    <link rel="stylesheet" href="../../footer.css">
+    <script src="../../footer.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. GLOBAL & RESET --- */
+        * { box-sizing: border-box; }
+        html, body { 
+            margin: 0; padding: 0; width: 100%; 
+            overflow-x: hidden; -webkit-font-smoothing: antialiased; 
+            font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111;
+        }
+
+        /* --- 2. SHARED VARIABLES --- */
+        :root {
+            --accent-color: #ff3366;
+            --btn-bg: #111;
+            --product-title-color: #777;
+            --line-color: #f0f0f0;
+        }
+
+        /* --- 3. PHONE MEDIA QUERY --- */
+        @media (max-width: 767px) {
+            :root {
+                --segment-margin: 0px;
+                --board-title-bottom-margin: 24px; /* Increased */
+                --title-to-type-gap: 6px;
+                --type-to-gallery-gap: 15px;
+                --group-margin: 40px;
+            }
+            .navdiv { margin-bottom: 0.65in; }
+            .main-wrapper { padding: 30px 15px 80px 15px; }
+            .main-title { font-size: 1.8rem; margin-bottom: 50px; text-align: center; }
+            .vision-board-title { font-size: 1.4rem; } /* Reduced */
+            .gallery-item { flex: 0 0 80%; }
+        }
+
+        /* --- 4. TABLET MEDIA QUERY --- */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            :root {
+                --segment-margin: 0px;
+                --board-title-bottom-margin: 32px; /* Increased */
+                --title-to-type-gap: 10px;
+                --type-to-gallery-gap: 20px;
+                --group-margin: 50px;
+            }
+            .navdiv { margin-bottom: 0.25in; }
+            .main-wrapper { padding: 50px 30px 100px 30px; }
+            .main-title { font-size: 2.3rem; margin-bottom: 70px; text-align: center; }
+            .vision-board-title { font-size: 1.7rem; } /* Reduced */
+            .gallery-item { flex: 0 0 320px; }
+        }
+
+        /* --- 5. DESKTOP MEDIA QUERY --- */
+        @media (min-width: 1024px) {
+            :root {
+                --segment-margin: 0px;
+                --board-title-bottom-margin: 40px; /* Increased */
+                --title-to-type-gap: 12px;
+                --type-to-gallery-gap: 25px;
+                --group-margin: 50px;
+            }
+            .navdiv { margin-bottom: 0.2in; }
+            .main-wrapper { padding: 60px 20px 120px 20px; max-width: 1200px; margin: 0 auto; }
+            .main-title { font-size: 2.8rem; margin-bottom: 90px; text-align: center; }
+            .vision-board-title { font-size: 2rem; } /* Reduced */
+            .gallery-item { flex: 0 0 350px; }
+        }
+
+        /* --- 6. COMPONENT CLASSES --- */
+        
+        .segment-wrap { 
+            margin-bottom: var(--segment-margin); 
+            border-bottom: 1px solid var(--line-color);
+            padding-bottom: var(--group-margin);
+        }
+
+        .vision-board-title { 
+            font-weight: 800; color: #000; 
+            margin: 0 0 var(--board-title-bottom-margin) 0; /* Increased margin below title */
+            letter-spacing: -0.02em;
+        }
+
+        .product-group {
+            margin-bottom: var(--group-margin);
+        }
+
+        .product-type-title { 
+            font-weight: 600; 
+            color: rgb(59, 59, 59); 
+            margin: 0 0 var(--type-to-gallery-gap) 0; 
+            text-transform: uppercase; 
+            letter-spacing: 0.12em; 
+            font-size: 0.85rem; /* Reduced size */
+        }
+
+        /* Gallery System */
+        .gallery-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 10px;
+        }
+        .gallery-container::-webkit-scrollbar { display: none; }
+
+        .gallery-item {
+            scroll-snap-align: start;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+        }
+
+        .zoomable-img { width: 100%; display: block; cursor: zoom-in; }
+
+        /* CTA Button */
+        .product-cta-wrap { display: flex; justify-content: flex-end; margin-top: 20px; }
+        .product-cta-btn {
+            background: var(--btn-bg); color: #fff; text-decoration: none;
+            padding: 14px 35px; border-radius: 50px; font-weight: 800;
+            font-size: 0.8rem; letter-spacing: 0.08em; transition: opacity 0.2s;
+        }
+        .product-cta-btn:hover { opacity: 0.9; }
+
+        /* MODAL */
+        .fego-modal-open { overflow: hidden !important; }
+        .modal-overlay { display: none; position: fixed; z-index: 10001; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a1a; cursor: grab; overflow: hidden; touch-action: none; }
+        .modal-close-btn { position: absolute; top: 20px; right: 30px; color: white; font-size: 35px; cursor: pointer; z-index: 10003; }
+        .modal-img-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transform-origin: center; }
+        .modal-main-img { max-width: 90%; max-height: 85%; transition: transform 0.1s ease-out; pointer-events: none; }
+        .modal-controls { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 20px; background: rgba(0,0,0,0.6); padding: 10px 25px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.1); z-index: 10004; }
+        .modal-ctrl-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    </style>
+</head>
+
+<body>
+
+    <div class="navdiv"></div>
+
+    <div class="main-wrapper">
+        <h1 class="main-title">Curated Vision Boards</h1>
+
+        <div class="segment-wrap">
+            <h2 class="vision-board-title">The Strategic Growth Board</h2>
+            
+            <div class="product-group">
+                <p class="product-type-title">Poster Print</p>
+                <div class="gallery-container">
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/6444249/pexels-photo-6444249.jpeg?auto=compress&cs=tinysrgb&w=800" class="zoomable-img"></div>
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800" class="zoomable-img"></div>
+                </div>
+                <div class="product-cta-wrap">
+                    <a href="#" class="product-cta-btn">GET THE POSTER</a>
+                </div>
+            </div>
+
+            <div class="product-group">
+                <p class="product-type-title">Letter Card Set</p>
+                <div class="gallery-container">
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&cs=tinysrgb&w=800" class="zoomable-img"></div>
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/276514/pexels-photo-276514.jpeg?auto=compress&cs=tinysrgb&w=800" class="zoomable-img"></div>
+                </div>
+                <div class="product-cta-wrap">
+                    <a href="#" class="product-cta-btn">GET THE CARDS</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="segment-wrap" style="border-bottom: none; margin-bottom: 0;">
+            <h2 class="vision-board-title">Minimalist Mindset</h2>
+            
+            <div class="product-group">
+                <p class="product-type-title">Poster Print</p>
+                <div class="gallery-container">
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800" class="zoomable-img"></div>
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/6782567/pexels-photo-6782567.jpeg?auto=compress&cs=tinysrgb&w=800" class="zoomable-img"></div>
+                </div>
+                <div class="product-cta-wrap">
+                    <a href="#" class="product-cta-btn">GET THE POSTER</a>
+                </div>
+            </div>
+
+            <div class="product-group">
+                <p class="product-type-title">Letter Card Set</p>
+                <div class="gallery-container">
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/6444249/pexels-photo-6444249.jpeg?auto=compress&cs=tinysrgb&w=800" class="zoomable-img"></div>
+                    <div class="gallery-item"><img src="https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&cs=tinysrgb&w=800" class="zoomable-img"></div>
+                </div>
+                <div class="product-cta-wrap">
+                    <a href="#" class="product-cta-btn">GET THE CARDS</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="imgModal" class="modal-overlay">
+        <span onclick="closeModal()" class="modal-close-btn">&times;</span>
+        <div id="modalContent" class="modal-img-container">
+            <img id="fullImg" class="modal-main-img">
+        </div>
+        <div class="modal-controls">
+            <button class="modal-ctrl-btn" onclick="adjustZoom(-0.5)">&minus;</button>
+            <span id="zoomPercent" style="color:white; font-weight:600; min-width:50px; text-align:center;">100%</span>
+            <button class="modal-ctrl-btn" onclick="adjustZoom(0.5)">&plus;</button>
+        </div>
+    </div>
+
+    <script src="../../nav.js"></script>
+    <script>
+        const modal = document.getElementById("imgModal");
+        const fullImg = document.getElementById("fullImg");
+        const zoomText = document.getElementById("zoomPercent");
+        let scale = 1, translateX = 0, translateY = 0, isDragging = false, startX, startY, lastTouchHypot = 0;
+
+        document.querySelectorAll('.zoomable-img').forEach(img => {
+            img.onclick = () => {
+                modal.style.display = "block";
+                document.body.classList.add("fego-modal-open");
+                fullImg.src = img.src;
+                resetModal();
+                window.history.pushState({ modalOpen: true }, "");
+            };
+        });
+
+        window.onpopstate = function (event) { if (modal.style.display === "block") { closeModal(false); } };
+
+        function closeModal(triggerHistory = true) {
+            modal.style.display = "none";
+            document.body.classList.remove("fego-modal-open");
+            if (triggerHistory && window.history.state && window.history.state.modalOpen) { window.history.back(); }
+        }
+
+        function resetModal() { scale = 1; translateX = 0; translateY = 0; updateTransform(); }
+        function updateTransform() {
+            fullImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+            zoomText.innerText = Math.round(scale * 100) + "%";
+        }
+        function adjustZoom(delta) { scale = Math.min(Math.max(1, scale + delta), 4); updateTransform(); }
+        modal.ondblclick = () => { scale = (scale === 2) ? 1 : 2; translateX = 0; translateY = 0; updateTransform(); };
+        modal.onwheel = (e) => { e.preventDefault(); adjustZoom(e.deltaY > 0 ? -0.2 : 0.2); };
+
+        const startMove = (x, y) => { if (scale <= 1) return; isDragging = true; startX = x - translateX; startY = y - translateY; };
+        const doMove = (x, y) => { if (!isDragging) return; translateX = x - startX; translateY = y - startY; updateTransform(); };
+
+        modal.addEventListener('mousedown', e => startMove(e.clientX, e.clientY));
+        window.addEventListener('mousemove', e => doMove(e.clientX, e.clientY));
+        window.addEventListener('mouseup', () => isDragging = false);
+
+        modal.addEventListener('touchstart', e => {
+            if (e.touches.length === 2) {
+                lastTouchHypot = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+            } else { startMove(e.touches[0].pageX, e.touches[0].pageY); }
+        });
+        modal.addEventListener('touchmove', e => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const hypot = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+                adjustZoom((hypot - lastTouchHypot) / 100);
+                lastTouchHypot = hypot;
+            } else { doMove(e.touches[0].pageX, e.touches[0].pageY); }
+        }, { passive: false });
+        modal.addEventListener('touchend', () => isDragging = false);
+    </script>
+</body>
+</html>

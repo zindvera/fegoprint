@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FegoPrint | Design Strategy</title>
+
+    <link rel="stylesheet" href="../../footer.css">
+    <script src="../../footer.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. GLOBAL & RESET --- */
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #111;
+        }
+
+        /* --- 2. CSS VARIABLES (SHARED) --- */
+        :root {
+            --accent-color: #ff3366;
+            --btn-bg: #111;
+        }
+
+        /* --- 3. PHONE MEDIA QUERY (Up to 767px) --- */
+        @media (max-width: 767px) {
+            .navdiv {
+                margin-bottom: 0.65in;
+            }
+
+            .main-wrapper {
+                padding: 30px 15px 150px 15px;
+            }
+
+            .main-title {
+                font-size: 1.8rem;
+                line-height: 1.1;
+                letter-spacing: -0.04em;
+            }
+
+            .page-header {
+                margin-bottom: 40px;
+            }
+
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+                margin-bottom: 37px;
+            }
+
+            .hero-secret-title {
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+
+            .section-divider {
+                margin-bottom: 30px;
+                padding-top: 20px;
+                border-top: 1px solid #f0f0f0;
+            }
+
+            .divider-text {
+                font-size: 1.2rem;
+            }
+
+            .mockup-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .cta-anchor {
+                justify-content: center;
+                padding-bottom: 25px;
+            }
+
+            .cta-btn {
+                width: 85%;
+                max-width: 320px;
+            }
+        }
+
+        /* --- 4. TABLET MEDIA QUERY (768px to 1023px) --- */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .navdiv {
+                margin-bottom: 0.25in;
+            }
+
+            .main-wrapper {
+                padding: 50px 30px 180px 30px;
+            }
+
+            .main-title {
+                font-size: 2.3rem;
+                line-height: 1.1;
+            }
+
+            .page-header {
+                margin-bottom: 60px;
+            }
+
+            .hero-section {
+                flex-direction: row;
+                text-align: left;
+                gap: 40px;
+                margin-bottom: 50px;
+            }
+
+            .hero-secret-title {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+            }
+
+            .section-divider {
+                margin-bottom: 40px;
+                padding-top: 50px;
+                border-top: 1px solid #f0f0f0;
+            }
+
+            .divider-text {
+                font-size: 1.3rem;
+            }
+
+            .mockup-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .cta-anchor {
+                justify-content: flex-end;
+                padding: 0 40px 40px 0;
+            }
+
+            .cta-btn {
+                width: 220px;
+            }
+        }
+
+        /* --- 5. DESKTOP MEDIA QUERY (1024px and up) --- */
+        @media (min-width: 1024px) {
+            .navdiv {
+                margin-bottom: 0.2in;
+            }
+
+            .main-wrapper {
+                padding: 60px 20px 200px 20px;
+                max-width: 1100px;
+                margin: 0 auto;
+            }
+
+            .main-title {
+                font-size: 2.8rem;
+                line-height: 1.1;
+            }
+
+            .page-header {
+                margin-bottom: 80px;
+            }
+
+            .hero-section {
+                flex-direction: row;
+                text-align: left;
+                gap: 60px;
+                margin-bottom: 36px;
+            }
+
+            .hero-secret-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-description {
+                font-size: 1.2rem;
+                max-width: 450px;
+            }
+
+            .section-divider {
+                margin-bottom: 50px;
+                padding-top: 60px;
+                border-top: 1px solid #f0f0f0;
+            }
+
+            .divider-text {
+                font-size: 1.4rem;
+            }
+
+            .mockup-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .cta-anchor {
+                justify-content: flex-end;
+                padding: 0 60px 60px 0;
+            }
+
+            .cta-btn {
+                width: 250px;
+            }
+        }
+
+        /* --- 6. COMMON COMPONENT CLASSES (Layout Neutral) --- */
+        .page-header,
+        .section-divider {
+            text-align: center;
+        }
+
+        .main-title,
+        .hero-secret-title,
+        .divider-text {
+            font-weight: 800;
+        }
+
+        .hero-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-visual-wrap,
+        .hero-content-wrap {
+            flex: 1;
+            width: 100%;
+        }
+
+        .img-shadow-box {
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+        }
+
+        .mockup-grid {
+            display: grid;
+            width: 100%;
+        }
+
+        .hero-secret-title {
+            color: var(--accent-color);
+        }
+
+        .zoomable-img {
+            cursor: zoom-in;
+            transition: opacity 0.3s;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 2px;
+        }
+
+        .zoomable-img:hover {
+            opacity: 0.9;
+        }
+
+        .cta-anchor {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            pointer-events: none;
+            z-index: 9000;
+        }
+
+        .cta-btn {
+            pointer-events: auto;
+            background: var(--btn-bg);
+            color: #fff;
+            text-decoration: none;
+            padding: 22px 0;
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* MODAL STYLES */
+        .fego-modal-open {
+            overflow: hidden !important;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            cursor: grab;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+            z-index: 10003;
+            font-weight: 300;
+        }
+
+        .modal-img-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-origin: center;
+        }
+
+        .modal-main-img {
+            max-width: 90%;
+            max-height: 85%;
+            user-select: none;
+            pointer-events: none;
+            transition: transform 0.1s ease-out;
+        }
+
+        .modal-controls {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 25px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10004;
+        }
+
+        .modal-ctrl-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .zoom-text {
+            color: white;
+            font-weight: 600;
+            min-width: 50px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navdiv"></div>
+
+    <div class="main-wrapper">
+        <header class="page-header">
+            <h1 class="main-title">
+                The $25 Upgrade That Makes Your <br style="display: none;"> Living Room Look Like a Hotel
+            </h1>
+        </header>
+
+        <section class="hero-section">
+            <div class="hero-visual-wrap">
+                <div class="img-shadow-box">
+                    <img src="https://images.pexels.com/photos/6444249/pexels-photo-6444249.jpeg?auto=compress&cs=tinysrgb&w=800"
+                        class="zoomable-img">
+                </div>
+            </div>
+            <div class="hero-content-wrap">
+                <h2 class="hero-secret-title">The Secret is Texture.</h2>
+                <p class="hero-description">Matte-grain finishes capture light differently. It anchors your room without
+                    adding clutter.</p>
+            </div>
+        </section>
+
+        <div class="section-divider">
+            <h3 class="divider-text">See how it will change your space</h3>
+        </div>
+
+        <div class="mockup-grid">
+            <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800"
+                class="zoomable-img">
+            <img src="https://images.pexels.com/photos/6782567/pexels-photo-6782567.jpeg?auto=compress&cs=tinysrgb&w=800"
+                class="zoomable-img">
+        </div>
+    </div>
+
+    <div class="cta-anchor">
+        <a href="https://fegoprint.info" class="cta-btn">I WANT THIS</a>
+    </div>
+
+    <div id="imgModal" class="modal-overlay">
+        <span onclick="closeModal()" class="modal-close-btn">&times;</span>
+        <div id="modalContent" class="modal-img-container">
+            <img id="fullImg" class="modal-main-img">
+        </div>
+        <div class="modal-controls">
+            <button class="modal-ctrl-btn" onclick="adjustZoom(-0.5)">&minus;</button>
+            <span id="zoomPercent" class="zoom-text">100%</span>
+            <button class="modal-ctrl-btn" onclick="adjustZoom(0.5)">&plus;</button>
+        </div>
+    </div>
+
+    <script src="../../nav.js"></script>
+    <script>
+        const modal = document.getElementById("imgModal");
+        const fullImg = document.getElementById("fullImg");
+        const zoomText = document.getElementById("zoomPercent");
+        let scale = 1, translateX = 0, translateY = 0, isDragging = false, startX, startY, lastTouchHypot = 0;
+
+        document.querySelectorAll('.zoomable-img').forEach(img => {
+            img.onclick = () => {
+                modal.style.display = "block";
+                document.body.classList.add("fego-modal-open");
+                fullImg.src = img.src;
+                resetModal();
+                window.history.pushState({ modalOpen: true }, "");
+            };
+        });
+
+        window.onpopstate = function (event) {
+            if (modal.style.display === "block") { closeModal(false); }
+        };
+
+        function closeModal(triggerHistory = true) {
+            modal.style.display = "none";
+            document.body.classList.remove("fego-modal-open");
+            if (triggerHistory && window.history.state && window.history.state.modalOpen) {
+                window.history.back();
+            }
+        }
+
+        function resetModal() { scale = 1; translateX = 0; translateY = 0; updateTransform(); }
+        function updateTransform() {
+            fullImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+            zoomText.innerText = Math.round(scale * 100) + "%";
+        }
+        function adjustZoom(delta) { scale = Math.min(Math.max(1, scale + delta), 4); updateTransform(); }
+
+        modal.ondblclick = () => { scale = (scale === 2) ? 1 : 2; translateX = 0; translateY = 0; updateTransform(); };
+        modal.onwheel = (e) => { e.preventDefault(); adjustZoom(e.deltaY > 0 ? -0.2 : 0.2); };
+
+        const startMove = (x, y) => { if (scale <= 1) return; isDragging = true; startX = x - translateX; startY = y - translateY; };
+        const doMove = (x, y) => { if (!isDragging) return; translateX = x - startX; translateY = y - startY; updateTransform(); };
+
+        modal.addEventListener('mousedown', e => startMove(e.clientX, e.clientY));
+        window.addEventListener('mousemove', e => doMove(e.clientX, e.clientY));
+        window.addEventListener('mouseup', () => isDragging = false);
+
+        modal.addEventListener('touchstart', e => {
+            if (e.touches.length === 2) {
+                lastTouchHypot = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+            } else { startMove(e.touches[0].pageX, e.touches[0].pageY); }
+        });
+        modal.addEventListener('touchmove', e => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const hypot = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+                adjustZoom((hypot - lastTouchHypot) / 100);
+                lastTouchHypot = hypot;
+            } else { doMove(e.touches[0].pageX, e.touches[0].pageY); }
+        }, { passive: false });
+        modal.addEventListener('touchend', () => isDragging = false);
+    </script>
+</body>
+
+</html>
