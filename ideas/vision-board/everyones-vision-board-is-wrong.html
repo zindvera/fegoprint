@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FegoPrint | Everyone’s Vision Board Is Wrong — Except These Structured Ones</title>
+
+    <link rel="stylesheet" href="../../footer.css">
+    <script src="../../footer.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. GLOBAL & RESET --- */
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #111;
+            line-height: 1.8;
+        }
+
+        /* --- 2. SHARED VARIABLES --- */
+        :root {
+            --accent-color: #ff3366;
+            --btn-bg: #111;
+            --zazzle-blue: #0066cc;
+            --section-gap: 140px;
+            --tooltip-bg: #f0f9ff;
+            --tooltip-border: #0066cc;
+            --deep-slate: #0f172a;
+        }
+
+        /* --- 3. PHONE MEDIA QUERY (Vertical Stack) --- */
+        @media (max-width: 767px) {
+            .navdiv {
+                margin-bottom: 0.65in;
+            }
+
+            .main-wrapper {
+                padding: 40px 20px 80px 20px;
+            }
+
+            .main-title {
+                font-size: 1.8rem;
+                margin-bottom: 40px;
+                text-align: left;
+                line-height: 1.3;
+            }
+
+            .main-blog-sub {
+                font-size: 1.15rem;
+                margin-bottom: 40px;
+                text-align: left;
+            }
+
+            .intro-accent-tag {
+                font-size: 1.45rem;
+                margin: 60px 0 100px 0;
+                text-align: left;
+            }
+
+            .split-container {
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .mobile-title {
+                display: block;
+                font-size: 1.6rem;
+                margin-bottom: 12px;
+                line-height: 1.2;
+            }
+
+            .desktop-title {
+                display: none;
+            }
+
+            .product-type-title {
+                text-align: left;
+            }
+
+            .product-blog-text {
+                font-size: 1.1rem;
+                margin-bottom: 20px;
+                line-height: 1.6;
+            }
+
+            .action-area {
+                align-items: center;
+                margin-top: 40px;
+            }
+
+            .custom-tooltip {
+                padding: 15px 20px;
+                text-align: left;
+                font-size: 0.95rem;
+                max-width: 100%;
+            }
+
+            .custom-tooltip::after,
+            .custom-tooltip::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .gallery-item {
+                flex: 0 0 88%;
+            }
+
+            .env-text {
+                margin-top: 40px;
+                font-size: 1.4rem;
+                line-height: 1.3;
+            }
+        }
+
+        /* --- 4. TABLET & DESKTOP (Split Screen) --- */
+        @media (min-width: 768px) {
+            .navdiv {
+                margin-bottom: 0.25in;
+            }
+
+            .main-wrapper {
+                padding: 60px 40px 120px 40px;
+                max-width: 1100px;
+                margin: 0 auto;
+            }
+
+            .main-title {
+                font-size: 3rem;
+                margin-bottom: 25px;
+                text-align: center;
+                line-height: 1.1;
+            }
+
+            .main-blog-sub {
+                font-size: 1.4rem;
+                margin-bottom: 30px;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+
+            .intro-accent-tag {
+                font-size: 1.8rem;
+                margin: 50px auto 100px auto;
+                max-width: 900px;
+                text-align: center;
+            }
+
+            .split-container {
+                display: flex;
+                align-items: flex-start;
+                gap: 50px;
+                margin-bottom: 50px;
+            }
+
+            .split-left {
+                flex: 1.2;
+            }
+
+            .split-right {
+                flex: 1;
+            }
+
+            .mobile-title {
+                display: none;
+            }
+
+            .desktop-title {
+                display: block;
+            }
+
+            .product-type-title {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+
+            .action-area {
+                align-items: flex-end;
+                margin-top: 60px;
+            }
+
+            .custom-tooltip {
+                padding: 20px 25px;
+                text-align: left;
+                font-size: 1.05rem;
+                max-width: 500px;
+            }
+
+            .custom-tooltip::after,
+            .custom-tooltip::before {
+                right: 40px;
+            }
+
+            .env-text {
+                margin-top: 80px;
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+
+            .gallery-item {
+                flex: 0 0 420px;
+            }
+        }
+
+        /* --- 5. COMPONENT CLASSES --- */
+        .main-title span {
+            color: var(--accent-color);
+        }
+
+        .main-blog-sub {
+            color: #555;
+            font-weight: 400;
+        }
+
+        .intro-accent-tag {
+            color: var(--deep-slate);
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: -0.025em;
+        }
+
+        .tag-underline {
+            border-bottom: 4px solid var(--accent-color);
+            padding-bottom: 2px;
+            display: inline-block;
+        }
+
+        .action-area {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            position: relative;
+        }
+
+        .custom-tooltip {
+            position: relative;
+            background: var(--tooltip-bg);
+            border: 2px solid var(--tooltip-border);
+            border-radius: 12px;
+            color: #0369a1;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0, 102, 204, 0.1);
+            width: fit-content;
+            font-weight: 500;
+        }
+
+        .custom-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 12px solid var(--tooltip-border);
+            z-index: 1;
+        }
+
+        .custom-tooltip::before {
+            content: '';
+            position: absolute;
+            bottom: -9px;
+            border-left: 11px solid transparent;
+            border-right: 11px solid transparent;
+            border-top: 11px solid var(--tooltip-bg);
+            z-index: 2;
+        }
+
+        .highlight-underline {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 1px;
+            font-weight: 800;
+            color: #111;
+        }
+
+        .segment-wrap {
+            margin-bottom: var(--section-gap);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .product-type-title {
+            font-weight: 800;
+            color: #000;
+            margin: 0 0 15px 0;
+            letter-spacing: -0.02em;
+        }
+
+        /* Truncation & Show More Styles */
+        .product-blog-text {
+            font-size: 1.15rem;
+            color: #555;
+            margin: 0 0 25px 0;
+        }
+
+        .show-more-link {
+            color: var(--zazzle-blue);
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 5px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: inline-block;
+        }
+
+        .show-more-link:hover {
+            text-decoration: underline;
+        }
+
+        .text-hidden {
+            display: none;
+        }
+
+        .env-text {
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: -0.03em;
+            color: #000;
+        }
+
+        .gallery-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 25px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 15px;
+        }
+
+        .gallery-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-item {
+            scroll-snap-align: start;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .zoomable-img {
+            width: 100%;
+            display: block;
+            cursor: zoom-in;
+        }
+
+        .product-cta-btn {
+            display: inline-block;
+            background: var(--btn-bg);
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 35px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            transition: background-color 2s ease, transform 0.2s ease;
+            text-align: center;
+        }
+
+        .cta-active-blue {
+            background-color: var(--zazzle-blue) !important;
+        }
+
+        .product-cta-btn:hover {
+            background: var(--accent-color) !important;
+            transform: translateY(-2px);
+            transition: background-color 0.3s ease;
+        }
+
+        /* MODAL */
+        .fego-modal-open {
+            overflow: hidden !important;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            cursor: grab;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 10003;
+        }
+
+        .modal-img-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-origin: center;
+        }
+
+        .modal-main-img {
+            max-width: 90%;
+            max-height: 85%;
+            transition: transform 0.1s ease-out;
+            pointer-events: none;
+        }
+
+        .modal-controls {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 25px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10004;
+        }
+
+        .modal-ctrl-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #zoomPercent {
+            color: white;
+            font-weight: 600;
+            min-width: 55px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navdiv"></div>
+
+    <div class="main-wrapper">
+        <!-- 1. INTRO -->
+        <h1 class="main-title">Everyone’s Vision Board Is Wrong <span>— Except These Structured Ones.</span></h1>
+
+
+
+        <div class="intro-accent-tag">A vision board shouldn't be a chaotic collage. It should be a structured design
+            that aligns with your goals.</div>
+
+        <!-- PRODUCT LIST -->
+
+        <!-- DESIGN 1 -->
+        <div class="segment-wrap">
+            <h3 class="product-type-title mobile-title">2026 Vision with 8 Floating Photo Circles Poster</h3>
+            <div class="split-container">
+                <div class="split-left">
+                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/1/mock-1.jpg"
+                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                </div>
+                <div class="split-right">
+                    <h3 class="product-type-title desktop-title">2026 Vision with 8 Floating Photo Circles Poster</h3>
+                    <p class="product-blog-text">Manifest your 2026 goals with this aesthetic vision board poster
+                        featuring eight essential life categories. Stay motivated for career promotions and building
+                        passive income with this clean, professional layout designed for success. Perfect for home
+                        office decor to keep your daily manifestation and personal growth front and center.</p>
+                </div>
+            </div>
+            <h4 class="env-text">How it will look in real environment</h4>
+            <div class="gallery-container">
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/1/mock-2.jpg"
+                        class="zoomable-img"></div>
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/1/mock-3.jpg"
+                        class="zoomable-img"></div>
+            </div>
+            <div class="action-area">
+                <div class="custom-tooltip">
+                    if you want this poster, you can easily <span class="highlight-underline">edit the text</span>,
+                    <span class="highlight-underline">swap images</span>, and <span class="highlight-underline">change
+                        anything</span> on Zazzle to make it yours.
+                </div>
+                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+            </div>
+        </div>
+
+        <!-- DESIGN 2 -->
+        <div class="segment-wrap">
+            <h3 class="product-type-title mobile-title">2026 Aesthetic Pastel Circles Vision Poster</h3>
+            <div class="split-container">
+                <div class="split-left">
+                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/2/mock-1.jpg"
+                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                </div>
+                <div class="split-right">
+                    <h3 class="product-type-title desktop-title">2026 Aesthetic Pastel Circles Vision Poster</h3>
+                    <p class="product-blog-text">
+                        Visualize your 2026 goals with this aesthetic pastel vision board featuring eight essential life
+                        categories. Stay focused on your career promotion and passive income goals with this clean,
+                        professional layout. Perfect for your home or office wall to keep your daily manifestation and
+                        personal growth front and center.</p>
+                </div>
+            </div>
+            <h4 class="env-text">How it will look in real environment</h4>
+            <div class="gallery-container">
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/2/mock-2.jpg"
+                        class="zoomable-img"></div>
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/2/mock-3.jpg"
+                        class="zoomable-img"></div>
+            </div>
+            <div class="action-area">
+                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+            </div>
+        </div>
+
+        <!-- DESIGN 3 -->
+        <div class="segment-wrap">
+            <h3 class="product-type-title mobile-title">8-Focus Geometric Planner</h3>
+            <div class="split-container">
+                <div class="split-left">
+                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/3/mock-1.jpg"
+                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                </div>
+                <div class="split-right">
+                    <h3 class="product-type-title desktop-title">8-Focus Geometric Planner</h3>
+                    <p class="product-blog-text">Maximum impact through spatial organization. An elegant high-level
+                        overview of complex life goals in a single frame.</p>
+                </div>
+            </div>
+            <h4 class="env-text">How it will look in real environment</h4>
+            <div class="gallery-container">
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/3/mock-2.jpg"
+                        class="zoomable-img"></div>
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/3/mock-3.jpg"
+                        class="zoomable-img"></div>
+            </div>
+            <div class="action-area">
+                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+            </div>
+        </div>
+
+        <!-- DESIGN 4 -->
+        <div class="segment-wrap">
+            <h3 class="product-type-title mobile-title">The Minimalist Flow framework</h3>
+            <div class="split-container">
+                <div class="split-left">
+                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/4/mock-1.jpg"
+                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                </div>
+                <div class="split-right">
+                    <h3 class="product-type-title desktop-title">The Minimalist Flow framework</h3>
+                    <p class="product-blog-text">Professional tones meet category-first structure for a distraction-free
+                        visualization experience in modern interiors.</p>
+                </div>
+            </div>
+            <h4 class="env-text">How it will look in real environment</h4>
+            <div class="gallery-container">
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/4/mock-2.jpg"
+                        class="zoomable-img"></div>
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/4/mock-3.jpg"
+                        class="zoomable-img"></div>
+            </div>
+            <div class="action-area">
+                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+            </div>
+        </div>
+
+        <!-- DESIGN 5 -->
+        <div class="segment-wrap">
+            <h3 class="product-type-title mobile-title">Sequential Goal Roadmap</h3>
+            <div class="split-container">
+                <div class="split-left">
+                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/5/mock-1.jpg"
+                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                </div>
+                <div class="split-right">
+                    <h3 class="product-type-title desktop-title">Sequential Goal Roadmap</h3>
+                    <p class="product-blog-text">Visual roadmap designed to track the sequential progression of your
+                        targets at a single glance.</p>
+                </div>
+            </div>
+            <h4 class="env-text">How it will look in real environment</h4>
+            <div class="gallery-container">
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/5/mock-2.jpg"
+                        class="zoomable-img"></div>
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/5/mock-3.jpg"
+                        class="zoomable-img"></div>
+            </div>
+            <div class="action-area">
+                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+            </div>
+        </div>
+
+        <!-- DESIGN 6 -->
+        <div class="segment-wrap">
+            <h3 class="product-type-title mobile-title">Clarity-Driven Strategic Board</h3>
+            <div class="split-container">
+                <div class="split-left">
+                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/6/mock-1.jpg"
+                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                </div>
+                <div class="split-right">
+                    <h3 class="product-type-title desktop-title">Clarity-Driven Strategic Board</h3>
+                    <p class="product-blog-text">Structured category mapping to help you prioritize daily actions within
+                        a clean, modern frame.</p>
+                </div>
+            </div>
+            <h4 class="env-text">How it will look in real environment</h4>
+            <div class="gallery-container">
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/6/mock-2.jpg"
+                        class="zoomable-img"></div>
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/6/mock-3.jpg"
+                        class="zoomable-img"></div>
+            </div>
+            <div class="action-area">
+                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+            </div>
+        </div>
+
+        <!-- DESIGN 7 -->
+        <div class="segment-wrap">
+            <h3 class="product-type-title mobile-title">Professional Executive Anchor</h3>
+            <div class="split-container">
+                <div class="split-left">
+                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/7/mock-1.jpg"
+                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                </div>
+                <div class="split-right">
+                    <h3 class="product-type-title desktop-title">Professional Executive Anchor</h3>
+                    <p class="product-blog-text">Strict visual alignment for the high-end professional who values sleek,
+                        category-first orientation.</p>
+                </div>
+            </div>
+            <h4 class="env-text">How it will look in real environment</h4>
+            <div class="gallery-container">
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/7/mock-2.jpg"
+                        class="zoomable-img"></div>
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/7/mock-3.jpg"
+                        class="zoomable-img"></div>
+            </div>
+            <div class="action-area">
+                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+            </div>
+        </div>
+
+        <!-- DESIGN 8 -->
+        <div class="segment-wrap" style="border-bottom: none;">
+            <h3 class="product-type-title mobile-title">The Ultimate Structured visual Anchor</h3>
+            <div class="split-container">
+                <div class="split-left">
+                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/8/mock-1.jpg"
+                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                </div>
+                <div class="split-right">
+                    <h3 class="product-type-title desktop-title">The Ultimate Structured visual Anchor</h3>
+                    <p class="product-blog-text">A comprehensive life-design system mapping out every vital segment for
+                        actionable strategic visualization.</p>
+                </div>
+            </div>
+            <h4 class="env-text">How it will look in real environment</h4>
+            <div class="gallery-container">
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/8/mock-2.jpg"
+                        class="zoomable-img"></div>
+                <div class="gallery-item"><img
+                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/8/mock-3.jpg"
+                        class="zoomable-img"></div>
+            </div>
+            <div class="action-area">
+                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL -->
+    <div id="imgModal" class="modal-overlay">
+        <span onclick="closeModal()" class="modal-close-btn">&times;</span>
+        <div id="modalContent" class="modal-img-container">
+            <img id="fullImg" class="modal-main-img">
+        </div>
+        <div class="modal-controls">
+            <button class="modal-ctrl-btn" onclick="adjustZoom(-0.5)">&minus;</button>
+            <span id="zoomPercent">100%</span>
+            <button class="modal-ctrl-btn" onclick="adjustZoom(0.5)">&plus;</button>
+        </div>
+    </div>
+
+    <script src="../../nav.js"></script>
+    <script>
+        // --- Show More / Show Less Logic ---
+        function initializeDescriptions() {
+            // Updated word limit to 16 as per request
+            const wordLimit = 16;
+            document.querySelectorAll('.product-blog-text').forEach(p => {
+                const fullContent = p.innerText.trim();
+                const words = fullContent.split(/\s+/);
+
+                if (words.length > wordLimit) {
+                    const shortText = words.slice(0, wordLimit).join(' ');
+                    const remainingText = words.slice(wordLimit).join(' ');
+
+                    // Create the toggle structure
+                    p.innerHTML = `
+                        <span class="text-visible">${shortText}</span>
+                        <span class="text-hidden" style="display:none"> ${remainingText}</span>
+                        <a class="show-more-link">...Show more</a>
+                    `;
+
+                    const link = p.querySelector('.show-more-link');
+                    const hiddenSpan = p.querySelector('.text-hidden');
+
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const isExpanded = hiddenSpan.style.display !== 'none';
+
+                        if (isExpanded) {
+                            hiddenSpan.style.display = 'none';
+                            link.innerText = '...Show more';
+                        } else {
+                            hiddenSpan.style.display = 'inline';
+                            link.innerText = ' Show less';
+                        }
+                    });
+                }
+            });
+        }
+
+        // --- Modal Logic ---
+        const modal = document.getElementById("imgModal");
+        const fullImg = document.getElementById("fullImg");
+        const zoomText = document.getElementById("zoomPercent");
+        let scale = 1, translateX = 0, translateY = 0, isDragging = false, startX, startY, lastTouchHypot = 0;
+
+        function openModal(imgSrc) {
+            modal.style.display = "block";
+            document.body.classList.add("fego-modal-open");
+            fullImg.src = imgSrc;
+            resetModal();
+            window.history.pushState({ modalOpen: true }, "");
+        }
+
+        function closeModal(triggerHistory = true) {
+            if (modal.style.display === "none") return;
+            modal.style.display = "none";
+            document.body.classList.remove("fego-modal-open");
+            if (triggerHistory && window.history.state && window.history.state.modalOpen) {
+                window.history.back();
+            }
+        }
+
+        document.querySelectorAll('.zoomable-img').forEach(img => {
+            img.onclick = () => openModal(img.src);
+        });
+
+        window.onpopstate = function (event) {
+            if (modal.style.display === "block") {
+                closeModal(false);
+            }
+        };
+
+        function resetModal() { scale = 1; translateX = 0; translateY = 0; updateTransform(); }
+        function updateTransform() {
+            fullImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+            zoomText.innerText = Math.round(scale * 100) + "%";
+        }
+        function adjustZoom(delta) {
+            scale = Math.min(Math.max(1, scale + delta), 4);
+            if (scale === 1) { translateX = 0; translateY = 0; }
+            updateTransform();
+        }
+        modal.ondblclick = () => { if (scale > 1) { resetModal(); } else { scale = 2; updateTransform(); } };
+        modal.onwheel = (e) => { e.preventDefault(); adjustZoom(e.deltaY > 0 ? -0.2 : 0.2); };
+        const startMove = (x, y) => { if (scale <= 1) return; isDragging = true; startX = x - translateX; startY = y - translateY; };
+        const doMove = (x, y) => { if (!isDragging) return; translateX = x - startX; translateY = y - startY; updateTransform(); };
+        modal.addEventListener('mousedown', e => startMove(e.clientX, e.clientY));
+        window.addEventListener('mousemove', e => doMove(e.clientX, e.clientY));
+        window.addEventListener('mouseup', () => isDragging = false);
+        modal.addEventListener('touchstart', e => {
+            if (e.touches.length === 2) { lastTouchHypot = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY); }
+            else { startMove(e.touches[0].pageX, e.touches[0].pageY); }
+        });
+        modal.addEventListener('touchmove', e => {
+            if (e.touches.length === 2) { e.preventDefault(); const hypot = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY); adjustZoom((hypot - lastTouchHypot) / 100); lastTouchHypot = hypot; }
+            else { doMove(e.touches[0].pageX, e.touches[0].pageY); }
+        }, { passive: false });
+        modal.addEventListener('touchend', () => isDragging = false);
+
+        // --- Blue Signal Logic ---
+        let signalTriggered = false;
+        const observerOptions = { root: null, threshold: 0.1 };
+        const globalObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !signalTriggered) {
+                    signalTriggered = true;
+                    setTimeout(() => {
+                        document.querySelectorAll('.blue-signal-btn').forEach(btn => { btn.classList.add('cta-active-blue'); });
+                    }, 5000);
+                    globalObserver.disconnect();
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.blue-signal-btn').forEach(btn => { globalObserver.observe(btn); });
+
+        // Initialize script on window load
+        window.onload = function () {
+            initializeDescriptions();
+        };
+    </script>
+</body>
+
+</html>
