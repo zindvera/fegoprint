@@ -2,9 +2,19 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTVZME6WHC"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-YTVZME6WHC');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FegoPrint | Everyone’s Vision Board Is Wrong — Except These Structured Ones</title>
+    <title>Everyone’s Vision Board Is Wrong — Except These Structured Ones</title>
 
     <link rel="stylesheet" href="../../footer.css">
     <script src="../../footer.js" defer></script>
@@ -33,10 +43,10 @@
         :root {
             --accent-color: #ff3366;
             --btn-bg: #111;
-            --zazzle-blue: #0066cc;
+            --zazzle-blue: #1e66ad;
             --section-gap: 140px;
-            --tooltip-bg: #f0f9ff;
-            --tooltip-border: #0066cc;
+            --tooltip-bg: #f4fbff;
+            --tooltip-border: #1374d4;
             --deep-slate: #0f172a;
         }
 
@@ -51,10 +61,10 @@
             }
 
             .main-title {
-                font-size: 1.8rem;
+                font-size: 1.85rem;
                 margin-bottom: 40px;
                 text-align: left;
-                line-height: 1.3;
+                line-height: 1.8;
             }
 
             .main-blog-sub {
@@ -64,8 +74,8 @@
             }
 
             .intro-accent-tag {
-                font-size: 1.45rem;
-                margin: 60px 0 100px 0;
+                font-size: 1.25rem;
+                margin: 60px 0 75px 0;
                 text-align: left;
             }
 
@@ -77,7 +87,7 @@
 
             .mobile-title {
                 display: block;
-                font-size: 1.6rem;
+                font-size: 1.5rem;
                 margin-bottom: 12px;
                 line-height: 1.2;
             }
@@ -88,12 +98,8 @@
 
             .product-type-title {
                 text-align: left;
-            }
-
-            .product-blog-text {
-                font-size: 1.1rem;
-                margin-bottom: 20px;
-                line-height: 1.6;
+                font-weight: 600;
+                margin: 0 0 28px 0;
             }
 
             .action-area {
@@ -104,7 +110,7 @@
             .custom-tooltip {
                 padding: 15px 20px;
                 text-align: left;
-                font-size: 0.95rem;
+                font-size: 1.25rem;
                 max-width: 100%;
             }
 
@@ -154,7 +160,7 @@
             }
 
             .intro-accent-tag {
-                font-size: 1.8rem;
+                font-size: 1.35rem;
                 margin: 50px auto 100px auto;
                 max-width: 900px;
                 text-align: center;
@@ -185,7 +191,9 @@
 
             .product-type-title {
                 font-size: 1.8rem;
-                line-height: 1.2;
+                line-height: 1.7;
+                font-weight: 700;
+                margin: 50% 0 15px 0;
             }
 
             .action-area {
@@ -196,8 +204,8 @@
             .custom-tooltip {
                 padding: 20px 25px;
                 text-align: left;
-                font-size: 1.05rem;
-                max-width: 500px;
+                font-size: 1.25rem;
+                max-width: 540px;
             }
 
             .custom-tooltip::after,
@@ -251,12 +259,12 @@
             background: var(--tooltip-bg);
             border: 2px solid var(--tooltip-border);
             border-radius: 12px;
-            color: #0369a1;
+            color: #32434d;
             line-height: 1.6;
             margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0, 102, 204, 0.1);
             width: fit-content;
             font-weight: 500;
+            line-height: 2;
         }
 
         .custom-tooltip::after {
@@ -292,18 +300,62 @@
         }
 
         .product-type-title {
-            font-weight: 800;
             color: #000;
-            margin: 0 0 15px 0;
-            letter-spacing: -0.02em;
+            
         }
 
-        /* Truncation & Show More Styles */
-        .product-blog-text {
-            font-size: 1.15rem;
-            color: #555;
-            margin: 0 0 25px 0;
+        /* --- 6. LAZY LOAD & LOADER STYLES --- */
+        .loader-container {
+            position: relative;
+            width: 100%;
+            min-height: 300px;
+            background: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            overflow: hidden;
         }
+
+        .loader-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #eee;
+            border-top: 4px solid var(--zazzle-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loader-text {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: #777;
+            font-weight: 500;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .lazy-img {
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            width: 100%;
+            display: block;
+        }
+
+        .lazy-img.loaded {
+            opacity: 1;
+        }
+
+        .loader-container.finished .loader-spinner,
+        .loader-container.finished .loader-text {
+            display: none;
+        }
+
+        /* ------------------------------------- */
 
         .show-more-link {
             color: var(--zazzle-blue);
@@ -319,12 +371,8 @@
             text-decoration: underline;
         }
 
-        .text-hidden {
-            display: none;
-        }
-
         .env-text {
-            font-weight: 800;
+            font-weight: 600;
             text-align: center;
             margin-bottom: 40px;
             letter-spacing: -0.03em;
@@ -353,8 +401,6 @@
         }
 
         .zoomable-img {
-            width: 100%;
-            display: block;
             cursor: zoom-in;
         }
 
@@ -472,252 +518,246 @@
     <div class="navdiv"></div>
 
     <div class="main-wrapper">
-        <!-- 1. INTRO -->
-        <h1 class="main-title">Everyone’s Vision Board Is Wrong <span>— Except These Structured Ones.</span></h1>
-
-
+        <h1 class="main-title">Everyone’s Vision Board Is Wrong <span>— Except These.</span></h1>
 
         <div class="intro-accent-tag">A vision board shouldn't be a chaotic collage. It should be a structured design
             that aligns with your goals.</div>
 
-        <!-- PRODUCT LIST -->
-
-        <!-- DESIGN 1 -->
         <div class="segment-wrap">
             <h3 class="product-type-title mobile-title">2026 Vision with 8 Floating Photo Circles Poster</h3>
             <div class="split-container">
                 <div class="split-left">
-                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/1/mock-1.jpg"
-                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/1/mock-1.jpg"
+                            class="zoomable-img lazy-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    </div>
                 </div>
                 <div class="split-right">
                     <h3 class="product-type-title desktop-title">2026 Vision with 8 Floating Photo Circles Poster</h3>
-                    <p class="product-blog-text">Manifest your 2026 goals with this aesthetic vision board poster
-                        featuring eight essential life categories. Stay motivated for career promotions and building
-                        passive income with this clean, professional layout designed for success. Perfect for home
-                        office decor to keep your daily manifestation and personal growth front and center.</p>
                 </div>
             </div>
             <h4 class="env-text">How it will look in real environment</h4>
             <div class="gallery-container">
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/1/mock-2.jpg"
-                        class="zoomable-img"></div>
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/1/mock-3.jpg"
-                        class="zoomable-img"></div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/1/mock-2.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/1/mock-3.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
             </div>
             <div class="action-area">
                 <div class="custom-tooltip">
-                    if you want this poster, you can easily <span class="highlight-underline">edit the text</span>,
+                    If you want this poster, you can easily <span class="highlight-underline">edit the text</span>,
                     <span class="highlight-underline">swap images</span>, and <span class="highlight-underline">change
                         anything</span> on Zazzle to make it yours.
                 </div>
-                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+                <a href="https://www.zazzle.com/2026_vision_with_8_floating_photo_circles_poster-256670535215785188"
+                    class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
             </div>
         </div>
 
-        <!-- DESIGN 2 -->
         <div class="segment-wrap">
             <h3 class="product-type-title mobile-title">2026 Aesthetic Pastel Circles Vision Poster</h3>
             <div class="split-container">
                 <div class="split-left">
-                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/2/mock-1.jpg"
-                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/2/mock-1.jpg"
+                            class="zoomable-img lazy-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    </div>
                 </div>
                 <div class="split-right">
                     <h3 class="product-type-title desktop-title">2026 Aesthetic Pastel Circles Vision Poster</h3>
-                    <p class="product-blog-text">
-                        Visualize your 2026 goals with this aesthetic pastel vision board featuring eight essential life
-                        categories. Stay focused on your career promotion and passive income goals with this clean,
-                        professional layout. Perfect for your home or office wall to keep your daily manifestation and
-                        personal growth front and center.</p>
                 </div>
             </div>
             <h4 class="env-text">How it will look in real environment</h4>
             <div class="gallery-container">
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/2/mock-2.jpg"
-                        class="zoomable-img"></div>
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/2/mock-3.jpg"
-                        class="zoomable-img"></div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/2/mock-2.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/2/mock-3.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
             </div>
             <div class="action-area">
-                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+                <a href="https://www.zazzle.com/2026_aesthetic_pastel_circles_vision_poster-256414751404110828"
+                    class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
             </div>
         </div>
 
-        <!-- DESIGN 3 -->
         <div class="segment-wrap">
-            <h3 class="product-type-title mobile-title">8-Focus Geometric Planner</h3>
+            <h3 class="product-type-title mobile-title">2026 Modern Circle Photo Vision Board Poster</h3>
             <div class="split-container">
                 <div class="split-left">
-                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/3/mock-1.jpg"
-                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/3/mock-1.jpg"
+                            class="zoomable-img lazy-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    </div>
                 </div>
                 <div class="split-right">
-                    <h3 class="product-type-title desktop-title">8-Focus Geometric Planner</h3>
-                    <p class="product-blog-text">Maximum impact through spatial organization. An elegant high-level
-                        overview of complex life goals in a single frame.</p>
+                    <h3 class="product-type-title desktop-title">2026 Modern Circle Photo Vision Board Poster</h3>
                 </div>
             </div>
             <h4 class="env-text">How it will look in real environment</h4>
             <div class="gallery-container">
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/3/mock-2.jpg"
-                        class="zoomable-img"></div>
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/3/mock-3.jpg"
-                        class="zoomable-img"></div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/3/mock-2.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/3/mock-3.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
             </div>
             <div class="action-area">
-                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+                <a href="https://www.zazzle.com/2026_modern_circle_photo_vision_board_poster-256434732169355074"
+                    class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
             </div>
         </div>
 
-        <!-- DESIGN 4 -->
         <div class="segment-wrap">
-            <h3 class="product-type-title mobile-title">The Minimalist Flow framework</h3>
+            <h3 class="product-type-title mobile-title">2026 Soft Gradient Circle Proper Vision Poster</h3>
             <div class="split-container">
                 <div class="split-left">
-                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/4/mock-1.jpg"
-                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/4/mock-1.jpg"
+                            class="zoomable-img lazy-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    </div>
                 </div>
                 <div class="split-right">
-                    <h3 class="product-type-title desktop-title">The Minimalist Flow framework</h3>
-                    <p class="product-blog-text">Professional tones meet category-first structure for a distraction-free
-                        visualization experience in modern interiors.</p>
+                    <h3 class="product-type-title desktop-title">2026 Soft Gradient Circle Proper Vision Poster</h3>
                 </div>
             </div>
             <h4 class="env-text">How it will look in real environment</h4>
             <div class="gallery-container">
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/4/mock-2.jpg"
-                        class="zoomable-img"></div>
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/4/mock-3.jpg"
-                        class="zoomable-img"></div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/4/mock-2.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/4/mock-3.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
             </div>
             <div class="action-area">
-                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+                <a href="https://www.zazzle.com/2026_soft_gradient_circle_proper_vision_poster-256610937228268983"
+                    class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
             </div>
         </div>
 
-        <!-- DESIGN 5 -->
         <div class="segment-wrap">
-            <h3 class="product-type-title mobile-title">Sequential Goal Roadmap</h3>
+            <h3 class="product-type-title mobile-title">2026 Random Modern Circle Photo Vision Poster</h3>
             <div class="split-container">
                 <div class="split-left">
-                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/5/mock-1.jpg"
-                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/5/mock-1.jpg"
+                            class="zoomable-img lazy-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    </div>
                 </div>
                 <div class="split-right">
-                    <h3 class="product-type-title desktop-title">Sequential Goal Roadmap</h3>
-                    <p class="product-blog-text">Visual roadmap designed to track the sequential progression of your
-                        targets at a single glance.</p>
+                    <h3 class="product-type-title desktop-title">2026 Random Modern Circle Photo Vision Poster</h3>
                 </div>
             </div>
             <h4 class="env-text">How it will look in real environment</h4>
             <div class="gallery-container">
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/5/mock-2.jpg"
-                        class="zoomable-img"></div>
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/5/mock-3.jpg"
-                        class="zoomable-img"></div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/5/mock-2.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/5/mock-3.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
             </div>
             <div class="action-area">
-                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+                <a href="https://www.zazzle.com/2026_random_modern_circle_photo_vision_poster-256884013622275743"
+                    class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
             </div>
         </div>
 
-        <!-- DESIGN 6 -->
         <div class="segment-wrap">
-            <h3 class="product-type-title mobile-title">Clarity-Driven Strategic Board</h3>
+            <h3 class="product-type-title mobile-title">Modern 2026 Manifestation Poster | Aesthetic Soft</h3>
             <div class="split-container">
                 <div class="split-left">
-                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/6/mock-1.jpg"
-                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/6/mock-1.jpg"
+                            class="zoomable-img lazy-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    </div>
                 </div>
                 <div class="split-right">
-                    <h3 class="product-type-title desktop-title">Clarity-Driven Strategic Board</h3>
-                    <p class="product-blog-text">Structured category mapping to help you prioritize daily actions within
-                        a clean, modern frame.</p>
+                    <h3 class="product-type-title desktop-title">Modern 2026 Manifestation Poster | Aesthetic Soft</h3>
                 </div>
             </div>
             <h4 class="env-text">How it will look in real environment</h4>
             <div class="gallery-container">
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/6/mock-2.jpg"
-                        class="zoomable-img"></div>
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/6/mock-3.jpg"
-                        class="zoomable-img"></div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/6/mock-2.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/6/mock-3.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
             </div>
             <div class="action-area">
-                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+                <a href="https://www.zazzle.com/modern_2026_manifestation_poster_aesthetic_soft-256616314950169127"
+                    class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
             </div>
         </div>
 
-        <!-- DESIGN 7 -->
-        <div class="segment-wrap">
-            <h3 class="product-type-title mobile-title">Professional Executive Anchor</h3>
-            <div class="split-container">
-                <div class="split-left">
-                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/7/mock-1.jpg"
-                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
-                </div>
-                <div class="split-right">
-                    <h3 class="product-type-title desktop-title">Professional Executive Anchor</h3>
-                    <p class="product-blog-text">Strict visual alignment for the high-end professional who values sleek,
-                        category-first orientation.</p>
-                </div>
-            </div>
-            <h4 class="env-text">How it will look in real environment</h4>
-            <div class="gallery-container">
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/7/mock-2.jpg"
-                        class="zoomable-img"></div>
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/7/mock-3.jpg"
-                        class="zoomable-img"></div>
-            </div>
-            <div class="action-area">
-                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
-            </div>
-        </div>
-
-        <!-- DESIGN 8 -->
-        <div class="segment-wrap" style="border-bottom: none;">
-            <h3 class="product-type-title mobile-title">The Ultimate Structured visual Anchor</h3>
-            <div class="split-container">
-                <div class="split-left">
-                    <img src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/8/mock-1.jpg"
-                        class="zoomable-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
-                </div>
-                <div class="split-right">
-                    <h3 class="product-type-title desktop-title">The Ultimate Structured visual Anchor</h3>
-                    <p class="product-blog-text">A comprehensive life-design system mapping out every vital segment for
-                        actionable strategic visualization.</p>
-                </div>
-            </div>
-            <h4 class="env-text">How it will look in real environment</h4>
-            <div class="gallery-container">
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/8/mock-2.jpg"
-                        class="zoomable-img"></div>
-                <div class="gallery-item"><img
-                        src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/8/mock-3.jpg"
-                        class="zoomable-img"></div>
-            </div>
-            <div class="action-area">
-                <a href="#" class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
-            </div>
-        </div>
     </div>
 
-    <!-- MODAL -->
     <div id="imgModal" class="modal-overlay">
         <span onclick="closeModal()" class="modal-close-btn">&times;</span>
         <div id="modalContent" class="modal-img-container">
@@ -732,43 +772,40 @@
 
     <script src="../../nav.js"></script>
     <script>
-        // --- Show More / Show Less Logic ---
-        function initializeDescriptions() {
-            // Updated word limit to 16 as per request
-            const wordLimit = 16;
-            document.querySelectorAll('.product-blog-text').forEach(p => {
-                const fullContent = p.innerText.trim();
-                const words = fullContent.split(/\s+/);
+        // --- LAZY LOAD LOGIC ---
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyImages = document.querySelectorAll(".lazy-img");
 
-                if (words.length > wordLimit) {
-                    const shortText = words.slice(0, wordLimit).join(' ');
-                    const remainingText = words.slice(wordLimit).join(' ');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const container = img.closest('.loader-container');
 
-                    // Create the toggle structure
-                    p.innerHTML = `
-                        <span class="text-visible">${shortText}</span>
-                        <span class="text-hidden" style="display:none"> ${remainingText}</span>
-                        <a class="show-more-link">...Show more</a>
-                    `;
-
-                    const link = p.querySelector('.show-more-link');
-                    const hiddenSpan = p.querySelector('.text-hidden');
-
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const isExpanded = hiddenSpan.style.display !== 'none';
-
-                        if (isExpanded) {
-                            hiddenSpan.style.display = 'none';
-                            link.innerText = '...Show more';
-                        } else {
-                            hiddenSpan.style.display = 'inline';
-                            link.innerText = ' Show less';
+                        // Move data-src to src
+                        if(img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
                         }
-                    });
-                }
+
+                        img.onload = () => {
+                            img.classList.add("loaded");
+                            if(container) container.classList.add("finished");
+                        };
+
+                        // Stop observing this image once it starts loading
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                root: null,
+                // 1200px bottom margin triggers load roughly 4 large images ahead
+                rootMargin: "0px 0px 1200px 0px",
+                threshold: 0.01
             });
-        }
+
+            lazyImages.forEach(img => imageObserver.observe(img));
+        });
 
         // --- Modal Logic ---
         const modal = document.getElementById("imgModal");
@@ -793,8 +830,11 @@
             }
         }
 
-        document.querySelectorAll('.zoomable-img').forEach(img => {
-            img.onclick = () => openModal(img.src);
+        // Apply click event to zoomable images (even those loaded later)
+        document.addEventListener('click', function(e) {
+            if(e.target && e.target.classList.contains('zoomable-img')) {
+                openModal(e.target.src);
+            }
         });
 
         window.onpopstate = function (event) {
@@ -845,11 +885,6 @@
             });
         }, observerOptions);
         document.querySelectorAll('.blue-signal-btn').forEach(btn => { globalObserver.observe(btn); });
-
-        // Initialize script on window load
-        window.onload = function () {
-            initializeDescriptions();
-        };
     </script>
 </body>
 
