@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="footer.css">
     <script src="footer.js" defer></script>
-    <title>FegoPrint - Product Landing Pages</title>
+    <title>FegoPrint - World of Decoration Ideas</title>
     <link rel="icon" type="image/png" sizes="32x32" href="media/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="media/favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="media/favicon/favicon-180x180.png">
@@ -38,6 +38,81 @@
             background-color: var(--bg-light);
             font-family: system-ui, -apple-system, sans-serif;
             color: var(--text-dark);
+        }
+
+
+
+        /* --- HERO SECTION --- */
+        .hero-container {
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        .hero-title {
+            /* Font Weight 600 as requested */
+            font-weight: 600;
+            color: #000000;
+            /* Solid Black */
+            line-height: 1.2;
+            margin-bottom: 8px;
+            text-transform: none;
+            /* Responsive sizing logic based on your values */
+            font-size: 45px;
+           
+        }
+
+        .hero-subtitle {
+            display: block;
+            font-weight: 500;
+            /* Font Weight 500 as requested */
+            color: #000000;
+            font-size: 24px;
+            /* Scaled proportionally */
+            text-transform: none;
+            padding-top:18px;
+        }
+
+        .hero-description {
+            display: block;
+            font-weight: 500;
+            color: #000000;
+            font-size: 18px;
+            margin-top: 10px;
+            text-transform: none;
+        }
+
+        /* --- DEVICE SPECIFIC OVERRIDES --- */
+
+        /* Tablet View (max-width: 992px) */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 42px;
+                /* As requested */
+            }
+
+            .hero-subtitle {
+                font-size: 22px;
+            }
+        }
+
+        /* Phone View (max-width: 767px) */
+        @media (max-width: 767px) {
+            .hero-container {
+                padding: 40px 25px 25px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+                /* As requested */
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
         }
 
         /* Navigation Placeholder Logic */
@@ -425,7 +500,7 @@
 <body>
 
 
-    <div class="container py-4 fixed-nav">
+    <div class="container  py-4 fixed-nav">
         <div class="d-flex justify-content-center">
             <img id="index-logo" src="media/logo/fegoprint.png" alt="Fegoprint Brand Logo"
                 onerror="this.src='https://via.placeholder.com/200x60?text=FegoPrint+Logo'" />
@@ -434,24 +509,201 @@
 
     <div class="navdiv"></div>
 
-    <div class="home-page-content container py-5">
+    <div class="hero-container">
+        <h1 class="hero-title">Need Decoration Idea ?</h1>
 
-        <section class="mb-5 pb-5">
-            <div class="section-header text-center">
-                <h2 class="section-title">Custom Vision Boards</h2>
-                <p class="section-subtitle">
-                    Customize text, images & anything and get your poster.
-                </p>
+        <span class="hero-subtitle">Find deco idea for home, laptop, car & anything.</span>
+
+     
+    </div>
+    </div>
+
+    <div class="home-page-content container pt-4">
+
+        <div class="container text-center py-5">
 
 
-            </div>
 
-            <div class="scroll-container-relative">
-                <button class="nav-arrow arrow-left hidden" aria-label="Scroll left"
-                    onclick="event.preventDefault();">&#10094;</button>
-                <div class="image-scroll-wrapper">
-                    <div class="scroll-item">
-                        <a href="https://fegoprint.info/product/wall-art/custom/special/1/" class="card-link">
+            <section class="mb-5 pb-5">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Under $30 — Make Your Small Balcony Look Expensive</h2>
+                    <p class="section-subtitle">
+                        Don't Regret Waiting.
+                    </p>
+
+
+                </div>
+
+                <div class="scroll-container-relative">
+                    <button class="nav-arrow arrow-left hidden" aria-label="Scroll left"
+                        onclick="event.preventDefault();">&#10094;</button>
+                    <div class="image-scroll-wrapper">
+                        <div class="scroll-item">
+
+                            <div class="card-custom">
+                                <div class="image-loader-overlay">
+                                    <div class="loader-spinner-small"></div>
+                                    <div class="loader-text-small">Loading Image</div>
+                                </div>
+                                <img src="ideas/apartment-decor/one-thing-missing-balcony-hang-planter/images/1.png"
+                                    alt="Vision Board 1" class="scroll-img">
+                            </div>
+
+                        </div>
+                        <div class="scroll-item">
+
+                            <div class="card-custom">
+                                <div class="image-loader-overlay">
+                                    <div class="loader-spinner-small"></div>
+                                    <div class="loader-text-small">Loading Image</div>
+                                </div>
+                                <img src="ideas/apartment-decor/one-thing-missing-balcony-hang-planter/images/2.png"
+                                    alt="Vision Board 2" class="scroll-img">
+                            </div>
+
+                        </div>
+                        <div class="scroll-item">
+
+                            <div class="card-custom">
+                                <div class="image-loader-overlay">
+                                    <div class="loader-spinner-small"></div>
+                                    <div class="loader-text-small">Loading Image</div>
+                                </div>
+                                <img src="ideas/apartment-decor/one-thing-missing-balcony-hang-planter/images/3.png"
+                                    alt="Vision Board 3" class="scroll-img">
+                            </div>
+
+                        </div>
+                        <div class="scroll-item">
+
+                            <div class="card-custom">
+                                <div class="image-loader-overlay">
+                                    <div class="loader-spinner-small"></div>
+                                    <div class="loader-text-small">Loading Image</div>
+                                </div>
+                                <img src="ideas/apartment-decor/one-thing-missing-balcony-hang-planter/images/4.png"
+                                    alt="Vision Board 4" class="scroll-img">
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <button class="nav-arrow arrow-right" aria-label="Scroll right"
+                        onclick="event.preventDefault();">&#10095;</button>
+                </div>
+
+                <div class="segment-cta-container">
+                    <a href="https://fegoprint.info/ideas/apartment-decor/one-thing-missing-balcony-hang-planter/"
+                        class="segment-cta-btn">
+                        See This $30 Idea
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </div>
+            </section>
+
+            <section class="mb-5 pb-5">
+                <div class="section-header text-center">
+                    <h2 class="section-title">This $20 Item Will Make Your Garden Look Magical At Night</h2>
+                    <p class="section-subtitle">
+                        Upgrade your garden night look.
+                    </p>
+
+
+                </div>
+
+                <div class="scroll-container-relative">
+                    <button class="nav-arrow arrow-left hidden" aria-label="Scroll left"
+                        onclick="event.preventDefault();">&#10094;</button>
+                    <div class="image-scroll-wrapper">
+                        <div class="scroll-item">
+
+                            <div class="card-custom">
+                                <div class="image-loader-overlay">
+                                    <div class="loader-spinner-small"></div>
+                                    <div class="loader-text-small">Loading Image</div>
+                                </div>
+                                <img src="ideas/garden/20+USD+Swaying+Garden+Light+Decor/images/5.png"
+                                    alt="Vision Board 1" class="scroll-img">
+                            </div>
+
+                        </div>
+                        <div class="scroll-item">
+
+                            <div class="card-custom">
+                                <div class="image-loader-overlay">
+                                    <div class="loader-spinner-small"></div>
+                                    <div class="loader-text-small">Loading Image</div>
+                                </div>
+                                <img src="ideas/garden/20+USD+Swaying+Garden+Light+Decor/images/4.png"
+                                    alt="Vision Board 2" class="scroll-img">
+                            </div>
+
+                        </div>
+                        <div class="scroll-item">
+
+                            <div class="card-custom">
+                                <div class="image-loader-overlay">
+                                    <div class="loader-spinner-small"></div>
+                                    <div class="loader-text-small">Loading Image</div>
+                                </div>
+                                <img src="ideas/garden/20+USD+Swaying+Garden+Light+Decor/images/1.png"
+                                    alt="Vision Board 3" class="scroll-img">
+                            </div>
+
+                        </div>
+                        <div class="scroll-item">
+
+                            <div class="card-custom">
+                                <div class="image-loader-overlay">
+                                    <div class="loader-spinner-small"></div>
+                                    <div class="loader-text-small">Loading Image</div>
+                                </div>
+                                <img src="ideas/garden/20+USD+Swaying+Garden+Light+Decor/images/7.png"
+                                    alt="Vision Board 4" class="scroll-img">
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <button class="nav-arrow arrow-right" aria-label="Scroll right"
+                        onclick="event.preventDefault();">&#10095;</button>
+                </div>
+
+                <div class="segment-cta-container">
+                    <a href="https://fegoprint.info/ideas/garden/20+USD+Swaying+Garden+Light+Decor/"
+                        class="segment-cta-btn">
+                        See This $20 Idea
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </div>
+            </section>
+
+
+            <section class="mb-5 pb-5">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Everyone’s Vision Board Is Wrong — Except These</h2>
+                    <p class="section-subtitle">
+                        A vision board shouldn't be a chaotic collage. It should be a structured design that aligns with
+                        your goals.
+                    </p>
+
+
+                </div>
+
+                <div class="scroll-container-relative">
+                    <button class="nav-arrow arrow-left hidden" aria-label="Scroll left"
+                        onclick="event.preventDefault();">&#10094;</button>
+                    <div class="image-scroll-wrapper">
+                        <div class="scroll-item">
+
                             <div class="card-custom">
                                 <div class="image-loader-overlay">
                                     <div class="loader-spinner-small"></div>
@@ -460,10 +712,10 @@
                                 <img src="product/wall-art/custom/special/1/images/1/1/mock-1.jpg" alt="Vision Board 1"
                                     class="scroll-img">
                             </div>
-                        </a>
-                    </div>
-                    <div class="scroll-item">
-                        <a href="https://fegoprint.info/product/wall-art/custom/special/1/" class="card-link">
+
+                        </div>
+                        <div class="scroll-item">
+
                             <div class="card-custom">
                                 <div class="image-loader-overlay">
                                     <div class="loader-spinner-small"></div>
@@ -472,10 +724,10 @@
                                 <img src="product/wall-art/custom/special/1/images/1/1/mock-2.jpg" alt="Vision Board 2"
                                     class="scroll-img">
                             </div>
-                        </a>
-                    </div>
-                    <div class="scroll-item">
-                        <a href="https://fegoprint.info/product/wall-art/custom/special/1/?d=1&v=2" class="card-link">
+
+                        </div>
+                        <div class="scroll-item">
+
                             <div class="card-custom">
                                 <div class="image-loader-overlay">
                                     <div class="loader-spinner-small"></div>
@@ -484,10 +736,10 @@
                                 <img src="product/wall-art/custom/special/1/images/1/2/mock-1.jpg" alt="Vision Board 3"
                                     class="scroll-img">
                             </div>
-                        </a>
-                    </div>
-                    <div class="scroll-item">
-                        <a href="https://fegoprint.info/product/wall-art/custom/special/1/?d=1&v=2" class="card-link">
+
+                        </div>
+                        <div class="scroll-item">
+
                             <div class="card-custom">
                                 <div class="image-loader-overlay">
                                     <div class="loader-spinner-small"></div>
@@ -496,11 +748,11 @@
                                 <img src="product/wall-art/custom/special/1/images/1/2/mock-2.jpg" alt="Vision Board 4"
                                     class="scroll-img">
                             </div>
-                        </a>
-                    </div>
 
-                    <div class="scroll-item">
-                        <a href="https://fegoprint.info/product/wall-art/custom/special/1/" class="card-link">
+                        </div>
+
+                        <div class="scroll-item">
+
                             <div class="card-custom" style="background: rgba(255, 255, 255, 0.15); 
                     backdrop-filter: blur(12px); 
                     -webkit-backdrop-filter: blur(12px); 
@@ -525,385 +777,181 @@
                                     </span>
                                 </div>
                             </div>
-                        </a>
+
+                        </div>
                     </div>
+                    <button class="nav-arrow arrow-right" aria-label="Scroll right"
+                        onclick="event.preventDefault();">&#10095;</button>
                 </div>
-                <button class="nav-arrow arrow-right" aria-label="Scroll right"
-                    onclick="event.preventDefault();">&#10095;</button>
-            </div>
 
-            <div class="segment-cta-container">
-                <a href="https://fegoprint.info/product/wall-art/custom/special/1/" class="segment-cta-btn">
-                    Explore Vision Boards
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="3">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                </a>
-            </div>
-        </section>
-
-
-        <section class="mb-5 pb-5">
-            <div class="section-header text-center">
-                <h2 class="section-title">Keep Calm & Stay Happy Poster</h2>
-                <p class="section-subtitle">
-                    Instant Digital Download & Order For Physical Delivery - Both Option Available
-                </p>
-
-
-            </div>
-
-            <div class="scroll-container-relative">
-                <button class="nav-arrow arrow-left hidden" aria-label="Scroll left"
-                    onclick="event.preventDefault();">&#10094;</button>
-                <div class="image-scroll-wrapper">
-                    <div class="scroll-item">
-
-                        <div class="card-custom">
-                            <div class="image-loader-overlay">
-                                <div class="loader-spinner-small"></div>
-                                <div class="loader-text-small">Loading Image</div>
-                            </div>
-                            <img src="product/wall-art/pre-made/designs/1/images/1.png" alt="Vision Board 1"
-                                class="scroll-img">
-                        </div>
-
-                    </div>
-                    <div class="scroll-item">
-
-                        <div class="card-custom">
-                            <div class="image-loader-overlay">
-                                <div class="loader-spinner-small"></div>
-                                <div class="loader-text-small">Loading Image</div>
-                            </div>
-                            <img src="product/wall-art/pre-made/designs/1/images/2.png" alt="Vision Board 2"
-                                class="scroll-img">
-                        </div>
-
-                    </div>
-                    <div class="scroll-item">
-
-                        <div class="card-custom">
-                            <div class="image-loader-overlay">
-                                <div class="loader-spinner-small"></div>
-                                <div class="loader-text-small">Loading Image</div>
-                            </div>
-                            <img src="product/wall-art/pre-made/designs/1/images/3.png" alt="Vision Board 3"
-                                class="scroll-img">
-                        </div>
-
-                    </div>
-                    <div class="scroll-item">
-
-                        <div class="card-custom">
-                            <div class="image-loader-overlay">
-                                <div class="loader-spinner-small"></div>
-                                <div class="loader-text-small">Loading Image</div>
-                            </div>
-                            <img src="product/wall-art/pre-made/designs/1/images/4.png" alt="Vision Board 4"
-                                class="scroll-img">
-                        </div>
-
-                    </div>
-
-
+                <div class="segment-cta-container">
+                    <a href="https://fegoprint.info/ideas/vision-board/everyones-vision-board-is-wrong/"
+                        class="segment-cta-btn">
+                        Explore Vision Boards
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
                 </div>
-                <button class="nav-arrow arrow-right" aria-label="Scroll right"
-                    onclick="event.preventDefault();">&#10095;</button>
-            </div>
-
-            <div class="segment-cta-container">
-                <a href="https://fegoprint.info/product/wall-art/pre-made/landing/page-1.html" class="segment-cta-btn">
-                    See This Poster
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="3">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                </a>
-            </div>
-        </section>
-
-
-        <section class="mb-5 pb-5">
-            <div class="section-header text-center">
-                <h2 class="section-title">Posters For Home Decor</h2>
-                <p class="section-subtitle">
-                    Browse Visual Appealing Posters for Home Decor.
-                </p>
-
-
-            </div>
-
-            <div class="scroll-container-relative">
-                <button class="nav-arrow arrow-left hidden" aria-label="Scroll left"
-                    onclick="event.preventDefault();">&#10094;</button>
-                <div class="image-scroll-wrapper">
-
-                    <div class="scroll-item">
-                        <a href="https://fegoprint.info/product/wall-art/pre-made/landing/page-1.html?design=7"
-                            class="card-link">
-                            <div class="card-custom">
-                                <div class="image-loader-overlay">
-                                    <div class="loader-spinner-small"></div>
-                                    <div class="loader-text-small">Loading Image</div>
-                                </div>
-                                <img src="product/wall-art/pre-made/designs/7/images/1.png" alt="Vision Board 2"
-                                    class="scroll-img">
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="scroll-item">
-
-                        <a href="https://fegoprint.info/product/wall-art/pre-made/landing/page-1.html?design=2"
-                            class="card-link">
-                            <div class="card-custom">
-                                <div class="image-loader-overlay">
-                                    <div class="loader-spinner-small"></div>
-                                    <div class="loader-text-small">Loading Image</div>
-                                </div>
-                                <img src="product/wall-art/pre-made/designs/2/images/1.png" alt="Vision Board 2"
-                                    class="scroll-img">
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="scroll-item">
-                        <a href="https://fegoprint.info/product/wall-art/pre-made/landing/page-1.html"
-                            class="card-link">
-                            <div class="card-custom">
-                                <div class="image-loader-overlay">
-                                    <div class="loader-spinner-small"></div>
-                                    <div class="loader-text-small">Loading Image</div>
-                                </div>
-                                <img src="product/wall-art/pre-made/designs/1/images/1.png" alt="Vision Board 1"
-                                    class="scroll-img">
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="scroll-item">
-
-                        <a href="https://fegoprint.info/product/wall-art/pre-made/landing/page-1.html?design=3"
-                            class="card-link">
-                            <div class="card-custom">
-                                <div class="image-loader-overlay">
-                                    <div class="loader-spinner-small"></div>
-                                    <div class="loader-text-small">Loading Image</div>
-                                </div>
-                                <img src="product/wall-art/pre-made/designs/3/images/1.png" alt="Vision Board 2"
-                                    class="scroll-img">
-                            </div>
-                        </a>
-
-                    </div>
-
-
-                    <div class="scroll-item">
-                        <a href="https://fegoprint.info/product/wall-art/pre-made/" class="card-link">
-                            <div class="card-custom" style="background: rgba(255, 255, 255, 0.15); 
-                    backdrop-filter: blur(12px); 
-                    -webkit-backdrop-filter: blur(12px); 
-                    border: 1px solid rgba(255, 255, 255, 0.4); 
-                    display: flex; 
-                    align-items: center; 
-                    justify-content: center; 
-                    min-height: 300px;
-                    box-shadow: none;">
-                                <div class="text-center p-4">
-                                    <h3
-                                        style="color: var(--brand-blue); font-weight: 700; font-size: 2.5rem; margin-bottom: 0.5rem;">
-                                        +4
-                                    </h3>
-                                    <p
-                                        style="color: var(--text-dark); font-weight: 600; font-size: 1.1rem; line-height: 1.2; margin-bottom: 0.8rem;">
-                                        More Poster Designs
-                                    </p>
-                                    <span
-                                        style="color: var(--brand-green); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
-                                        View All &rarr;
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-
-                </div>
-                <button class="nav-arrow arrow-right" aria-label="Scroll right"
-                    onclick="event.preventDefault();">&#10095;</button>
-            </div>
-
-            <div class="segment-cta-container">
-                <a href="https://fegoprint.info/product/wall-art/pre-made/" class="segment-cta-btn">
-                    Explore Posters
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="3">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                </a>
-            </div>
-
-
-        </section>
-
-
-    </div>
+            </section>
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="nav.js"></script>
-    <script>
+        </div>
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('section.mb-5');
 
-            sections.forEach(section => {
-                // 1. Get the link from the CTA button in this section
-                const ctaBtn = section.querySelector('.segment-cta-btn');
-                if (!ctaBtn) return;
 
-                const sectionUrl = ctaBtn.getAttribute('href');
-                const scrollItems = section.querySelectorAll('.scroll-item');
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="nav.js"></script>
+        <script>
 
-                scrollItems.forEach(item => {
-                    // 2. CRITICAL: Only proceed if there is NO <a> tag inside this scroll-item
-                    const existingLink = item.querySelector('a');
+            document.addEventListener('DOMContentLoaded', () => {
+                const sections = document.querySelectorAll('section.mb-5');
 
-                    if (!existingLink) {
-                        // Apply cursor pointer to indicate it's clickable
-                        item.style.cursor = 'pointer';
+                sections.forEach(section => {
+                    // 1. Get the link from the CTA button in this section
+                    const ctaBtn = section.querySelector('.segment-cta-btn');
+                    if (!ctaBtn) return;
 
-                        // 3. Assign the click event to the div
-                        item.addEventListener('click', () => {
-                            window.location.href = sectionUrl;
-                        });
+                    const sectionUrl = ctaBtn.getAttribute('href');
+                    const scrollItems = section.querySelectorAll('.scroll-item');
 
-                        // 4. Manual Hover Effect (replicates your CSS .card-custom:hover)
-                        const card = item.querySelector('.card-custom');
-                        if (card) {
-                            item.addEventListener('mouseenter', () => {
-                                card.style.transform = 'translateY(-8px)';
-                                card.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1)';
+                    scrollItems.forEach(item => {
+                        // 2. CRITICAL: Only proceed if there is NO <a> tag inside this scroll-item
+                        const existingLink = item.querySelector('a');
+
+                        if (!existingLink) {
+                            // Apply cursor pointer to indicate it's clickable
+                            item.style.cursor = 'pointer';
+
+                            // 3. Assign the click event to the div
+                            item.addEventListener('click', () => {
+                                window.location.href = sectionUrl;
                             });
-                            item.addEventListener('mouseleave', () => {
-                                card.style.transform = 'none';
-                                card.style.boxShadow = 'none';
-                            });
-                        }
-                    }
-                });
-            });
 
-            // Per-image Loading Logic
-            const images = document.querySelectorAll('.scroll-img');
-            images.forEach(img => {
-                const overlay = img.previousElementSibling; // The .image-loader-overlay
-
-                const handleLoad = () => {
-                    img.classList.add('loaded');
-                    if (overlay) {
-                        overlay.style.opacity = '0';
-                        setTimeout(() => overlay.remove(), 300);
-                    }
-                };
-
-                if (img.complete) {
-                    handleLoad();
-                } else {
-                    img.addEventListener('load', handleLoad);
-                    // Handle broken images
-                    img.addEventListener('error', () => {
-                        if (overlay) {
-                            overlay.querySelector('.loader-spinner-small').style.display = 'none';
-                            overlay.querySelector('.loader-text-small').innerText = 'Error Loading';
+                            // 4. Manual Hover Effect (replicates your CSS .card-custom:hover)
+                            const card = item.querySelector('.card-custom');
+                            if (card) {
+                                item.addEventListener('mouseenter', () => {
+                                    card.style.transform = 'translateY(-8px)';
+                                    card.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1)';
+                                });
+                                item.addEventListener('mouseleave', () => {
+                                    card.style.transform = 'none';
+                                    card.style.boxShadow = 'none';
+                                });
+                            }
                         }
                     });
-                }
+                });
+
+                // Per-image Loading Logic
+                const images = document.querySelectorAll('.scroll-img');
+                images.forEach(img => {
+                    const overlay = img.previousElementSibling; // The .image-loader-overlay
+
+                    const handleLoad = () => {
+                        img.classList.add('loaded');
+                        if (overlay) {
+                            overlay.style.opacity = '0';
+                            setTimeout(() => overlay.remove(), 300);
+                        }
+                    };
+
+                    if (img.complete) {
+                        handleLoad();
+                    } else {
+                        img.addEventListener('load', handleLoad);
+                        // Handle broken images
+                        img.addEventListener('error', () => {
+                            if (overlay) {
+                                overlay.querySelector('.loader-spinner-small').style.display = 'none';
+                                overlay.querySelector('.loader-text-small').innerText = 'Error Loading';
+                            }
+                        });
+                    }
+                });
             });
-        });
 
-        // Navigation visibility logic
-        document.addEventListener('DOMContentLoaded', () => {
-            const header = document.querySelector('.fixed-nav');
-            const navDiv = document.querySelector('.navdiv');
+            // Navigation visibility logic
+            document.addEventListener('DOMContentLoaded', () => {
+                const header = document.querySelector('.fixed-nav');
+                const navDiv = document.querySelector('.navdiv');
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        navDiv.classList.add('show-nav');
-                    } else {
-                        navDiv.classList.remove('show-nav');
-                    }
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) {
+                            navDiv.classList.add('show-nav');
+                        } else {
+                            navDiv.classList.remove('show-nav');
+                        }
+                    });
+                }, { threshold: 0 });
+
+                if (header && navDiv) { observer.observe(header); }
+
+                // Scroll components logic
+                const scrollSections = document.querySelectorAll('section.mb-5');
+
+                scrollSections.forEach(section => {
+                    const wrapper = section.querySelector('.image-scroll-wrapper');
+                    const leftBtn = section.querySelector('.arrow-left');
+                    const rightBtn = section.querySelector('.arrow-right');
+
+                    if (!wrapper || !leftBtn || !rightBtn) return;
+
+                    const updateArrows = () => {
+                        const scrollLeft = wrapper.scrollLeft;
+                        const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+                        const hasOverflow = wrapper.scrollWidth > wrapper.clientWidth + 5;
+
+                        // Centering/Overflow logic
+                        if (hasOverflow) {
+                            wrapper.classList.add('has-overflow');
+                        } else {
+                            wrapper.classList.remove('has-overflow');
+                        }
+
+                        // Arrows visibility logic
+                        if (!hasOverflow) {
+                            leftBtn.classList.add('hidden');
+                            rightBtn.classList.add('hidden');
+                            return;
+                        }
+
+                        if (scrollLeft <= 10) {
+                            leftBtn.classList.add('hidden');
+                        } else {
+                            leftBtn.classList.remove('hidden');
+                        }
+
+                        if (scrollLeft >= maxScroll - 10) {
+                            rightBtn.classList.add('hidden');
+                        } else {
+                            rightBtn.classList.remove('hidden');
+                        }
+                    };
+
+                    leftBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const cardWidth = wrapper.querySelector('.scroll-item').offsetWidth + 24;
+                        wrapper.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+                    });
+
+                    rightBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const cardWidth = wrapper.querySelector('.scroll-item').offsetWidth + 24;
+                        wrapper.scrollBy({ left: cardWidth, behavior: 'smooth' });
+                    });
+
+                    wrapper.addEventListener('scroll', updateArrows);
+                    window.addEventListener('resize', updateArrows);
+
+                    setTimeout(updateArrows, 500);
                 });
-            }, { threshold: 0 });
-
-            if (header && navDiv) { observer.observe(header); }
-
-            // Scroll components logic
-            const scrollSections = document.querySelectorAll('section.mb-5');
-
-            scrollSections.forEach(section => {
-                const wrapper = section.querySelector('.image-scroll-wrapper');
-                const leftBtn = section.querySelector('.arrow-left');
-                const rightBtn = section.querySelector('.arrow-right');
-
-                if (!wrapper || !leftBtn || !rightBtn) return;
-
-                const updateArrows = () => {
-                    const scrollLeft = wrapper.scrollLeft;
-                    const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
-                    const hasOverflow = wrapper.scrollWidth > wrapper.clientWidth + 5;
-
-                    // Centering/Overflow logic
-                    if (hasOverflow) {
-                        wrapper.classList.add('has-overflow');
-                    } else {
-                        wrapper.classList.remove('has-overflow');
-                    }
-
-                    // Arrows visibility logic
-                    if (!hasOverflow) {
-                        leftBtn.classList.add('hidden');
-                        rightBtn.classList.add('hidden');
-                        return;
-                    }
-
-                    if (scrollLeft <= 10) {
-                        leftBtn.classList.add('hidden');
-                    } else {
-                        leftBtn.classList.remove('hidden');
-                    }
-
-                    if (scrollLeft >= maxScroll - 10) {
-                        rightBtn.classList.add('hidden');
-                    } else {
-                        rightBtn.classList.remove('hidden');
-                    }
-                };
-
-                leftBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const cardWidth = wrapper.querySelector('.scroll-item').offsetWidth + 24;
-                    wrapper.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-                });
-
-                rightBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const cardWidth = wrapper.querySelector('.scroll-item').offsetWidth + 24;
-                    wrapper.scrollBy({ left: cardWidth, behavior: 'smooth' });
-                });
-
-                wrapper.addEventListener('scroll', updateArrows);
-                window.addEventListener('resize', updateArrows);
-
-                setTimeout(updateArrows, 500);
             });
-        });
-    </script>
+        </script>
 </body>
 
 </html>
