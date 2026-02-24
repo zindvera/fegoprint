@@ -2,111 +2,493 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTVZME6WHC"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-YTVZME6WHC');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FegoPrint | The Collection</title>
+    <title>Everyone’s Vision Board Is Wrong — Except These Structured Ones</title>
 
-    <link rel="stylesheet" href="../../footer.css">
-    <script src="../../footer.js" defer></script>
+    <link rel="stylesheet" href="../../../footer.css"> 
+    <script src="../../../footer.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
         /* --- 1. GLOBAL & RESET --- */
-        * { box-sizing: border-box; }
-        html, body { 
-            margin: 0; padding: 0; width: 100%; 
-            overflow-x: hidden; -webkit-font-smoothing: antialiased; 
-            font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111;
+        * {
+            box-sizing: border-box;
         }
 
-        /* --- 2. CSS VARIABLES (SHARED) --- */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #111;
+            line-height: 1.8;
+        }
+
+        /* --- 2. SHARED VARIABLES --- */
         :root {
             --accent-color: #ff3366;
             --btn-bg: #111;
+            --zazzle-blue: #1e66ad;
+            --section-gap: 140px;
+            --tooltip-green: #dcfce7;
+            --deep-slate: #0f172a;
         }
 
-        /* --- 3. PHONE MEDIA QUERY (Up to 767px) --- */
+        /* --- 3. PHONE MEDIA QUERY (Vertical Stack) --- */
         @media (max-width: 767px) {
-            .navdiv { margin-bottom: 0.65in; }
-            .main-wrapper { padding: 30px 15px 150px 15px; }
-            .main-title { font-size: 1.8rem; line-height: 1.1; letter-spacing: -0.04em; }
-            .page-header { margin-bottom: 40px; }
-            
-            .product-collection-grid { grid-template-columns: 1fr; gap: 30px; margin-bottom: 50px; }
-            .collection-card { padding: 15px; }
-            .collection-secret { font-size: 1.5rem; margin-bottom: 10px; }
-            
-            .section-divider { margin-bottom: 30px; padding-top: 20px; border-top: 1px solid #f0f0f0; }
-            .divider-text { font-size: 1.2rem; }
-            .mockup-grid { grid-template-columns: 1fr; gap: 15px; }
+            .navdiv {
+                margin-bottom: 0.65in;
+            }
 
-            .cta-anchor { justify-content: center; padding-bottom: 25px; }
-            .cta-btn { width: 85%; max-width: 320px; }
+            .main-wrapper {
+                padding: 40px 20px 80px 20px;
+            }
+
+            .main-title {
+                font-size: 1.85rem;
+                margin-bottom: 40px;
+                text-align: left;
+                line-height: 1.8;
+            }
+
+            .main-blog-sub {
+                font-size: 1.15rem;
+                margin-bottom: 40px;
+                text-align: left;
+            }
+
+            .intro-accent-tag {
+                font-size: 1.25rem;
+                margin: 60px 0 75px 0;
+                text-align: left;
+            }
+
+            .split-container {
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .mobile-title {
+                display: block;
+                font-size: 1.5rem;
+                margin-bottom: 12px;
+                line-height: 1.2;
+            }
+
+            .desktop-title {
+                display: none;
+            }
+
+            .product-type-title {
+                text-align: left;
+                font-weight: 600;
+                margin: 0 0 28px 0;
+            }
+
+            .action-area {
+                align-items: center;
+                margin-top: 40px;
+            }
+
+            .custom-tooltip {
+                font-size: 1rem !important;
+                padding: 12px 20px !important;
+            }
+
+            /* Triangle centered for mobile */
+            .custom-tooltip::after {
+                left: 50% !important;
+            }
+
+            .gallery-item {
+                flex: 0 0 88%;
+            }
+
+            .env-text {
+                margin-top: 40px;
+                font-size: 1.4rem;
+                line-height: 1.3;
+            }
         }
 
-        /* --- 4. TABLET MEDIA QUERY (768px to 1023px) --- */
+        /* --- 4. TABLET & DESKTOP (Split Screen) --- */
+        @media (min-width: 768px) {
+            .navdiv {
+                margin-bottom: 0.25in;
+            }
+
+            .main-wrapper {
+                padding: 60px 40px 120px 40px;
+                max-width: 1100px;
+                margin: 0 auto;
+            }
+
+            .main-title {
+                font-size: 3rem;
+                margin-bottom: 25px;
+                text-align: center;
+                line-height: 1.1;
+            }
+
+            .main-blog-sub {
+                font-size: 1.4rem;
+                margin-bottom: 30px;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+
+            .intro-accent-tag {
+                font-size: 1.35rem;
+                margin: 50px auto 100px auto;
+                max-width: 900px;
+                text-align: center;
+            }
+
+            .split-container {
+                display: flex;
+                align-items: flex-start;
+                gap: 50px;
+                margin-bottom: 50px;
+            }
+
+            .split-left {
+                flex: 1.2;
+            }
+
+            .split-right {
+                flex: 1;
+            }
+
+            .mobile-title {
+                display: none;
+            }
+
+            .desktop-title {
+                display: block;
+            }
+
+            .product-type-title {
+                font-size: 1.8rem;
+                line-height: 1.7;
+                font-weight: 700;
+                margin: 50% 0 15px 0;
+            }
+
+            .action-area {
+                align-items: flex-end; /* Aligned CTA button to the right */
+                margin-top: 60px;
+            }
+
+            .custom-tooltip {
+                font-size: 1.5rem !important;
+                padding: 15px 40px !important;
+                margin-left: auto; /* Aligned tooltip to the right */
+                margin-right: 0;
+            }
+
+            .env-text {
+                margin-top: 80px;
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+
+            .gallery-item {
+                flex: 0 0 420px;
+            }
+        }
+
+        /* Tablet specific adjustment for tooltip */
         @media (min-width: 768px) and (max-width: 1023px) {
-            .navdiv { margin-bottom: 0.25in; }
-            .main-wrapper { padding: 50px 30px 180px 30px; }
-            .main-title { font-size: 2.3rem; line-height: 1.1; }
-            .page-header { margin-bottom: 60px; }
-
-            .product-collection-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; margin-bottom: 70px; }
-            .collection-secret { font-size: 1.6rem; }
-
-            .section-divider { margin-bottom: 40px; padding-top: 50px; border-top: 1px solid #f0f0f0; }
-            .divider-text { font-size: 1.3rem; }
-            .mockup-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-
-            .cta-anchor { justify-content: flex-end; padding: 0 40px 40px 0; }
-            .cta-btn { width: 220px; }
+            .custom-tooltip {
+                font-size: 1.25rem !important;
+                padding: 14px 28px !important;
+            }
         }
 
-        /* --- 5. DESKTOP MEDIA QUERY (1024px and up) --- */
-        @media (min-width: 1024px) {
-            .navdiv { margin-bottom: 0.2in; }
-            .main-wrapper { padding: 60px 20px 200px 20px; max-width: 1100px; margin: 0 auto; }
-            .main-title { font-size: 2.8rem; line-height: 1.1; }
-            .page-header { margin-bottom: 80px; }
-
-            .product-collection-grid { grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; }
-            .collection-secret { font-size: 1.8rem; }
-
-            .section-divider { margin-bottom: 50px; padding-top: 60px; border-top: 1px solid #f0f0f0; }
-            .divider-text { font-size: 1.4rem; }
-            .mockup-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
-
-            .cta-anchor { justify-content: flex-end; padding: 0 60px 60px 0; }
-            .cta-btn { width: 250px; }
+        /* --- 5. COMPONENT CLASSES --- */
+        .main-title span {
+            color: var(--accent-color);
         }
 
-        /* --- 6. COMMON COMPONENT CLASSES --- */
-        .page-header, .section-divider { text-align: center; }
-        .main-title, .collection-secret, .divider-text { font-weight: 800; }
-        .product-collection-grid { display: grid; width: 100%; }
-        
-        .collection-card { border: 1px solid #f2f2f2; border-radius: 8px; text-align: center; }
-        .card-category { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; color: #999; text-transform: uppercase; margin-bottom: 15px; display: block; }
-        .collection-secret { color: var(--accent-color); }
-        .collection-desc { font-size: 1rem; font-weight: 400; color: #444; margin: 10px 0 0 0; }
+        .main-blog-sub {
+            color: #555;
+            font-weight: 400;
+        }
 
-        .img-shadow-box { border-radius: 4px; overflow: hidden; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05); margin-bottom: 20px; }
-        .mockup-grid { display: grid; width: 100%; }
-        .zoomable-img { cursor: zoom-in; transition: opacity 0.3s; max-width: 100%; height: auto; display: block; border-radius: 2px; }
-        .zoomable-img:hover { opacity: 0.9; }
+        .intro-accent-tag {
+            color: var(--deep-slate);
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: -0.025em;
+        }
 
-        .cta-anchor { position: fixed; bottom: 0; left: 0; width: 100%; height: 100vh; display: flex; align-items: flex-end; pointer-events: none; z-index: 9000; }
-        .cta-btn { pointer-events: auto; background: var(--btn-bg); color: #fff; text-decoration: none; padding: 22px 0; border-radius: 100px; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.15em; text-align: center; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .tag-underline {
+            border-bottom: 4px solid var(--accent-color);
+            padding-bottom: 2px;
+            display: inline-block;
+        }
 
-        /* MODAL STYLES */
-        .fego-modal-open { overflow: hidden !important; }
-        .modal-overlay { display: none; position: fixed; z-index: 10001; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a1a; cursor: grab; overflow: hidden; touch-action: none; }
-        .modal-close-btn { position: absolute; top: 20px; right: 30px; color: white; font-size: 35px; cursor: pointer; z-index: 10003; font-weight: 300; }
-        .modal-img-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transform-origin: center; }
-        .modal-main-img { max-width: 90%; max-height: 85%; user-select: none; pointer-events: none; transition: transform 0.1s ease-out; }
-        .modal-controls { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 20px; background: rgba(0, 0, 0, 0.6); padding: 10px 25px; border-radius: 100px; border: 1px solid rgba(255, 255, 255, 0.1); z-index: 10004; }
-        .modal-ctrl-btn { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; }
-        .zoom-text { color: white; font-weight: 600; min-width: 50px; text-align: center; font-size: 0.9rem; }
+        .action-area {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            position: relative;
+        }
+
+        /* --- UPDATED TOOLTIP UI --- */
+        .custom-tooltip {
+            position: relative;
+            background: var(--tooltip-green);
+            color: #000;
+            border-radius: 8px; /* Curved horizontal rectangle */
+            text-align: center;
+            margin: 0 auto 50px auto;
+            width: fit-content;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            font-weight: 600;
+            z-index: 10;
+            opacity: 0; /* Hidden initially */
+            transform: translateY(10px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+        }
+
+        .custom-tooltip.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Large Triangle Pointer Styling */
+        .custom-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -25px; /* Sits below the tooltip body */
+            left: 90%; /* Pointer on the right for Desktop/Tablet */
+            transform: translateX(-50%);
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 28px solid var(--tooltip-green); /* Taller pointer */
+        }
+
+        .highlight-underline {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 1px;
+            font-weight: 800;
+            color: #111;
+        }
+
+        .segment-wrap {
+            margin-bottom: var(--section-gap);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        /* --- 6. LAZY LOAD & LOADER STYLES --- */
+        .loader-container {
+            position: relative;
+            width: 100%;
+            min-height: 300px;
+            background: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .loader-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #eee;
+            border-top: 4px solid var(--zazzle-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loader-text {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: #777;
+            font-weight: 500;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .lazy-img {
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            width: 100%;
+            display: block;
+        }
+
+        .lazy-img.loaded {
+            opacity: 1;
+        }
+
+        .loader-container.finished .loader-spinner,
+        .loader-container.finished .loader-text {
+            display: none;
+        }
+
+        .env-text {
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: -0.03em;
+            color: #000;
+        }
+
+        .gallery-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 25px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 15px;
+        }
+
+        .gallery-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-item {
+            scroll-snap-align: start;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .zoomable-img {
+            cursor: zoom-in;
+        }
+
+        .product-cta-btn {
+            display: inline-block;
+            background: var(--btn-bg);
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 35px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            transition: background-color 2s ease, transform 0.2s ease;
+            text-align: center;
+        }
+
+        .cta-active-blue {
+            background-color: var(--zazzle-blue) !important;
+        }
+
+        .product-cta-btn:hover {
+            background: var(--accent-color) !important;
+            transform: translateY(-2px);
+            transition: background-color 0.3s ease;
+        }
+
+        /* MODAL */
+        .fego-modal-open {
+            overflow: hidden !important;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            cursor: grab;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 10003;
+        }
+
+        .modal-img-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-origin: center;
+        }
+
+        .modal-main-img {
+            max-width: 90%;
+            max-height: 85%;
+            transition: transform 0.1s ease-out;
+            pointer-events: none;
+        }
+
+        .modal-controls {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 25px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10004;
+        }
+
+        .modal-ctrl-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #zoomPercent {
+            color: white;
+            font-weight: 600;
+            min-width: 55px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 
@@ -115,53 +497,168 @@
     <div class="navdiv"></div>
 
     <div class="main-wrapper">
-        <header class="page-header">
-            <h1 class="main-title">
-                5 Aesthetic Essentials for a <br style="display: none;"> Studio That Feels Like a Home
-            </h1>
-        </header>
+        <h1 class="main-title">Everyone’s Vision Board Is Wrong <span>— Except These.</span></h1>
 
-        <section class="product-collection-grid">
-            <div class="collection-card">
-                <span class="card-category">01 / Wall Art</span>
-                <div class="img-shadow-box">
-                    <img src="https://images.pexels.com/photos/6444249/pexels-photo-6444249.jpeg?auto=compress&cs=tinysrgb&w=800" class="zoomable-img">
+        <div class="intro-accent-tag">A vision board shouldn't be a chaotic collage. It should be a structured design
+            that aligns with your goals.</div>
+
+        <div class="segment-wrap">
+            <h3 class="product-type-title mobile-title">2026 Vision with 8 Floating Photo Circles Poster</h3>
+            <div class="split-container">
+                <div class="split-left">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/1/mock-1.jpg"
+                            class="zoomable-img lazy-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    </div>
                 </div>
-                <h2 class="collection-secret">Adds Tactile Depth</h2>
-                <p class="collection-desc">Neutral tones that capture light.</p>
-            </div>
-
-            <div class="collection-card">
-                <span class="card-category">02 / Mood Lighting</span>
-                <div class="img-shadow-box">
-                    <img src="https://images.pexels.com/photos/276514/pexels-photo-276514.jpeg?auto=compress&cs=tinysrgb&w=800" class="zoomable-img">
+                <div class="split-right">
+                    <h3 class="product-type-title desktop-title">2026 Vision with 8 Floating Photo Circles Poster</h3>
                 </div>
-                <h2 class="collection-secret" style="color: #1565c0;">The Hotel Glow</h2>
-                <p class="collection-desc">Shifts the room vibe instantly.</p>
             </div>
-
-            <div class="collection-card">
-                <span class="card-category">03 / Sculptural Decor</span>
-                <div class="img-shadow-box">
-                    <img src="https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&cs=tinysrgb&w=800" class="zoomable-img">
+            <h4 class="env-text">How it will look in real environment</h4>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/1/mock-2.jpg" class="zoomable-img lazy-img">
+                    </div>
                 </div>
-                <h2 class="collection-secret" style="color: #2e7d32;">Organic Shapes</h2>
-                <p class="collection-desc">Focal points for coffee tables.</p>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/1/mock-3.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
             </div>
-        </section>
-
-        <div class="section-divider">
-            <h3 class="divider-text">See how it will change your space</h3>
+            <div class="action-area">
+                <div class="custom-tooltip">
+                    If you want this poster, you can easily <span class="highlight-underline">edit the text</span>,
+                    <span class="highlight-underline">swap images</span>, and <span class="highlight-underline">change
+                        anything</span> on Zazzle to make it yours.
+                </div>
+                <a href="https://www.zazzle.com/2026_vision_with_8_floating_photo_circles_poster-256670535215785188"
+                    class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+            </div>
         </div>
 
-        <div class="mockup-grid">
-            <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800" class="zoomable-img">
-            <img src="https://images.pexels.com/photos/6782567/pexels-photo-6782567.jpeg?auto=compress&cs=tinysrgb&w=800" class="zoomable-img">
+        <div class="segment-wrap">
+            <h3 class="product-type-title mobile-title">2026 Aesthetic Pastel Circles Vision Poster</h3>
+            <div class="split-container">
+                <div class="split-left">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/2/mock-1.jpg"
+                            class="zoomable-img lazy-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    </div>
+                </div>
+                <div class="split-right">
+                    <h3 class="product-type-title desktop-title">2026 Aesthetic Pastel Circles Vision Poster</h3>
+                </div>
+            </div>
+            <h4 class="env-text">How it will look in real environment</h4>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/2/mock-2.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/2/mock-3.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
+            </div>
+            <div class="action-area">
+                <a href="https://www.zazzle.com/2026_aesthetic_pastel_circles_vision_poster-256414751404110828"
+                    class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+            </div>
         </div>
-    </div>
 
-    <div class="cta-anchor">
-        <a href="https://fegoprint.info" class="cta-btn">I WANT THESE</a>
+        <div class="segment-wrap">
+            <h3 class="product-type-title mobile-title">2026 Modern Circle Photo Vision Board Poster</h3>
+            <div class="split-container">
+                <div class="split-left">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/3/mock-1.jpg"
+                            class="zoomable-img lazy-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    </div>
+                </div>
+                <div class="split-right">
+                    <h3 class="product-type-title desktop-title">2026 Modern Circle Photo Vision Board Poster</h3>
+                </div>
+            </div>
+            <h4 class="env-text">How it will look in real environment</h4>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/3/mock-2.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/3/mock-3.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
+            </div>
+            <div class="action-area">
+                <a href="https://www.zazzle.com/2026_modern_circle_photo_vision_board_poster-256434732169355074"
+                    class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+            </div>
+        </div>
+
+        <div class="segment-wrap">
+            <h3 class="product-type-title mobile-title">2026 Soft Gradient Circle Proper Vision Poster</h3>
+            <div class="split-container">
+                <div class="split-left">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/4/mock-1.jpg"
+                            class="zoomable-img lazy-img" style="border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+                    </div>
+                </div>
+                <div class="split-right">
+                    <h3 class="product-type-title desktop-title">2026 Soft Gradient Circle Proper Vision Poster</h3>
+                </div>
+            </div>
+            <h4 class="env-text">How it will look in real environment</h4>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/4/mock-2.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="loader-container">
+                        <div class="loader-spinner"></div>
+                        <span class="loader-text">Loading Image...</span>
+                        <img data-src="https://fegoprint.info/product/wall-art/custom/special/1/images/1/4/mock-3.jpg" class="zoomable-img lazy-img">
+                    </div>
+                </div>
+            </div>
+            <div class="action-area">
+                <a href="https://www.zazzle.com/2026_soft_gradient_circle_proper_vision_poster-256610937228268983"
+                    class="product-cta-btn blue-signal-btn">CUSTOMIZE ON ZAZZLE</a>
+            </div>
+        </div>
+
     </div>
 
     <div id="imgModal" class="modal-overlay">
@@ -171,33 +668,74 @@
         </div>
         <div class="modal-controls">
             <button class="modal-ctrl-btn" onclick="adjustZoom(-0.5)">&minus;</button>
-            <span id="zoomPercent" class="zoom-text">100%</span>
+            <span id="zoomPercent">100%</span>
             <button class="modal-ctrl-btn" onclick="adjustZoom(0.5)">&plus;</button>
         </div>
     </div>
 
-    <script src="../../nav.js"></script>
+    <script src="../../../nav.js"></script>
     <script>
+        // --- LAZY LOAD LOGIC ---
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyImages = document.querySelectorAll(".lazy-img");
+
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const container = img.closest('.loader-container');
+
+                        if(img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+
+                        img.onload = () => {
+                            img.classList.add("loaded");
+                            if(container) container.classList.add("finished");
+                        };
+
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: "0px 0px 1200px 0px",
+                threshold: 0.01
+            });
+
+            lazyImages.forEach(img => imageObserver.observe(img));
+        });
+
+        // --- Tooltip Fade-In Logic ---
+        const tooltipObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    tooltipObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const tooltips = document.querySelectorAll('.custom-tooltip');
+        tooltips.forEach(t => tooltipObserver.observe(t));
+
+        // --- Modal Logic ---
         const modal = document.getElementById("imgModal");
         const fullImg = document.getElementById("fullImg");
         const zoomText = document.getElementById("zoomPercent");
         let scale = 1, translateX = 0, translateY = 0, isDragging = false, startX, startY, lastTouchHypot = 0;
 
-        document.querySelectorAll('.zoomable-img').forEach(img => {
-            img.onclick = () => {
-                modal.style.display = "block";
-                document.body.classList.add("fego-modal-open");
-                fullImg.src = img.src;
-                resetModal();
-                window.history.pushState({ modalOpen: true }, "");
-            };
-        });
-
-        window.onpopstate = function (event) {
-            if (modal.style.display === "block") { closeModal(false); }
-        };
+        function openModal(imgSrc) {
+            modal.style.display = "block";
+            document.body.classList.add("fego-modal-open");
+            fullImg.src = imgSrc;
+            resetModal();
+            window.history.pushState({ modalOpen: true }, "");
+        }
 
         function closeModal(triggerHistory = true) {
+            if (modal.style.display === "none") return;
             modal.style.display = "none";
             document.body.classList.remove("fego-modal-open");
             if (triggerHistory && window.history.state && window.history.state.modalOpen) {
@@ -205,37 +743,61 @@
             }
         }
 
+        document.addEventListener('click', function(e) {
+            if(e.target && e.target.classList.contains('zoomable-img')) {
+                openModal(e.target.src);
+            }
+        });
+
+        window.onpopstate = function (event) {
+            if (modal.style.display === "block") {
+                closeModal(false);
+            }
+        };
+
         function resetModal() { scale = 1; translateX = 0; translateY = 0; updateTransform(); }
         function updateTransform() {
             fullImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
             zoomText.innerText = Math.round(scale * 100) + "%";
         }
-        function adjustZoom(delta) { scale = Math.min(Math.max(1, scale + delta), 4); updateTransform(); }
-
-        modal.ondblclick = () => { scale = (scale === 2) ? 1 : 2; translateX = 0; translateY = 0; updateTransform(); };
+        function adjustZoom(delta) {
+            scale = Math.min(Math.max(1, scale + delta), 4);
+            if (scale === 1) { translateX = 0; translateY = 0; }
+            updateTransform();
+        }
+        modal.ondblclick = () => { if (scale > 1) { resetModal(); } else { scale = 2; updateTransform(); } };
         modal.onwheel = (e) => { e.preventDefault(); adjustZoom(e.deltaY > 0 ? -0.2 : 0.2); };
-
         const startMove = (x, y) => { if (scale <= 1) return; isDragging = true; startX = x - translateX; startY = y - translateY; };
         const doMove = (x, y) => { if (!isDragging) return; translateX = x - startX; translateY = y - startY; updateTransform(); };
-
         modal.addEventListener('mousedown', e => startMove(e.clientX, e.clientY));
         window.addEventListener('mousemove', e => doMove(e.clientX, e.clientY));
         window.addEventListener('mouseup', () => isDragging = false);
-
         modal.addEventListener('touchstart', e => {
-            if (e.touches.length === 2) {
-                lastTouchHypot = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
-            } else { startMove(e.touches[0].pageX, e.touches[0].pageY); }
+            if (e.touches.length === 2) { lastTouchHypot = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY); }
+            else { startMove(e.touches[0].pageX, e.touches[0].pageY); }
         });
         modal.addEventListener('touchmove', e => {
-            if (e.touches.length === 2) {
-                e.preventDefault();
-                const hypot = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
-                adjustZoom((hypot - lastTouchHypot) / 100);
-                lastTouchHypot = hypot;
-            } else { doMove(e.touches[0].pageX, e.touches[0].pageY); }
+            if (e.touches.length === 2) { e.preventDefault(); const hypot = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY); adjustZoom((hypot - lastTouchHypot) / 100); lastTouchHypot = hypot; }
+            else { doMove(e.touches[0].pageX, e.touches[0].pageY); }
         }, { passive: false });
         modal.addEventListener('touchend', () => isDragging = false);
+
+        // --- Blue Signal Logic ---
+        let signalTriggered = false;
+        const observerOptions = { root: null, threshold: 0.1 };
+        const globalObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !signalTriggered) {
+                    signalTriggered = true;
+                    setTimeout(() => {
+                        document.querySelectorAll('.blue-signal-btn').forEach(btn => { btn.classList.add('cta-active-blue'); });
+                    }, 5000);
+                    globalObserver.disconnect();
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.blue-signal-btn').forEach(btn => { globalObserver.observe(btn); });
     </script>
 </body>
+
 </html>
