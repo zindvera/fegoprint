@@ -64,7 +64,7 @@
             }
 
             .main-wrapper {
-                padding: 40px 20px 150px 20px;
+                padding: 40px 20px 0px 20px;
             }
 
             .main-title {
@@ -117,7 +117,7 @@
             }
 
             .main-wrapper {
-                padding: 60px 30px 180px 30px;
+                padding: 60px 30px 35px 30px;
                 max-width: 900px;
                 margin: 0 auto;
             }
@@ -166,7 +166,7 @@
             }
 
             .main-wrapper {
-                padding: 80px 0 200px 0;
+                padding: 80px 0 40px 0;
                 max-width: 1100px;
                 margin: 0 auto;
             }
@@ -511,6 +511,56 @@
             font-weight: bold;
             margin-right: 10px;
         }
+
+        .final-conversion-area {
+            text-align: center;
+            padding: 10px 20px 150px 20px;
+            /* High bottom padding so it never clashes with the fixed button */
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .variety-main-text {
+            font-size: 1.65rem;
+            /* Large, "Headline" style text */
+            font-weight: 600;
+            color: #111;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+
+        .text-link {
+            color: #ac7308;
+            /* Trustworthy Amazon Blue */
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .text-link:hover {
+            color: #da6309;
+            /* Amazon Orange on hover */
+        }
+
+        .variety-sub-text {
+            font-size: 1.2rem;
+            color: #555;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        /* Responsive adjustment for smaller mobile screens */
+        @media (max-width: 767px) {
+            .variety-main-text {
+                font-size: 1.45rem;
+            }
+
+            .variety-sub-text {
+                font-size: 1.1rem;
+            }
+        }
     </style>
 </head>
 
@@ -520,7 +570,8 @@
     <div class="main-wrapper">
         <header class="page-header">
             <h1 class="main-title">Under $30 — Make Your Small Balcony Look Expensive.
-                <span style="font-weight: 500; display: inline-block;">Don't Regret Waiting.</span></h1>
+                <span style="font-weight: 500; display: inline-block;">Don't Regret Waiting.</span>
+            </h1>
         </header>
 
         <section class="hero-section">
@@ -537,7 +588,8 @@
                     <span class="product-reveal">Vertical Railing Hanging Planter</span>
 
                     <div class="solution-details">
-                        <strong class="highlight-text">The easiest way to create a private green space on your balcony—instantly.</strong>
+                        <strong class="highlight-text">The easiest way to create a private green space on your
+                            balcony—instantly.</strong>
 
                         <ul class="feature-list">
                             <li>Hooks onto your railing in seconds</li>
@@ -575,6 +627,13 @@
         </div>
     </div>
 
+    <div class="final-conversion-area">
+        <h2 class="variety-main-text">
+            Different types of Railing Hanging Plant Box are available on
+            <a href="https://fegoprint.info" class="text-link">Amazon</a>
+        </h2>
+
+    </div>
     <div class="cta-anchor">
         <a href="https://fegoprint.info" id="amazonBtn" class="cta-btn">BROWSE ON AMAZON</a>
     </div>
