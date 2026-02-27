@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="footer.css">
     <script src="footer.js" defer></script>
-    <title>FegoPrint - World of Decoration Ideas</title>
+    <title>FegoPrint | Creative Products & Real-Life Settings for Life Upgrades</title>
     <link rel="icon" type="image/png" sizes="32x32" href="media/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="media/favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="media/favicon/favicon-180x180.png">
@@ -42,58 +42,47 @@
 
 
 
-        /* --- HERO SECTION --- */
-        .hero-container {
-            padding: 60px 0 30px;
-            text-align: center;
-        }
+/* --- ENHANCED HERO SECTION --- */
+.hero-container {
+    padding: 80px 20px 40px; /* Increased vertical space for a "premium" feel */
+    text-align: center;
+    max-width: 900px; /* Prevents text from stretching too wide on big screens */
+    margin: 0 auto;
+}
 
-        .hero-title {
-            /* Font Weight 600 as requested */
-            font-weight: 600;
-            color: #000000;
-            /* Solid Black */
-            line-height: 1.2;
-            margin-bottom: 8px;
-            text-transform: none;
-            /* Responsive sizing logic based on your values */
-            font-size: 45px;
+.hero-title {
+    font-size: 48px; /* Slightly larger for more impact */
+    font-weight: 620; /* Extra Bold for authority */
+    color: #111827; /* Deep Charcoal instead of flat black */
+    line-height: 1.1; /* Tight line height for a modern look */
+    margin-bottom: 24px; /* More space before the subtitle */
+    letter-spacing: -0.03em; /* Tight letter spacing for a high-end feel */
+}
 
-        }
+.hero-subtitle {
+    display: block;
+    font-weight: 500;
+    color: #4b5563; /* Muted gray to create hierarchy */
+    font-size: 22px; /* Slightly smaller to make the H1 pop */
+    line-height: 1.6; /* Better breathing room for reading */
+    max-width: 700px;
+    margin: 0 auto;
+    padding-top: 0; /* Removing top padding in favor of H1 margin */
+}
 
-        .hero-subtitle {
-            display: block;
-            font-weight: 500;
-            /* Font Weight 500 as requested */
-            color: #000000;
-            font-size: 24px;
-            /* Scaled proportionally */
-            text-transform: none;
-            padding-top: 18px;
-        }
-
-        .hero-description {
-            display: block;
-            font-weight: 500;
-            color: #000000;
-            font-size: 18px;
-            margin-top: 10px;
-            text-transform: none;
-        }
-
-        /* --- DEVICE SPECIFIC OVERRIDES --- */
-
-        /* Tablet View (max-width: 992px) */
-        @media (max-width: 992px) {
-            .hero-title {
-                font-size: 42px;
-                /* As requested */
-            }
-
-            .hero-subtitle {
-                font-size: 22px;
-            }
-        }
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 767px) {
+    .hero-container {
+        padding: 50px 20px 30px;
+    }
+    .hero-title {
+        font-size: 36px; /* Adjusted for smaller screens */
+        margin-bottom: 16px;
+    }
+    .hero-subtitle {
+        font-size: 18px;
+    }
+}
 
         /* Phone View (max-width: 767px) */
         @media (max-width: 767px) {
@@ -509,13 +498,12 @@
 
     <div class="navdiv"></div>
 
-    <div class="hero-container">
-        <h1 class="hero-title">Need Decoration Idea ?</h1>
-
-        <span class="hero-subtitle">Find deco idea for home, laptop, car & anything.</span>
-
-
-    </div>
+ <div class="hero-container">
+    <h1 class="hero-title">Curate creative products that bring change</h1>
+    <span class="hero-subtitle">
+        See the transformation in <strong>real-life settings</strong> to find the exact change you need.
+    </span>
+</div>
 
 
 
