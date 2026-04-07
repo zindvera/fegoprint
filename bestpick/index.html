@@ -16,6 +16,7 @@
             --border-soft: #eeeeee;
         }
 
+        /* --- GLOBAL & COMMON STYLES --- */
         body {
             font-family: 'Inter', sans-serif;
             color: var(--brand-black);
@@ -23,22 +24,6 @@
             line-height: 1.7;
             margin: 0;
             padding: 0;
-            font-size: 1.15rem;
-        }
-
-        .container {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-
-        @media (max-width: 576px) {
-            .container {
-                padding-left: 12px;
-                padding-right: 12px;
-            }
-            body {
-                font-size: 1.1rem;
-            }
         }
 
         h1, h2, h3 { font-weight: 700; color: var(--brand-black); }
@@ -53,33 +38,18 @@
             border-bottom: 1px solid var(--border-soft);
         }
 
-        .product-title {
-            margin-bottom: 25px;
-            font-size: 1.8rem;
-        }
-
-        @media (min-width: 992px) {
-            .product-title { font-size: 2.2rem; }
-        }
-
         .img-placeholder {
             background: #ffffff;
-            aspect-ratio: 4/3;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #ddd;
-            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             border: 1px solid var(--border-soft);
             border-radius: 4px;
             margin-bottom: 25px;
-        }
-
-        @media (min-width: 992px) {
-            .img-placeholder { height: 500px; aspect-ratio: auto; }
         }
 
         .rating-container {
@@ -88,6 +58,7 @@
             gap: 10px;
             margin: 20px 0 10px;
         }
+
         .stars { color: #ffc107; font-size: 1.4rem; }
         .rating-score {
             color: var(--brand-black);
@@ -116,15 +87,12 @@
             padding: 16px 0;
             border-bottom: 1px solid var(--border-soft);
             color: var(--brand-black);
-            font-size: 1.1rem;
             font-weight: 600;
             text-decoration: none;
             transition: color 0.2s;
         }
 
-        .accordion-link:hover {
-            color: var(--brand-green);
-        }
+        .accordion-link:hover { color: var(--brand-green); }
 
         .accordion-link svg {
             width: 22px;
@@ -138,13 +106,10 @@
             border-bottom-color: transparent;
         }
 
-        .accordion-link[aria-expanded="true"] svg {
-            transform: rotate(180deg);
-        }
+        .accordion-link[aria-expanded="true"] svg { transform: rotate(180deg); }
 
         .collapse-content {
             padding: 0 0 25px 0;
-            font-size: 1.05rem;
             color: var(--text-grey);
             border-bottom: 1px solid var(--border-soft);
         }
@@ -153,7 +118,6 @@
             background: rgba(0, 200, 83, 0.05);
             padding: 12px 20px;
             border-radius: 4px;
-            font-size: 1rem;
             font-weight: 600;
             margin-bottom: 15px;
             display: inline-block;
@@ -163,19 +127,14 @@
             background: var(--brand-black);
             color: white;
             padding: 18px 0;
-            width: 100%;
             text-align: center;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.1rem;
             letter-spacing: 1px;
             display: inline-block;
             transition: 0.3s;
         }
         
-        @media (min-width: 768px) {
-            .cta-btn { width: auto; padding: 18px 60px; }
-        }
         .cta-btn:hover { background: var(--brand-green); color: white; }
 
         .faq-section {
@@ -184,10 +143,11 @@
             margin-top: 40px;
             border-top: 1px solid var(--border-soft);
         }
+
         .faq-card {
             background: #fcfcfc;
             border: 1px solid var(--border-soft);
-            padding: 30px;
+            padding: 18px; /* Reduced padding */
             border-radius: 8px;
             margin-bottom: 25px;
             max-width: 800px;
@@ -200,24 +160,93 @@
             background: #f9f9f9;
             border-top: 1px solid var(--border-soft);
         }
+
         .useful-links-section a {
             color: var(--brand-black);
             text-decoration: none;
-            display: block;
-            margin-bottom: 5px;
-            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px dotted var(--border-soft);
             font-weight: 500;
+            text-align: start; /* Align text start */
         }
+
         .useful-links-section a:hover {
             color: var(--brand-green);
-            text-decoration: underline;
+            text-decoration: none;
+            background: rgba(0, 200, 83, 0.02);
+        }
+
+        .useful-links-section .redirect-icon {
+            width: 16px;
+            height: 16px;
+            fill: var(--brand-green);
+            margin-left: 10px;
         }
 
         footer {
             background: #000;
             padding: 50px 0;
             color: #aaa;
-            font-size: 1rem;
+        }
+
+        /* --- TRUNCATION STYLES --- */
+        .truncate-text {
+            display: inline;
+        }
+        .show-more-btn {
+            color: var(--brand-green);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: underline;
+            margin-left: 5px;
+        }
+
+        /* --- DEVICE SPECIFIC MEDIA QUERIES --- */
+
+        /* 1. MOBILE VIEW (Up to 767px) */
+        @media (max-width: 767px) {
+            body { font-size: 1.1rem; }
+            .container { padding-left: 12px; padding-right: 12px; }
+            .header-section .lead { text-align: start; margin-left: 0 !important; font-size: 18px; } /* Align start in phone view */
+            .product-title { font-size: 1.6rem; margin-bottom: 20px; }
+            .img-placeholder { aspect-ratio: 4/3; font-size: 0.9rem; }
+            .cta-btn { width: 100%; font-size: 1.1rem; }
+            .accordion-link { font-size: 1.1rem; }
+            .collapse-content { font-size: 1.05rem; }
+            .useful-links-section a { font-size: 1.1rem; margin-bottom: 5px; }
+            .platform-info { font-size: 1rem; }
+            .faq-card { margin-left: 5px; margin-right: 5px; } /* Less side margin */
+            footer { font-size: 1rem; }
+        }
+
+        /* 2. TABLET VIEW (768px to 1023px) */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            body { font-size: 1.15rem; }
+            .container { padding-left: 15px; padding-right: 15px; }
+            .product-title { font-size: 1.8rem; margin-bottom: 25px; }
+            .img-placeholder { aspect-ratio: 4/3; font-size: 1rem; }
+            .cta-btn { width: auto; padding: 18px 60px; font-size: 1.1rem; }
+            .accordion-link { font-size: 1.1rem; }
+            .collapse-content { font-size: 1.05rem; }
+            .useful-links-section a { font-size: 1.1rem; }
+            footer { font-size: 1rem; }
+        }
+
+        /* 3. DESKTOP VIEW (1024px and above) */
+        @media (min-width: 1024px) {
+            body { font-size: 1.15rem; }
+            .container { padding-left: 15px; padding-right: 15px; }
+            .product-title { font-size: 2.2rem; margin-bottom: 25px; }
+            .img-placeholder { height: 500px; font-size: 1rem; }
+            .cta-btn { width: auto; padding: 18px 60px; font-size: 1.1rem; }
+            .accordion-link { font-size: 1.1rem; }
+            .collapse-content { font-size: 1.05rem; }
+            .useful-links-section a { font-size: 1.1rem; }
+            footer { font-size: 1rem; }
         }
     </style>
 </head>
@@ -243,7 +272,9 @@
                 <div class="col-lg-5 ps-lg-4">
                     <div class="mb-4">
                         <p class="fw-bold mb-2">About Product</p>
-                        <p class="text-muted mb-0">This breathtaking centerpiece features intricate branching details and a warm, glowing finish that catches the eye. It is an artisanal piece that instantly transforms any blank wall into a sophisticated focal point for your home.</p>
+                        <p class="text-muted mb-0 product-desc" data-full-text="This breathtaking centerpiece features intricate branching details and a warm, glowing finish that catches the eye. It is an artisanal piece that instantly transforms any blank wall into a sophisticated focal point for your home.">
+                            <!-- Truncated text injected via JS -->
+                        </p>
                     </div>
 
                     <div class="rating-container">
@@ -319,7 +350,9 @@
                 <div class="col-lg-5 ps-lg-4">
                     <div class="mb-4">
                         <p class="fw-bold mb-2">About Product</p>
-                        <p class="text-muted mb-0">This is a sophisticated triptych consisting of interlocking geometric panels. The set features a striking contrast between brushed and polished finishes, providing a sharp modern edge to any interior.</p>
+                        <p class="text-muted mb-0 product-desc" data-full-text="This is a sophisticated triptych consisting of interlocking geometric panels. The set features a striking contrast between brushed and polished finishes, providing a sharp modern edge to any interior.">
+                            <!-- Truncated text injected via JS -->
+                        </p>
                     </div>
 
                     <div class="rating-container">
@@ -392,7 +425,9 @@
                 <div class="col-lg-5 ps-lg-4">
                     <div class="mb-4">
                         <p class="fw-bold mb-2">About Product</p>
-                        <p class="text-muted mb-0">This artwork consists of delicate, hand-formed lotus leaves. It features a unique blend of flame-painted copper paired with rich verdigris patina accents that provide a natural feel.</p>
+                        <p class="text-muted mb-0 product-desc" data-full-text="This artwork consists of delicate, hand-formed lotus leaves. It features a unique blend of flame-painted copper paired with rich verdigris patina accents that provide a natural feel.">
+                            <!-- Truncated text injected via JS -->
+                        </p>
                     </div>
 
                     <div class="rating-container">
@@ -473,16 +508,51 @@
 
     <!-- Useful Links Section (Grid List) -->
     <section class="useful-links-section">
-        <div class="container text-center">
-            <h2 class="mb-4">Useful Links</h2>
+        <div class="container">
+            <h2 class="mb-4 text-center">Useful Links</h2>
             <div class="row row-cols-1 row-cols-md-3 g-2">
-                <div class="col"><a href="#">Copper Metal Wall Art under 10usd</a></div>
-                <div class="col"><a href="#">Copper Metal Wall Art under 50 usd</a></div>
-                <div class="col"><a href="#">Copper Metal Wall Art for living room</a></div>
-                <div class="col"><a href="#">Copper Metal Wall Art for bedroom wall</a></div>
-                <div class="col"><a href="#">Copper Metal Wall Art for entryway statements</a></div>
-                <div class="col"><a href="#">How to Clean Pure Copper Decor</a></div>
-                <div class="col"><a href="#">Installation Guide for Metal Art</a></div>
+                <div class="col">
+                    <a href="#">
+                        <span>Copper Metal Wall Art under 10usd</span>
+                        <svg class="redirect-icon" viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#">
+                        <span>Copper Metal Wall Art under 50 usd</span>
+                        <svg class="redirect-icon" viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#">
+                        <span>Copper Metal Wall Art for living room</span>
+                        <svg class="redirect-icon" viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#">
+                        <span>Copper Metal Wall Art for bedroom wall</span>
+                        <svg class="redirect-icon" viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#">
+                        <span>Copper Metal Wall Art for entryway statements</span>
+                        <svg class="redirect-icon" viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#">
+                        <span>How to Clean Pure Copper Decor</span>
+                        <svg class="redirect-icon" viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#">
+                        <span>Installation Guide for Metal Art</span>
+                        <svg class="redirect-icon" viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H10M19 5V14" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -495,5 +565,44 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const descriptions = document.querySelectorAll(".product-desc");
+
+        descriptions.forEach(el => {
+            const fullText = el.getAttribute("data-full-text");
+            const words = fullText.split(" ");
+            
+            if (words.length > 12) {
+                const truncatedText = words.slice(0, 12).join(" ");
+                const hiddenText = words.slice(12).join(" ");
+                
+                el.innerHTML = `
+                    <span class="visible-part">${truncatedText}...</span>
+                    <span class="hidden-part" style="display: none;">${hiddenText}</span>
+                    <span class="show-more-btn">Show more</span>
+                `;
+
+                const btn = el.querySelector(".show-more-btn");
+                const hiddenSpan = el.querySelector(".hidden-part");
+                const visibleSpan = el.querySelector(".visible-part");
+
+                btn.addEventListener("click", function() {
+                    if (hiddenSpan.style.display === "none") {
+                        hiddenSpan.style.display = "inline";
+                        visibleSpan.innerText = words.slice(0, 12).join(" ") + " ";
+                        btn.innerText = "Show less";
+                    } else {
+                        hiddenSpan.style.display = "none";
+                        visibleSpan.innerText = truncatedText + "...";
+                        btn.innerText = "Show more";
+                    }
+                });
+            } else {
+                el.innerText = fullText;
+            }
+        });
+    });
+</script>
 </body>
 </html>
