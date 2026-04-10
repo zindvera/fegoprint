@@ -121,6 +121,7 @@
             flex: 0 0 auto;
             margin-bottom: 0;
             scroll-snap-align: start;
+            scroll-snap-stop: always; /* Ensures scrolling stops at the next image on finger swipe */
             border-radius: 4px;
             border: 1px solid var(--border-soft);
             cursor: pointer;
@@ -612,10 +613,10 @@
                             <button class="scroll-arrow left-arrow">&#10094;</button>
                             <div class="image-scroll-container">
                                 <!-- Mixed landscape and portrait placeholders -->
-                                <img src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual A (Landscape)">
-                                <img src="https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual B (Portrait)">
-                                <img src="https://images.pexels.com/photos/276514/pexels-photo-276514.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual C (Landscape)">
-                                <img src="https://images.pexels.com/photos/2082087/pexels-photo-2082087.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual D (Portrait)">
+                                <img loading="lazy" src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual A (Landscape)">
+                                <img loading="lazy" src="https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual B (Portrait)">
+                                <img loading="lazy" src="https://images.pexels.com/photos/276514/pexels-photo-276514.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual C (Landscape)">
+                                <img loading="lazy" src="https://images.pexels.com/photos/2082087/pexels-photo-2082087.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual D (Portrait)">
                             </div>
                             <button class="scroll-arrow right-arrow">&#10095;</button>
                         </div>
@@ -724,9 +725,9 @@
                             <button class="scroll-arrow left-arrow">&#10094;</button>
                             <div class="image-scroll-container">
                                 <!-- Mixed landscape and portrait placeholders -->
-                                <img src="https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual A (Portrait)">
-                                <img src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual B (Landscape)">
-                                <img src="https://images.pexels.com/photos/2082087/pexels-photo-2082087.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual C (Portrait)">
+                                <img loading="lazy" src="https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual A (Portrait)">
+                                <img loading="lazy" src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual B (Landscape)">
+                                <img loading="lazy" src="https://images.pexels.com/photos/2082087/pexels-photo-2082087.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual C (Portrait)">
                             </div>
                             <button class="scroll-arrow right-arrow">&#10095;</button>
                         </div>
@@ -827,10 +828,10 @@
                             <button class="scroll-arrow left-arrow">&#10094;</button>
                             <div class="image-scroll-container">
                                 <!-- Mixed landscape and portrait placeholders -->
-                                <img src="https://images.pexels.com/photos/276514/pexels-photo-276514.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual A (Landscape)">
-                                <img src="https://images.pexels.com/photos/2082087/pexels-photo-2082087.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual B (Portrait)">
-                                <img src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual C (Landscape)">
-                                <img src="https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual D (Portrait)">
+                                <img loading="lazy" src="https://images.pexels.com/photos/276514/pexels-photo-276514.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual A (Landscape)">
+                                <img loading="lazy" src="https://images.pexels.com/photos/2082087/pexels-photo-2082087.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual B (Portrait)">
+                                <img loading="lazy" src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual C (Landscape)">
+                                <img loading="lazy" src="https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual D (Portrait)">
                             </div>
                             <button class="scroll-arrow right-arrow">&#10095;</button>
                         </div>
