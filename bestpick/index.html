@@ -54,18 +54,82 @@
             border-bottom: 1px solid var(--border-soft);
         }
 
-        .img-placeholder {
-            background: #ffffff;
-            width: 100%;
-            display: flex;
+        /* --- MULTIPLE IMAGES SCROLL STYLES --- */
+        .carousel-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background-color: #eeeeee;
+            color: #333;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            display: none; /* Hidden by default (mobile/tablet) */
             align-items: center;
             justify-content: center;
-            color: #ddd;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border: 1px solid var(--border-soft);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background 0.3s, opacity 0.3s;
+        }
+
+        .scroll-arrow:hover {
+            background-color: #dddddd;
+        }
+
+        .scroll-arrow.disabled {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .left-arrow { left: -15px; }
+        .right-arrow { right: -15px; }
+
+        .image-scroll-container {
+            display: flex;
+            align-items: flex-start; /* Keep images aligned top if different heights */
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 15px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #cccccc transparent;
+        }
+
+        .image-scroll-container::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .image-scroll-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .image-scroll-container::-webkit-scrollbar-thumb {
+            background-color: #cccccc;
+            border-radius: 10px;
+        }
+
+        .product-img {
+            flex: 0 0 auto;
+            margin-bottom: 0;
+            scroll-snap-align: start;
             border-radius: 4px;
-            margin-bottom: 25px;
+            border: 1px solid var(--border-soft);
+            cursor: pointer;
+            background: #ffffff;
+            /* Default Mobile View Width */
+            width: 85%;
+            height: auto; /* Full height based on aspect ratio */
+            max-height: 70vh; /* Prevent it from being excessively tall */
+            object-fit: contain;
         }
 
         .rating-container {
@@ -263,12 +327,10 @@
                 padding-right: 20px;
             }
 
-            /* Added slight more side padding */
             .header-section h1 {
                 text-align: start;
             }
 
-            /* Align start in phone view */
             .header-section .lead {
                 text-align: start;
                 margin-left: 0 !important;
@@ -277,11 +339,6 @@
             .product-title {
                 font-size: 1.6rem;
                 margin-bottom: 20px;
-            }
-
-            .img-placeholder {
-                aspect-ratio: 4/3;
-                font-size: 0.9rem;
             }
 
             .cta-btn {
@@ -307,10 +364,7 @@
                 margin-right: 5px;
             }
 
-     
-
             .heading_text {
-
                 font-size: 30px
             }
         }
@@ -331,9 +385,10 @@
                 margin-bottom: 25px;
             }
 
-            .img-placeholder {
-                aspect-ratio: 4/3;
-                font-size: 1rem;
+            /* Tablet: 1 full + slight view of 2nd */
+            .image-scroll-container > .product-img {
+                width: 85%;
+                height: auto;
             }
 
             .cta-btn {
@@ -354,10 +409,7 @@
                 font-size: 1.1rem;
             }
 
-       
-
             .heading_text {
-
                 font-size: 32px
             }
         }
@@ -378,9 +430,15 @@
                 margin-bottom: 25px;
             }
 
-            .img-placeholder {
-                height: 500px;
-                font-size: 1rem;
+            /* Desktop: 1 full + slight view of 2nd */
+            .image-scroll-container > .product-img {
+                width: 85%;
+                height: auto; 
+            }
+
+            /* Show arrows on Desktop */
+            .scroll-arrow {
+                display: flex;
             }
 
             .cta-btn {
@@ -401,11 +459,132 @@
                 font-size: 1.1rem;
             }
 
-    
             .heading_text {
-
                 font-size: 35px
             }
+        }
+
+        /* --- IMAGE MODAL STYLES (UPDATED) --- */
+        .image-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #333333; /* Dark grey */
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            overflow: hidden;
+            touch-action: none; /* Prevents default browser pinch-zoom */
+        }
+
+        .image-modal-overlay.active {
+            display: flex;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 36px;
+            cursor: pointer;
+            z-index: 10001;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            user-select: none;
+        }
+
+        .image-modal-close:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .image-modal-content-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: grab;
+            overflow: hidden; /* Ensure content dragging stays within */
+        }
+
+        .image-modal-content-wrapper:active {
+            cursor: grabbing;
+        }
+
+        .image-modal-target {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 0 0;
+            will-change: transform;
+            display: inline-block;
+        }
+
+        .modal-dummy-img {
+            width: 80vw;
+            height: 60vh;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #aaaaaa;
+            border: 2px solid var(--border-soft);
+            border-radius: 8px;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .zoom-controls {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 25px;
+            border-radius: 30px;
+            z-index: 10001;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .zoom-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            user-select: none;
+            transition: background 0.2s;
+            line-height: 1;
+        }
+
+        .zoom-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .zoom-percent {
+            min-width: 60px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            user-select: none;
         }
     </style>
 </head>
@@ -429,7 +608,17 @@
                 <h3 class="product-title">1. Hand-Hammered Copper Tree</h3>
                 <div class="row">
                     <div class="col-lg-7">
-                        <div class="img-placeholder">PRODUCT VISUAL 01</div>
+                        <div class="carousel-wrapper">
+                            <button class="scroll-arrow left-arrow">&#10094;</button>
+                            <div class="image-scroll-container">
+                                <!-- Mixed landscape and portrait placeholders -->
+                                <img src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual A (Landscape)">
+                                <img src="https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual B (Portrait)">
+                                <img src="https://images.pexels.com/photos/276514/pexels-photo-276514.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual C (Landscape)">
+                                <img src="https://images.pexels.com/photos/2082087/pexels-photo-2082087.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual D (Portrait)">
+                            </div>
+                            <button class="scroll-arrow right-arrow">&#10095;</button>
+                        </div>
                     </div>
                     <div class="col-lg-5 ps-lg-4">
                         <div class="mb-4">
@@ -531,7 +720,16 @@
                 <h3 class="product-title">2. Geometric Interlock Panels</h3>
                 <div class="row">
                     <div class="col-lg-7">
-                        <div class="img-placeholder">PRODUCT VISUAL 02</div>
+                        <div class="carousel-wrapper">
+                            <button class="scroll-arrow left-arrow">&#10094;</button>
+                            <div class="image-scroll-container">
+                                <!-- Mixed landscape and portrait placeholders -->
+                                <img src="https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual A (Portrait)">
+                                <img src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual B (Landscape)">
+                                <img src="https://images.pexels.com/photos/2082087/pexels-photo-2082087.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual C (Portrait)">
+                            </div>
+                            <button class="scroll-arrow right-arrow">&#10095;</button>
+                        </div>
                     </div>
                     <div class="col-lg-5 ps-lg-4">
                         <div class="mb-4">
@@ -625,7 +823,17 @@
                 <h3 class="product-title">3. Copper Lotus Leaf Sculpture</h3>
                 <div class="row">
                     <div class="col-lg-7">
-                        <div class="img-placeholder">PRODUCT VISUAL 03</div>
+                        <div class="carousel-wrapper">
+                            <button class="scroll-arrow left-arrow">&#10094;</button>
+                            <div class="image-scroll-container">
+                                <!-- Mixed landscape and portrait placeholders -->
+                                <img src="https://images.pexels.com/photos/276514/pexels-photo-276514.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual A (Landscape)">
+                                <img src="https://images.pexels.com/photos/2082087/pexels-photo-2082087.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual B (Portrait)">
+                                <img src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual C (Landscape)">
+                                <img src="https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=800" class="product-img" alt="Visual D (Portrait)">
+                            </div>
+                            <button class="scroll-arrow right-arrow">&#10095;</button>
+                        </div>
                     </div>
                     <div class="col-lg-5 ps-lg-4">
                         <div class="mb-4">
@@ -807,12 +1015,27 @@
         </section>
     </main>
 
-  
+    <!-- --- ADDED IMAGE MODAL HTML --- -->
+    <div id="imageZoomModal" class="image-modal-overlay">
+        <div class="image-modal-close" id="modalCloseBtn">&times;</div>
+        
+        <div class="image-modal-content-wrapper" id="modalWrapper">
+            <div id="modalTarget" class="image-modal-target"></div>
+        </div>
+
+        <div class="zoom-controls">
+            <div class="zoom-btn" id="zoomOutBtn">&minus;</div>
+            <div class="zoom-percent" id="zoomPercentText">100%</div>
+            <div class="zoom-btn" id="zoomInBtn">&plus;</div>
+        </div>
+    </div>
+    <!-- ----------------------------- -->
 
     <script src="../../../nav.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            // Existing truncation logic
             const descriptions = document.querySelectorAll(".product-desc");
 
             descriptions.forEach(el => {
@@ -846,6 +1069,281 @@
                     });
                 } else {
                     el.innerText = fullText;
+                }
+            });
+
+            // --- IMAGE SLIDER ARROW LOGIC (DESKTOP) ---
+            document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
+                const container = wrapper.querySelector('.image-scroll-container');
+                const leftBtn = wrapper.querySelector('.left-arrow');
+                const rightBtn = wrapper.querySelector('.right-arrow');
+
+                if(leftBtn && rightBtn) {
+                    const updateArrows = () => {
+                        const scrollLeft = Math.ceil(container.scrollLeft);
+                        const maxScrollLeft = container.scrollWidth - container.clientWidth;
+
+                        if (scrollLeft <= 5) {
+                            leftBtn.classList.add('disabled');
+                        } else {
+                            leftBtn.classList.remove('disabled');
+                        }
+
+                        if (scrollLeft >= maxScrollLeft - 5) {
+                            rightBtn.classList.add('disabled');
+                        } else {
+                            rightBtn.classList.remove('disabled');
+                        }
+                    };
+
+                    // Add event listeners for scroll and resize
+                    container.addEventListener('scroll', updateArrows);
+                    window.addEventListener('resize', updateArrows);
+
+                    // Initial check
+                    setTimeout(updateArrows, 100);
+
+                    leftBtn.addEventListener('click', () => {
+                        const scrollAmount = container.clientWidth * 0.85; 
+                        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                    });
+                    rightBtn.addEventListener('click', () => {
+                        const scrollAmount = container.clientWidth * 0.85;
+                        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                    });
+                }
+            });
+
+            // --- UPDATED IMAGE MODAL JAVASCRIPT ---
+            const modal = document.getElementById('imageZoomModal');
+            const modalClose = document.getElementById('modalCloseBtn');
+            const modalWrapper = document.getElementById('modalWrapper');
+            const modalTarget = document.getElementById('modalTarget');
+            const zoomInBtn = document.getElementById('zoomInBtn');
+            const zoomOutBtn = document.getElementById('zoomOutBtn');
+            const zoomPercentTxt = document.getElementById('zoomPercentText');
+
+            let scale = 1;
+            let translateX = 0;
+            let translateY = 0;
+            let isDragging = false;
+            let startX, startY;
+            let initialTranslateX, initialTranslateY;
+
+            let initialPinchDistance = null;
+            let initialScale = 1;
+            let pinchCenter = { x: 0, y: 0 };
+            let lastTapTime = 0; // Needed for touch double-tap detection
+
+            function updateTransform() {
+                modalTarget.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+                zoomPercentTxt.innerText = `${Math.round(scale * 100)}%`;
+            }
+
+            function zoomToPoint(targetX, targetY, newScale) {
+                newScale = Math.max(0.5, Math.min(newScale, 5)); // Limits zoom to 0.5x - 5x
+                const ratio = newScale / scale;
+                translateX = targetX - (targetX - translateX) * ratio;
+                translateY = targetY - (targetY - translateY) * ratio;
+                scale = newScale;
+                updateTransform();
+            }
+
+            function resetZoom() {
+                scale = 1;
+                const child = modalTarget.firstElementChild;
+                if (child) {
+                    modalTarget.style.transform = 'none'; // Clear transform temporarily to get true width/height
+                    const wrapperRect = modalWrapper.getBoundingClientRect();
+                    const childRect = child.getBoundingClientRect();
+                    
+                    translateX = (wrapperRect.width - childRect.width) / 2;
+                    translateY = (wrapperRect.height - childRect.height) / 2;
+                } else {
+                    translateX = 0;
+                    translateY = 0;
+                }
+                updateTransform();
+            }
+
+            // Open Modal Logic
+            document.querySelectorAll('.product-img, img').forEach(imgEl => {
+                imgEl.addEventListener('click', function () {
+                    modalTarget.innerHTML = ''; 
+                    
+                    const clone = this.cloneNode(true);
+                    
+                    // Formatting the clone so it looks like an image even if it's the text placeholder div
+                    if (this.tagName !== 'IMG') {
+                        clone.className = 'modal-dummy-img';
+                        clone.innerText = this.innerText;
+                    } else {
+                        clone.style.maxWidth = '90vw';
+                        clone.style.maxHeight = '90vh';
+                        clone.style.width = 'auto'; // Disable 85% width inside modal
+                        clone.style.height = 'auto'; // Disable fixed height inside modal
+                        clone.style.objectFit = 'contain'; 
+                        clone.draggable = false;
+                        clone.classList.remove('product-img');
+                    }
+                    
+                    modalTarget.appendChild(clone);
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Stop background scrolling
+                    
+                    // Push state to intercept browser back button
+                    window.history.pushState({ modalOpen: true }, "");
+                    
+                    // Small timeout to allow element to render and get dimensions for perfect centering
+                    setTimeout(() => resetZoom(), 10);
+                });
+            });
+
+            // Close Modal
+            modalClose.addEventListener('click', () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore background scrolling
+                if (window.history.state && window.history.state.modalOpen) {
+                    window.history.back();
+                }
+            });
+
+            // Handle Browser Back Button
+            window.addEventListener('popstate', () => {
+                if (modal.classList.contains('active')) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = ''; // Restore background scrolling
+                }
+            });
+
+            // Button Zoom
+            zoomInBtn.addEventListener('click', () => {
+                const rect = modalWrapper.getBoundingClientRect();
+                zoomToPoint(rect.width / 2, rect.height / 2, scale + 0.25);
+            });
+
+            zoomOutBtn.addEventListener('click', () => {
+                const rect = modalWrapper.getBoundingClientRect();
+                zoomToPoint(rect.width / 2, rect.height / 2, scale - 0.25);
+            });
+
+            // Double Click Zoom (Mouse Support)
+            modalWrapper.addEventListener('dblclick', (e) => {
+                const rect = modalWrapper.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const clickY = e.clientY - rect.top;
+
+                if (scale >= 2.5) {
+                    zoomToPoint(clickX, clickY, 1);
+                    setTimeout(() => resetZoom(), 10); // Fully reset position if zooming all the way out
+                } else {
+                    zoomToPoint(clickX, clickY, scale * 2);
+                }
+            });
+
+            // Mouse Drag to Pan
+            modalWrapper.addEventListener('mousedown', (e) => {
+                if (e.target === zoomInBtn || e.target === zoomOutBtn || e.target === modalClose) return;
+                e.preventDefault();
+                isDragging = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                initialTranslateX = translateX;
+                initialTranslateY = translateY;
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                translateX = initialTranslateX + (e.clientX - startX);
+                translateY = initialTranslateY + (e.clientY - startY);
+                updateTransform();
+            });
+
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            // Touch Gestures (Pinch to Zoom, Double Tap, & Drag to Pan)
+            function getTouchDistance(touches) {
+                const dx = touches[0].clientX - touches[1].clientX;
+                const dy = touches[0].clientY - touches[1].clientY;
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+
+            function getTouchMidpoint(touches) {
+                const rect = modalWrapper.getBoundingClientRect();
+                return {
+                    x: (touches[0].clientX + touches[1].clientX) / 2 - rect.left,
+                    y: (touches[0].clientY + touches[1].clientY) / 2 - rect.top
+                };
+            }
+
+            modalWrapper.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    isDragging = true;
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    initialTranslateX = translateX;
+                    initialTranslateY = translateY;
+                } else if (e.touches.length === 2) {
+                    isDragging = false; 
+                    initialPinchDistance = getTouchDistance(e.touches);
+                    initialScale = scale;
+                    pinchCenter = getTouchMidpoint(e.touches);
+                }
+            }, { passive: false });
+
+            modalWrapper.addEventListener('touchmove', (e) => {
+                if(modal.classList.contains('active')) {
+                    e.preventDefault(); // Stop underlying page scroll while modal is active
+                }
+                
+                if (isDragging && e.touches.length === 1) {
+                    translateX = initialTranslateX + (e.touches[0].clientX - startX);
+                    translateY = initialTranslateY + (e.touches[0].clientY - startY);
+                    updateTransform();
+                } else if (e.touches.length === 2 && initialPinchDistance) {
+                    const currentDistance = getTouchDistance(e.touches);
+                    const pinchRatio = currentDistance / initialPinchDistance;
+                    zoomToPoint(pinchCenter.x, pinchCenter.y, initialScale * pinchRatio);
+                }
+            }, { passive: false });
+
+            modalWrapper.addEventListener('touchend', (e) => {
+                const currentTime = new Date().getTime();
+                const tapLength = currentTime - lastTapTime;
+
+                // Handle Double Tap Zoom on Touch Devices (Tablets/Phones)
+                if (e.touches.length === 0 && e.changedTouches.length === 1 && tapLength > 0 && tapLength < 300) {
+                    const rect = modalWrapper.getBoundingClientRect();
+                    const clickX = e.changedTouches[0].clientX - rect.left;
+                    const clickY = e.changedTouches[0].clientY - rect.top;
+
+                    if (scale >= 2.5) {
+                        zoomToPoint(clickX, clickY, 1);
+                        setTimeout(() => resetZoom(), 10);
+                    } else {
+                        zoomToPoint(clickX, clickY, scale * 2);
+                    }
+                    e.preventDefault();
+                    lastTapTime = 0; // Reset
+                } else {
+                    lastTapTime = currentTime;
+                }
+
+                if (e.touches.length < 2) {
+                    initialPinchDistance = null;
+                }
+                
+                if (e.touches.length === 1) {
+                    // Resume drag if one finger is left
+                    isDragging = true;
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    initialTranslateX = translateX;
+                    initialTranslateY = translateY;
+                } else {
+                    isDragging = false;
                 }
             });
         });
