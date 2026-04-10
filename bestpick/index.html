@@ -1134,6 +1134,8 @@
             let initialScale = 1;
             let pinchCenter = { x: 0, y: 0 };
             let lastTapTime = 0; // Needed for touch double-tap detection
+            let isPinching = false; // Flag to stop double-taps firing right after a pinch
+            let pinchTimeout;
 
             function updateTransform() {
                 modalTarget.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
@@ -1280,16 +1282,21 @@
 
             modalWrapper.addEventListener('touchstart', (e) => {
                 if (e.touches.length === 1) {
-                    isDragging = true;
-                    startX = e.touches[0].clientX;
-                    startY = e.touches[0].clientY;
-                    initialTranslateX = translateX;
-                    initialTranslateY = translateY;
+                    if (!isPinching) {
+                        isDragging = true;
+                        startX = e.touches[0].clientX;
+                        startY = e.touches[0].clientY;
+                        initialTranslateX = translateX;
+                        initialTranslateY = translateY;
+                    }
                 } else if (e.touches.length === 2) {
                     isDragging = false; 
+                    isPinching = true; // Mark as pinching to avoid double-tap conflict
+                    clearTimeout(pinchTimeout); // Clear reset timeout if actively pinching again
                     initialPinchDistance = getTouchDistance(e.touches);
                     initialScale = scale;
                     pinchCenter = getTouchMidpoint(e.touches);
+                    lastTapTime = 0; // Cancel any pending tap logic
                 }
             }, { passive: false });
 
@@ -1298,11 +1305,11 @@
                     e.preventDefault(); // Stop underlying page scroll while modal is active
                 }
                 
-                if (isDragging && e.touches.length === 1) {
+                if (isDragging && e.touches.length === 1 && !isPinching) {
                     translateX = initialTranslateX + (e.touches[0].clientX - startX);
                     translateY = initialTranslateY + (e.touches[0].clientY - startY);
                     updateTransform();
-                } else if (e.touches.length === 2 && initialPinchDistance) {
+                } else if (isPinching && e.touches.length === 2 && initialPinchDistance) {
                     const currentDistance = getTouchDistance(e.touches);
                     const pinchRatio = currentDistance / initialPinchDistance;
                     zoomToPoint(pinchCenter.x, pinchCenter.y, initialScale * pinchRatio);
@@ -1313,8 +1320,8 @@
                 const currentTime = new Date().getTime();
                 const tapLength = currentTime - lastTapTime;
 
-                // Handle Double Tap Zoom on Touch Devices (Tablets/Phones)
-                if (e.touches.length === 0 && e.changedTouches.length === 1 && tapLength > 0 && tapLength < 300) {
+                // Handle Double Tap Zoom - ONLY if we weren't just pinching
+                if (!isPinching && e.touches.length === 0 && e.changedTouches.length === 1 && tapLength > 0 && tapLength < 300) {
                     const rect = modalWrapper.getBoundingClientRect();
                     const clickX = e.changedTouches[0].clientX - rect.left;
                     const clickY = e.changedTouches[0].clientY - rect.top;
@@ -1327,7 +1334,7 @@
                     }
                     e.preventDefault();
                     lastTapTime = 0; // Reset
-                } else {
+                } else if (!isPinching && e.touches.length === 0 && e.changedTouches.length === 1) {
                     lastTapTime = currentTime;
                 }
 
@@ -1335,7 +1342,7 @@
                     initialPinchDistance = null;
                 }
                 
-                if (e.touches.length === 1) {
+                if (e.touches.length === 1 && !isPinching) {
                     // Resume drag if one finger is left
                     isDragging = true;
                     startX = e.touches[0].clientX;
@@ -1344,6 +1351,15 @@
                     initialTranslateY = translateY;
                 } else {
                     isDragging = false;
+                }
+
+                if (e.touches.length === 0) {
+                    if (isPinching) {
+                        // Small delay before unflagging pinch to prevent subsequent release triggering double tap
+                        pinchTimeout = setTimeout(() => {
+                            isPinching = false;
+                        }, 300);
+                    }
                 }
             });
         });
