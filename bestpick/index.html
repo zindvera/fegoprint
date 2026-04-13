@@ -54,6 +54,17 @@
             border-bottom: 1px solid var(--border-soft);
         }
 
+        /* --- PRODUCT TITLE ALIGNMENT --- */
+        .product-title {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .product-title .num {
+            flex-shrink: 0;
+        }
+
         /* --- MULTIPLE IMAGES SCROLL STYLES --- */
         .carousel-wrapper {
             position: relative;
@@ -175,6 +186,7 @@
             font-weight: 600;
             text-decoration: none;
             transition: color 0.2s;
+            font-size: 1.2rem;
         }
 
         .accordion-link:hover {
@@ -192,6 +204,7 @@
             padding: 0 0 25px 0;
             color: var(--text-grey);
             border-bottom: 1px solid var(--border-soft);
+            font-size: 1.2rem;
         }
 
         /* --- PLATFORM SPECIFIC COLORS --- */
@@ -338,14 +351,6 @@
                 font-size: 1.1rem;
             }
 
-            .accordion-link {
-                font-size: 1.1rem;
-            }
-
-            .collapse-content {
-                font-size: 1.05rem;
-            }
-
             .useful-links-section a {
                 font-size: 1.1rem;
                 margin-bottom: 5px;
@@ -389,14 +394,6 @@
                 font-size: 1.1rem;
             }
 
-            .accordion-link {
-                font-size: 1.1rem;
-            }
-
-            .collapse-content {
-                font-size: 1.05rem;
-            }
-
             .useful-links-section a {
                 font-size: 1.1rem;
             }
@@ -437,14 +434,6 @@
                 width: auto;
                 padding: 18px 60px;
                 font-size: 1.1rem;
-            }
-
-            .accordion-link {
-                font-size: 1.1rem;
-            }
-
-            .collapse-content {
-                font-size: 1.05rem;
             }
 
             .useful-links-section a {
@@ -597,7 +586,10 @@
 
             <!-- Product 1 -->
             <article class="product-section" id="product1">
-                <h3 class="product-title">1. Hand-Hammered Copper Tree</h3>
+                <h3 class="product-title">
+                    <span class="num">1.</span>
+                    <span class="text">Hand-Hammered Copper Tree</span>
+                </h3>
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="carousel-wrapper">
@@ -675,7 +667,10 @@
 
             <!-- Product 2 -->
             <article class="product-section" id="product2">
-                <h3 class="product-title">2. Geometric Interlock Panels</h3>
+                <h3 class="product-title">
+                    <span class="num">2.</span>
+                    <span class="text">Geometric Interlock Panels</span>
+                </h3>
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="carousel-wrapper">
@@ -746,7 +741,10 @@
 
             <!-- Product 3 -->
             <article class="product-section border-0" id="product3">
-                <h3 class="product-title">3. Copper Lotus Leaf Sculpture</h3>
+                <h3 class="product-title">
+                    <span class="num">3.</span>
+                    <span class="text">Copper Lotus Leaf Sculpture</span>
+                </h3>
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="carousel-wrapper">
