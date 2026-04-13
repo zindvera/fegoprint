@@ -181,20 +181,11 @@
             color: var(--brand-green);
         }
 
-        .accordion-link svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.3s ease;
-            fill: currentColor;
-        }
-
-        .accordion-link[aria-expanded="true"] {
-            color: var(--brand-green);
+        .accordion-link.expanded {
+            color: var(--brand-black);
             border-bottom-color: transparent;
-        }
-
-        .accordion-link[aria-expanded="true"] svg {
-            transform: rotate(180deg);
+            cursor: default;
+            pointer-events: none;
         }
 
         .collapse-content {
@@ -622,96 +613,61 @@
                         </div>
                     </div>
                     <div class="col-lg-5 ps-lg-4">
-                        <div class="mb-4">
-                            <p class="fw-bold mb-2">About Product</p>
-                            <p class="text-muted mb-0 product-desc"
-                                data-full-text="This breathtaking centerpiece features intricate branching details and a warm, glowing finish that catches the eye. It is an artisanal piece that instantly transforms any blank wall into a sophisticated focal point for your home.">
-                            </p>
-                        </div>
+                        <div class="accordion-list mt-0">
+                            <div class="accordion-link expanded">
+                                About Product
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    <p class="text-muted mb-0 product-desc">This breathtaking centerpiece features intricate branching details and a warm, glowing finish that catches the eye. It is an artisanal piece that instantly transforms any blank wall into a sophisticated focal point for your home.</p>
+                                </div>
+                            </div>
 
-                        <div class="rating-container">
-                            <div class="stars">★★★★★</div>
-                            <div class="rating-score">4.8/5</div>
-                        </div>
+                            <div class="accordion-link expanded">
+                                What customers are saying
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    <div class="customer-sentiment">
+                                        <div class="rating-container m-0 mb-3">
+                                            <div class="stars">★★★★★</div>
+                                            <div class="rating-score">4.8/5</div>
+                                        </div>
+                                        <p class="mb-2"><strong>Most customers say:</strong></p>
+                                        <p class="text-muted">Many buyers have noted that the way this art catches the evening
+                                            light is truly magical.</p>
+                                        <p class="text-muted">Additionally, users often mention that the product feels much
+                                            heavier and sturdier than they originally expected from the online photos.</p>
+                                        <p class="mt-3 mb-1"><strong>Some customers mention:</strong></p>
+                                        <p class="text-muted">A few customers have pointed out that due to the significant
+                                            weight of the metal, the installation process typically requires two people to ensure it
+                                            is mounted securely.</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="customer-sentiment">
-                            <p class="fw-bold mb-3">What customers are saying</p>
-                            <p class="mb-2"><strong>Most customers say:</strong></p>
-                            <p class="text-muted">Many buyers have noted that the way this art catches the evening
-                                light is truly magical.</p>
-                            <p class="text-muted">Additionally, users often mention that the product feels much
-                                heavier and sturdier than they originally expected from the online photos.</p>
-                                <p class="mt-3 mb-1"><strong>Some customers mention:</strong></p>
-                            <p class="text-muted">A few customers have pointed out that due to the significant
-                                weight of the metal, the installation process typically requires two people to ensure it
-                                is mounted securely.</p>
-                        </div>
-
-                        <div class="accordion-list">
-                            <a class="accordion-link" data-bs-toggle="collapse" href="#use1" role="button"
-                                aria-expanded="true">
+                            <div class="accordion-link expanded">
                                 Where to use
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                                </svg>
-                            </a>
-                            <div class="collapse show" id="use1" data-bs-parent="#product1">
-                                <div class="collapse-content">
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
                                     This piece is ideal for prominent display in living rooms or entryways. It works
                                     exceptionally well when centered above fireplace mantles or serving as a grand focal
                                     point in a high-ceiling foyer.
                                 </div>
                             </div>
 
-                            <a class="accordion-link" data-bs-toggle="collapse" href="#spec1" role="button"
-                                aria-expanded="false">
-                                Why it’s special
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                                </svg>
-                            </a>
-                            <div class="collapse" id="spec1" data-bs-parent="#product1">
-                                <div class="collapse-content">
-                                    Crafted from 100% pure heavy-gauge copper, this item features a tarnish-resistant
-                                    protective coating. It is further enhanced by hand-etched leaf detailing that
-                                    showcases superior craftsmanship.
+                            <div class="accordion-link expanded">
+                                Where to buy
+                            </div>
+                            <div>
+                                <div class="collapse-content border-0 pb-0 pt-2">
+                                    <p class="mb-3">You will get this product at price near 50 USD on Amazon.</p>
+                                    <div class="d-block">
+                                        <a href="#" class="cta-btn">View Product</a>
+                                    </div>
                                 </div>
                             </div>
-
-                            <a class="accordion-link" data-bs-toggle="collapse" href="#who1" role="button"
-                                aria-expanded="false">
-                                Who it’s for
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                                </svg>
-                            </a>
-                            <div class="collapse" id="who1" data-bs-parent="#product1">
-                                <div class="collapse-content">
-                                    This art is designed for those who enjoy Modern, Rustic, or Industrial interior
-                                    styles. It is particularly suited for homeowners looking for high-end natural
-                                    metallic accents to warm up their living space.
-                                </div>
-                            </div>
-
-                            <a class="accordion-link" data-bs-toggle="collapse" href="#look1" role="button"
-                                aria-expanded="false">
-                                What it looks like
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                                </svg>
-                            </a>
-                            <div class="collapse" id="look1" data-bs-parent="#product1">
-                                <div class="collapse-content">
-                                    The design showcases an organic branching tree silhouette with a polished
-                                    reddish-gold copper finish. It features a hammered 3D relief structure that offers a
-                                    substantial 2-inch depth against the wall.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="platform-info platform-amazon">Available on Amazon</div>
-                        <div class="d-block">
-                            <a href="#" class="cta-btn">View Product</a>
                         </div>
                     </div>
                 </div>
@@ -734,87 +690,55 @@
                         </div>
                     </div>
                     <div class="col-lg-5 ps-lg-4">
-                        <div class="mb-4">
-                            <p class="fw-bold mb-2">About Product</p>
-                            <p class="text-muted mb-0 product-desc"
-                                data-full-text="This is a sophisticated triptych consisting of interlocking geometric panels. The set features a striking contrast between brushed and polished finishes, providing a sharp modern edge to any interior.">
-                            </p>
-                        </div>
+                        <div class="accordion-list mt-0">
+                            <div class="accordion-link expanded">
+                                About Product
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    <p class="text-muted mb-0 product-desc">This is a sophisticated triptych consisting of interlocking geometric panels. The set features a striking contrast between brushed and polished finishes, providing a sharp modern edge to any interior.</p>
+                                </div>
+                            </div>
 
-                        <div class="rating-container">
-                            <div class="stars">★★★★☆</div>
-                            <div class="rating-score">4.7/5</div>
-                        </div>
+                            <div class="accordion-link expanded">
+                                What customers are saying
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    <div class="customer-sentiment">
+                                        <div class="rating-container m-0 mb-3">
+                                            <div class="stars">★★★★☆</div>
+                                            <div class="rating-score">4.7/5</div>
+                                        </div>
+                                        <p class="text-muted mb-0">Most users have expressed their love for the bold geometric
+                                            profile, stating it is perfect for minimalist offices and professional dining spaces.
+                                            Many customers also frequently mention the high quality and refined texture of the
+                                            brushed metallic finish.</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="customer-sentiment">
-                            <p class="fw-bold mb-3">What customers are saying</p>
-                            <p class="text-muted ">Most users have expressed their love for the bold geometric
-                                profile, stating it is perfect for minimalist offices and professional dining spaces.
-                                Many customers also frequently mention the high quality and refined texture of the
-                                brushed metallic finish.</p>
-                        </div>
-
-                        <div class="accordion-list">
-                            <a class="accordion-link" data-bs-toggle="collapse" href="#use2" role="button"
-                                aria-expanded="true">
+                            <div class="accordion-link expanded">
                                 Where to use
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                                </svg>
-                            </a>
-                            <div class="collapse show" id="use2" data-bs-parent="#product2">
-                                <div class="collapse-content">
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
                                     These panels are best suited for modern offices, urban lofts, or minimalist dining
                                     rooms where clean lines are appreciated.
                                 </div>
                             </div>
 
-                            <a class="accordion-link" data-bs-toggle="collapse" href="#spec2" role="button"
-                                aria-expanded="false">
-                                Why it’s special
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                                </svg>
-                            </a>
-                            <div class="collapse" id="spec2" data-bs-parent="#product2">
-                                <div class="collapse-content">
-                                    A unique feature of this product is the hand-welded invisible joints, which are
-                                    applied to industrial-grade solid copper sheets for a seamless appearance.
+                            <div class="accordion-link expanded">
+                                Where to buy
+                            </div>
+                            <div>
+                                <div class="collapse-content border-0 pb-0 pt-2">
+                                    <p class="mb-3">You will get this product at price between 60 to 70 USD on Etsy.</p>
+                                    <div class="d-block">
+                                        <a href="#" class="cta-btn">View Product</a>
+                                    </div>
                                 </div>
                             </div>
-
-                            <a class="accordion-link" data-bs-toggle="collapse" href="#who2" role="button"
-                                aria-expanded="false">
-                                Who it’s for
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                                </svg>
-                            </a>
-                            <div class="collapse" id="who2" data-bs-parent="#product2">
-                                <div class="collapse-content">
-                                    The set is designed for those with an affinity for Minimalist, Contemporary, or
-                                    Corporate Modern interior styles.
-                                </div>
-                            </div>
-
-                            <a class="accordion-link" data-bs-toggle="collapse" href="#look2" role="button"
-                                aria-expanded="false">
-                                What it looks like
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                                </svg>
-                            </a>
-                            <div class="collapse" id="look2" data-bs-parent="#product2">
-                                <div class="collapse-content">
-                                    The design features sharp geometric interlocking plates with a multi-tonal brushed
-                                    copper finish that includes several high-shine highlights.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="platform-info platform-etsy">Available on Etsy</div>
-                        <div class="d-block">
-                            <a href="#" class="cta-btn">View Product</a>
                         </div>
                     </div>
                 </div>
@@ -838,86 +762,54 @@
                         </div>
                     </div>
                     <div class="col-lg-5 ps-lg-4">
-                        <div class="mb-4">
-                            <p class="fw-bold mb-2">About Product</p>
-                            <p class="text-muted mb-0 product-desc"
-                                data-full-text="This artwork consists of delicate, hand-formed lotus leaves. It features a unique blend of flame-painted copper paired with rich verdigris patina accents that provide a natural feel.">
-                            </p>
-                        </div>
+                        <div class="accordion-list mt-0">
+                            <div class="accordion-link expanded">
+                                About Product
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    <p class="text-muted mb-0 product-desc">This artwork consists of delicate, hand-formed lotus leaves. It features a unique blend of flame-painted copper paired with rich verdigris patina accents that provide a natural feel.</p>
+                                </div>
+                            </div>
 
-                        <div class="rating-container">
-                            <div class="stars">★★★★★</div>
-                            <div class="rating-score">4.9/5</div>
-                        </div>
+                            <div class="accordion-link expanded">
+                                What customers are saying
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    <div class="customer-sentiment">
+                                        <div class="rating-container m-0 mb-3">
+                                            <div class="stars">★★★★★</div>
+                                            <div class="rating-score">4.9/5</div>
+                                        </div>
+                                        <p class="text-muted mb-0">Customers frequently praise the unique color transitions found
+                                            in each leaf. Many reviewers have noted how the verdigris edges create a calming and
+                                            organic atmosphere within their modern living spaces.</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="customer-sentiment">
-                            <p class="fw-bold mb-3">What customers are saying</p>
-                            <p class="text-muted">Customers frequently praise the unique color transitions found
-                                in each leaf. Many reviewers have noted how the verdigris edges create a calming and
-                                organic atmosphere within their modern living spaces.</p>
-                        </div>
-
-                        <div class="accordion-list">
-                            <a class="accordion-link" data-bs-toggle="collapse" href="#use3" role="button"
-                                aria-expanded="true">
+                            <div class="accordion-link expanded">
                                 Where to use
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                                </svg>
-                            </a>
-                            <div class="collapse show" id="use3" data-bs-parent="#product3">
-                                <div class="collapse-content">
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
                                     These sculptures are perfect for spas, meditation rooms, bathrooms, or even as
                                     accent pieces on a bedroom wall.
                                 </div>
                             </div>
 
-                            <a class="accordion-link" data-bs-toggle="collapse" href="#spec3" role="button"
-                                aria-expanded="false">
-                                Why it’s special
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                                </svg>
-                            </a>
-                            <div class="collapse" id="spec3" data-bs-parent="#product3">
-                                <div class="collapse-content">
-                                    The unique feature of this work is the chemically oxidized edges, which provide a
-                                    natural patina and ensure that every individual leaf has its own distinct variance.
+                            <div class="accordion-link expanded">
+                                Where to buy
+                            </div>
+                            <div>
+                                <div class="collapse-content border-0 pb-0 pt-2">
+                                    <p class="mb-3">You will get this product at price near 120 USD on Uncommon Goods.</p>
+                                    <div class="d-block">
+                                        <a href="#" class="cta-btn">View Product</a>
+                                    </div>
                                 </div>
                             </div>
-
-                            <a class="accordion-link" data-bs-toggle="collapse" href="#who3" role="button"
-                                aria-expanded="false">
-                                Who it’s for
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                                </svg>
-                            </a>
-                            <div class="collapse" id="who3" data-bs-parent="#product3">
-                                <div class="collapse-content">
-                                    This piece is ideally suited for Zen, Bohemian, Coastal, or Eclectic interior design
-                                    themes.
-                                </div>
-                            </div>
-
-                            <a class="accordion-link" data-bs-toggle="collapse" href="#look3" role="button"
-                                aria-expanded="false">
-                                What it looks like
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                                </svg>
-                            </a>
-                            <div class="collapse" id="look3" data-bs-parent="#product3">
-                                <div class="collapse-content">
-                                    The design features circular organic discs that resemble floating lily pads. They
-                                    are finished in flame-painted copper with deep verdigris blue-green accents.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="platform-info platform-uncommon">Available on Uncommon Goods</div>
-                        <div class="d-block">
-                            <a href="#" class="cta-btn">View Product</a>
                         </div>
                     </div>
                 </div>
@@ -1037,43 +929,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Existing truncation logic
-            const descriptions = document.querySelectorAll(".product-desc");
-
-            descriptions.forEach(el => {
-                const fullText = el.getAttribute("data-full-text");
-                const words = fullText.split(" ");
-
-                if (words.length > 15) {
-                    const truncatedText = words.slice(0, 15).join(" ");
-                    const hiddenText = words.slice(15).join(" ");
-
-                    el.innerHTML = `
-                    <span class="visible-part">${truncatedText}...</span>
-                    <span class="hidden-part" style="display: none;">${hiddenText}</span>
-                    <span class="show-more-btn">Show more</span>
-                `;
-
-                    const btn = el.querySelector(".show-more-btn");
-                    const hiddenSpan = el.querySelector(".hidden-part");
-                    const visibleSpan = el.querySelector(".visible-part");
-
-                    btn.addEventListener("click", function () {
-                        if (hiddenSpan.style.display === "none") {
-                            hiddenSpan.style.display = "inline";
-                            visibleSpan.innerText = words.slice(0, 15).join(" ") + " ";
-                            btn.innerText = "Show less";
-                        } else {
-                            hiddenSpan.style.display = "none";
-                            visibleSpan.innerText = truncatedText + "...";
-                            btn.innerText = "Show more";
-                        }
-                    });
-                } else {
-                    el.innerText = fullText;
-                }
-            });
-
             // --- IMAGE SLIDER ARROW LOGIC (DESKTOP) ---
             document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
                 const container = wrapper.querySelector('.image-scroll-container');
