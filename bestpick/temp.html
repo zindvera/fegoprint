@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Iframe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            background-color: #f4f4f9;
+        }
+        .iframe-container {
+            width: 100%; /* Default for phone */
+            height: 85vh;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        /* Desktop view */
+        @media (min-width: 768px) {
+            .iframe-container {
+                width: 40%;
+                padding: 20px;
+            }
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="iframe-container">
+        <iframe 
+            src="https://benable.com/fegoprint/16-best-canvas-city-skylines-wall-art-to-buy-online-2026/details?detail_id=20893490" 
+            title="Benable Content"
+            onerror="this.parentElement.innerHTML='<div class=\'p-4 text-center\'>Unable to load the requested content. The site may prevent embedding via iFrames.</div>'">
+        </iframe>
+    </div>
+
+</body>
+</html>

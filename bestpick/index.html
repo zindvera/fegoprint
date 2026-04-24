@@ -17,6 +17,7 @@
             --brand-green: #00c853;
             --brand-black: #1a1a1a;
             --text-dark-grey: #333333;
+            /* Darker grey for better readability */
             --text-grey: #4a4a4a;
             --border-soft: #eeeeee;
         }
@@ -45,6 +46,7 @@
 
         .header-section .lead {
             color: #444444 !important;
+            /* Slightly darker than standard muted for readability */
         }
 
         .product-section {
@@ -63,80 +65,29 @@
             flex-shrink: 0;
         }
 
-        /* --- PINTEREST MULTIPLE IMAGES SCROLL STYLES --- */
+        /* --- IFRAME CONTAINER STYLES --- */
         .carousel-wrapper {
             position: relative;
             margin-bottom: 25px;
-            width: 100%;
         }
 
-        .scroll-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 44px;
-            height: 44px;
-            background-color: #eeeeee;
-            color: #333;
-            border: none;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 10;
-            display: none; /* Hidden by default (mobile/tablet) */
+        .product-iframe-container {
+            width: 100%;
+            min-height: 500px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid var(--border-soft);
+            display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: background 0.3s, opacity 0.3s;
+            overflow: hidden;
         }
 
-        .scroll-arrow:hover {
-            background-color: #dddddd;
-        }
-
-        .scroll-arrow.disabled {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .left-arrow { left: -22px; }
-        .right-arrow { right: -22px; }
-
-        .pinterest-scroll-container {
-            display: flex;
-            align-items: flex-start;
-            overflow-x: auto;
-            gap: 15px;
-            padding-bottom: 15px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: #cccccc transparent;
-            min-height: 250px; /* Provides space before injection */
-        }
-
-        .pinterest-scroll-container::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .pinterest-scroll-container::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .pinterest-scroll-container::-webkit-scrollbar-thumb {
-            background-color: #cccccc;
-            border-radius: 10px;
-        }
-
-        .pinterest-card {
-            flex: 0 0 auto;
-            margin-bottom: 0;
-            scroll-snap-align: start;
-            scroll-snap-stop: always;
-            height: auto;
-            position: relative;
-            display: flex;
-            justify-content: center;
+        .product-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 600px;
+            border: none;
         }
 
         .rating-container {
@@ -206,6 +157,32 @@
             font-size: 1.05rem;
         }
 
+        /* --- PLATFORM SPECIFIC COLORS --- */
+        .platform-info {
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: inline-block;
+            font-size: 1rem;
+        }
+
+        .platform-amazon,
+        .platform-etsy {
+            background: rgba(255, 153, 0, 0.1);
+            color: #cc7a00;
+        }
+
+        .platform-uncommon {
+            background: rgba(0, 200, 83, 0.1);
+            color: #008a39;
+        }
+
+        .platform-zazzle {
+            background: rgba(0, 102, 255, 0.1);
+            color: #0052cc;
+        }
+
         .cta-btn {
             background: var(--brand-black);
             color: white;
@@ -270,6 +247,17 @@
             margin-left: 10px;
         }
 
+
+        /* --- TRUNCATION STYLES --- */
+        .show-more-btn {
+            color: var(--brand-green);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: underline;
+            margin-left: 5px;
+        }
+
         .heading_text {
             font-weight: 450;
         }
@@ -278,104 +266,238 @@
 
         /* 1. MOBILE VIEW (Up to 767px) */
         @media (max-width: 767px) {
-            body { font-size: 1.1rem; }
-            .container { padding-left: 12px; padding-right: 12px; }
-            .header-section { padding-left: 20px; padding-right: 20px; }
-            .header-section h1 { text-align: start; }
-            .header-section .lead { text-align: start; margin-left: 0 !important; }
-            .product-title { font-size: 1.6rem; margin-bottom: 20px; }
-            .pinterest-card { 
-                width: 85%; 
-                min-width: 240px; /* Safe minimum for Pinterest iframes */
-            } /* Shows 1 full pin + slight view of next */
-            .cta-btn { width: 100%; font-size: 1.1rem; }
-            .useful-links-section a { font-size: 1.1rem; margin-bottom: 5px; }
-            .faq-card { margin-left: 5px; margin-right: 5px; }
-            .heading_text { font-size: 30px; }
+            body {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .header-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .header-section h1 {
+                text-align: start;
+            }
+
+            .header-section .lead {
+                text-align: start;
+                margin-left: 0 !important;
+            }
+
+            .product-title {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+
+            .cta-btn {
+                width: 100%;
+                font-size: 1.1rem;
+            }
+
+            .useful-links-section a {
+                font-size: 1.1rem;
+                margin-bottom: 5px;
+            }
+
+            .faq-card {
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+
+            .heading_text {
+                font-size: 30px
+            }
         }
 
         /* 2. TABLET VIEW (768px to 1023px) */
         @media (min-width: 768px) and (max-width: 1023px) {
-            body { font-size: 1.15rem; }
-            .container { padding-left: 15px; padding-right: 15px; }
-            .product-title { font-size: 1.8rem; margin-bottom: 25px; }
-            .pinterest-card { 
-                width: calc(32% - 15px); /* Adjusts for ~3 pins + slight view of 4th */
-                min-width: 240px; /* Prevents Pinterest iframes from overlapping */
-            } 
-            .scroll-arrow { display: flex; }
-            .cta-btn { width: auto; padding: 18px 60px; font-size: 1.1rem; }
-            .useful-links-section a { font-size: 1.1rem; }
-            .heading_text { font-size: 32px; }
+            body {
+                font-size: 1.15rem;
+            }
+
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .product-title {
+                font-size: 1.8rem;
+                margin-bottom: 25px;
+            }
+
+            .cta-btn {
+                width: auto;
+                padding: 18px 60px;
+                font-size: 1.1rem;
+            }
+
+            .useful-links-section a {
+                font-size: 1.1rem;
+            }
+
+            .heading_text {
+                font-size: 32px
+            }
         }
 
         /* 3. DESKTOP VIEW (1024px and above) */
         @media (min-width: 1024px) {
-            body { font-size: 1.15rem; }
-            .container { padding-left: 15px; padding-right: 15px; }
-            .product-title { font-size: 2.2rem; margin-bottom: 25px; }
-            .pinterest-card { 
-                width: calc(31.5% - 15px); /* Exactly sizes it so 3 fit fully, and 4th is peeking */
-                min-width: 250px; 
-            } 
-            .scroll-arrow { display: flex; }
-            .cta-btn { width: auto; padding: 18px 60px; font-size: 1.1rem; }
-            .useful-links-section a { font-size: 1.1rem; }
-            .heading_text { font-size: 35px; }
+            body {
+                font-size: 1.15rem;
+            }
+
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .product-title {
+                font-size: 2.2rem;
+                margin-bottom: 25px;
+            }
+
+            .cta-btn {
+                width: auto;
+                padding: 18px 60px;
+                font-size: 1.1rem;
+            }
+
+            .useful-links-section a {
+                font-size: 1.1rem;
+            }
+
+            .heading_text {
+                font-size: 35px
+            }
         }
 
-        /* --- IMAGE MODAL STYLES (UPDATED) --- */
+        /* --- IMAGE MODAL STYLES (Kept for compatibility if needed elsewhere) --- */
         .image-modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #333333;
+            background-color: #333333; /* Dark grey */
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 10000;
             overflow: hidden;
-            touch-action: none;
+            touch-action: none; /* Prevents default browser pinch-zoom */
         }
 
-        .image-modal-overlay.active { display: flex; }
+        .image-modal-overlay.active {
+            display: flex;
+        }
+
         .image-modal-close {
-            position: absolute; top: 20px; right: 20px; color: white;
-            font-size: 36px; cursor: pointer; z-index: 10001; background: rgba(0, 0, 0, 0.4);
-            border-radius: 50%; width: 50px; height: 50px; display: flex;
-            align-items: center; justify-content: center; line-height: 1; user-select: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 36px;
+            cursor: pointer;
+            z-index: 10001;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            user-select: none;
         }
-        .image-modal-close:hover { background: rgba(0, 0, 0, 0.7); }
+
+        .image-modal-close:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
         .image-modal-content-wrapper {
-            position: relative; width: 100%; height: 100%; cursor: grab; overflow: hidden;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: grab;
+            overflow: hidden; /* Ensure content dragging stays within */
         }
-        .image-modal-content-wrapper:active { cursor: grabbing; }
+
+        .image-modal-content-wrapper:active {
+            cursor: grabbing;
+        }
+
         .image-modal-target {
-            position: absolute; top: 0; left: 0; transform-origin: 0 0;
-            will-change: transform; display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 0 0;
+            will-change: transform;
+            display: inline-block;
         }
+
         .modal-dummy-img {
-            width: 80vw; height: 60vh; background: #ffffff; display: flex;
-            align-items: center; justify-content: center; font-size: 2rem; color: #aaaaaa;
-            border: 2px solid var(--border-soft); border-radius: 8px; user-select: none;
+            width: 80vw;
+            height: 60vh;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #aaaaaa;
+            border: 2px solid var(--border-soft);
+            border-radius: 8px;
+            user-select: none;
             pointer-events: none;
         }
+
         .zoom-controls {
-            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-            display: flex; align-items: center; gap: 15px; background: rgba(0, 0, 0, 0.6);
-            padding: 10px 25px; border-radius: 30px; z-index: 10001; color: white;
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 25px;
+            border-radius: 30px;
+            z-index: 10001;
+            color: white;
             font-family: 'Inter', sans-serif;
         }
+
         .zoom-btn {
-            width: 36px; height: 36px; border-radius: 50%; border: 2px solid white;
-            display: flex; align-items: center; justify-content: center; cursor: pointer;
-            font-size: 24px; font-weight: bold; user-select: none; transition: background 0.2s;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            user-select: none;
+            transition: background 0.2s;
             line-height: 1;
         }
-        .zoom-btn:hover { background: rgba(255, 255, 255, 0.3); }
-        .zoom-percent { min-width: 60px; text-align: center; font-weight: 600; font-size: 1.1rem; user-select: none; }
+
+        .zoom-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .zoom-percent {
+            min-width: 60px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            user-select: none;
+        }
     </style>
 </head>
 
@@ -399,53 +521,69 @@
                     <span class="num">1.</span>
                     <span class="text">Hand-Hammered Copper Tree</span>
                 </h3>
-                
-                <div class="carousel-wrapper">
-                    <button class="scroll-arrow left-arrow">&#10094;</button>
-                    <!-- Empty container to be injected by JS -->
-                    <div class="pinterest-scroll-container" data-product-id="product1"></div>
-                    <button class="scroll-arrow right-arrow">&#10095;</button>
-                </div>
-
-                <div class="accordion-list mt-0">
-                    <div class="mb-4">
-                        <p class="text-muted product-desc mb-0">
-                            This hand-hammered copper tree features intricate branches and a warm finish. Perfect for those who love nature-inspired decor.
-                        </p>
-                    </div>
-
-                    <div class="accordion-link expanded border-top-0 pt-0">
-                        What customers are saying
-                    </div>
-                    <div>
-                        <div class="collapse-content pt-2">
-                            <div class="customer-sentiment">
-                                <div class="rating-container m-0 mb-1">
-                                    <div class="stars">★★★★★</div>
-                                    <div class="rating-score">4.8/5</div>
-                                </div>
-                                <div class="mb-4" style="font-size: 1.05rem; font-weight: 500; color: var(--text-dark-grey);">Ratings from 1,420 customers on Amazon</div>
-                                <p class="mb-2"><strong>Most customers say:</strong></p>
-                                <p class="text-muted">Many buyers have noted that the way this art catches the evening
-                                    light is truly magical.</p>
-                                <p class="text-muted">Additionally, users often mention that the product feels much
-                                    heavier and sturdier than they originally expected from the online photos.</p>
-                                <p class="mt-3 mb-1"><strong>Some customers mention:</strong></p>
-                                <p class="text-muted">A few customers have pointed out that due to the significant
-                                    weight of the metal, the installation process typically requires two people to ensure it
-                                    is mounted securely.</p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="carousel-wrapper">
+                            <div id="product-iframe-1" class="product-iframe-container">
+                                <!-- Iframe injected here via JS -->
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 ps-lg-4">
+                        <div class="accordion-list mt-0">
+                            <div class="accordion-link expanded">
+                                About Product
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    <p class="text-muted mb-0 product-desc">This breathtaking centerpiece features intricate branching details and a warm, glowing finish that catches the eye. It is an artisanal piece that instantly transforms any blank wall into a sophisticated focal point for your home.</p>
+                                </div>
+                            </div>
 
-                    <div class="accordion-link expanded">
-                        Where to buy
-                    </div>
-                    <div>
-                        <div class="collapse-content border-0 pb-0 pt-2">
-                            <p class="mb-3">You will get this product at price near 50 USD on Amazon.</p>
-                            <div class="d-block">
-                                <a href="#" class="cta-btn">View Product</a>
+                            <div class="accordion-link expanded">
+                                What customers are saying
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    <div class="customer-sentiment">
+                                        <div class="rating-container m-0 mb-3">
+                                            <div class="stars">★★★★★</div>
+                                            <div class="rating-score">4.8/5</div>
+                                        </div>
+                                        <p class="mb-2"><strong>Most customers say:</strong></p>
+                                        <p class="text-muted">Many buyers have noted that the way this art catches the evening
+                                            light is truly magical.</p>
+                                        <p class="text-muted">Additionally, users often mention that the product feels much
+                                            heavier and sturdier than they originally expected from the online photos.</p>
+                                        <p class="mt-3 mb-1"><strong>Some customers mention:</strong></p>
+                                        <p class="text-muted">A few customers have pointed out that due to the significant
+                                            weight of the metal, the installation process typically requires two people to ensure it
+                                            is mounted securely.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-link expanded">
+                                Where to use
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    This piece is ideal for prominent display in living rooms or entryways. It works
+                                    exceptionally well when centered above fireplace mantles or serving as a grand focal
+                                    point in a high-ceiling foyer.
+                                </div>
+                            </div>
+
+                            <div class="accordion-link expanded">
+                                Where to buy
+                            </div>
+                            <div>
+                                <div class="collapse-content border-0 pb-0 pt-2">
+                                    <p class="mb-3">You will get this product at price near 50 USD on Amazon.</p>
+                                    <div class="d-block">
+                                        <a href="#" class="cta-btn">View Product</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -458,48 +596,63 @@
                     <span class="num">2.</span>
                     <span class="text">Geometric Interlock Panels</span>
                 </h3>
-                
-                <div class="carousel-wrapper">
-                    <button class="scroll-arrow left-arrow">&#10094;</button>
-                    <!-- Empty container to be injected by JS -->
-                    <div class="pinterest-scroll-container" data-product-id="product2"></div>
-                    <button class="scroll-arrow right-arrow">&#10095;</button>
-                </div>
-
-                <div class="accordion-list mt-0">
-                    <div class="mb-4">
-                        <p class="text-muted product-desc mb-0">
-                            These interlocking geometric panels offer a striking contrast of brushed finishes. Ideal if you love bold, minimalist modern designs.
-                        </p>
-                    </div>
-
-                    <div class="accordion-link expanded border-top-0 pt-0">
-                        What customers are saying
-                    </div>
-                    <div>
-                        <div class="collapse-content pt-2">
-                            <div class="customer-sentiment">
-                                <div class="rating-container m-0 mb-1">
-                                    <div class="stars">★★★★☆</div>
-                                    <div class="rating-score">4.7/5</div>
-                                </div>
-                                <div class="mb-4" style="font-size: 1.05rem; font-weight: 500; color: var(--text-dark-grey);">Ratings from 856 customers on Etsy</div>
-                                <p class="text-muted mb-0">Most users have expressed their love for the bold geometric
-                                    profile, stating it is perfect for minimalist offices and professional dining spaces.
-                                    Many customers also frequently mention the high quality and refined texture of the
-                                    brushed metallic finish.</p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="carousel-wrapper">
+                            <div id="product-iframe-2" class="product-iframe-container">
+                                <!-- Iframe injected here via JS -->
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 ps-lg-4">
+                        <div class="accordion-list mt-0">
+                            <div class="accordion-link expanded">
+                                About Product
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    <p class="text-muted mb-0 product-desc">This is a sophisticated triptych consisting of interlocking geometric panels. The set features a striking contrast between brushed and polished finishes, providing a sharp modern edge to any interior.</p>
+                                </div>
+                            </div>
 
-                    <div class="accordion-link expanded">
-                        Where to buy
-                    </div>
-                    <div>
-                        <div class="collapse-content border-0 pb-0 pt-2">
-                            <p class="mb-3">You will get this product at price between 60 to 70 USD on Etsy.</p>
-                            <div class="d-block">
-                                <a href="#" class="cta-btn">View Product</a>
+                            <div class="accordion-link expanded">
+                                What customers are saying
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    <div class="customer-sentiment">
+                                        <div class="rating-container m-0 mb-3">
+                                            <div class="stars">★★★★☆</div>
+                                            <div class="rating-score">4.7/5</div>
+                                        </div>
+                                        <p class="text-muted mb-0">Most users have expressed their love for the bold geometric
+                                            profile, stating it is perfect for minimalist offices and professional dining spaces.
+                                            Many customers also frequently mention the high quality and refined texture of the
+                                            brushed metallic finish.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-link expanded">
+                                Where to use
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    These panels are best suited for modern offices, urban lofts, or minimalist dining
+                                    rooms where clean lines are appreciated.
+                                </div>
+                            </div>
+
+                            <div class="accordion-link expanded">
+                                Where to buy
+                            </div>
+                            <div>
+                                <div class="collapse-content border-0 pb-0 pt-2">
+                                    <p class="mb-3">You will get this product at price between 60 to 70 USD on Etsy.</p>
+                                    <div class="d-block">
+                                        <a href="#" class="cta-btn">View Product</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -512,47 +665,62 @@
                     <span class="num">3.</span>
                     <span class="text">Copper Lotus Leaf Sculpture</span>
                 </h3>
-                
-                <div class="carousel-wrapper">
-                    <button class="scroll-arrow left-arrow">&#10094;</button>
-                    <!-- Empty container to be injected by JS -->
-                    <div class="pinterest-scroll-container" data-product-id="product3"></div>
-                    <button class="scroll-arrow right-arrow">&#10095;</button>
-                </div>
-
-                <div class="accordion-list mt-0">
-                    <div class="mb-4">
-                        <p class="text-muted product-desc mb-0">
-                            Featuring flame-painted copper and verdigris accents, this lotus leaf sculpture is perfect if you love organic, calming aesthetics.
-                        </p>
-                    </div>
-
-                    <div class="accordion-link expanded border-top-0 pt-0">
-                        What customers are saying
-                    </div>
-                    <div>
-                        <div class="collapse-content pt-2">
-                            <div class="customer-sentiment">
-                                <div class="rating-container m-0 mb-1">
-                                    <div class="stars">★★★★★</div>
-                                    <div class="rating-score">4.9/5</div>
-                                </div>
-                                <div class="mb-4" style="font-size: 1.05rem; font-weight: 500; color: var(--text-dark-grey);">Ratings from 342 customers on Uncommon Goods</div>
-                                <p class="text-muted mb-0">Customers frequently praise the unique color transitions found
-                                    in each leaf. Many reviewers have noted how the verdigris edges create a calming and
-                                    organic atmosphere within their modern living spaces.</p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="carousel-wrapper">
+                            <div id="product-iframe-3" class="product-iframe-container">
+                                <!-- Iframe injected here via JS -->
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 ps-lg-4">
+                        <div class="accordion-list mt-0">
+                            <div class="accordion-link expanded">
+                                About Product
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    <p class="text-muted mb-0 product-desc">This artwork consists of delicate, hand-formed lotus leaves. It features a unique blend of flame-painted copper paired with rich verdigris patina accents that provide a natural feel.</p>
+                                </div>
+                            </div>
 
-                    <div class="accordion-link expanded">
-                        Where to buy
-                    </div>
-                    <div>
-                        <div class="collapse-content border-0 pb-0 pt-2">
-                            <p class="mb-3">You will get this product at price near 120 USD on Uncommon Goods.</p>
-                            <div class="d-block">
-                                <a href="#" class="cta-btn">View Product</a>
+                            <div class="accordion-link expanded">
+                                What customers are saying
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    <div class="customer-sentiment">
+                                        <div class="rating-container m-0 mb-3">
+                                            <div class="stars">★★★★★</div>
+                                            <div class="rating-score">4.9/5</div>
+                                        </div>
+                                        <p class="text-muted mb-0">Customers frequently praise the unique color transitions found
+                                            in each leaf. Many reviewers have noted how the verdigris edges create a calming and
+                                            organic atmosphere within their modern living spaces.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-link expanded">
+                                Where to use
+                            </div>
+                            <div>
+                                <div class="collapse-content pt-2">
+                                    These sculptures are perfect for spas, meditation rooms, bathrooms, or even as
+                                    accent pieces on a bedroom wall.
+                                </div>
+                            </div>
+
+                            <div class="accordion-link expanded">
+                                Where to buy
+                            </div>
+                            <div>
+                                <div class="collapse-content border-0 pb-0 pt-2">
+                                    <p class="mb-3">You will get this product at price near 120 USD on Uncommon Goods.</p>
+                                    <div class="d-block">
+                                        <a href="#" class="cta-btn">View Product</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -671,130 +839,76 @@
 
     <script src="../../../nav.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Pinterest embed script -->
-    <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
-    
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             
-            // --- PINTEREST DATA (JSON) ---
-            const pinsList = {
-                "product1": [
-                    "https://www.pinterest.com/pin/1108307789616239012/",
-                    "https://www.pinterest.com/pin/1108307789616239011/",
-                    "https://www.pinterest.com/pin/1108307789616239010/",
-                    "https://www.pinterest.com/pin/1108307789616239009/"
-                ],
-                "product2": [
-                    "https://www.pinterest.com/pin/1108307789616239012/",
-                    "https://www.pinterest.com/pin/1108307789616239011/",
-                    "https://www.pinterest.com/pin/1108307789616239010/",
-                    "https://www.pinterest.com/pin/1108307789616239009/"
-                ],
-                "product3": [
-                    "https://www.pinterest.com/pin/1108307789616239012/",
-                    "https://www.pinterest.com/pin/1108307789616239011/",
-                    "https://www.pinterest.com/pin/1108307789616239010/",
-                    "https://www.pinterest.com/pin/1108307789616239009/"
-                ]
+            // --- NEW BENABLE IFRAME INJECTION LOGIC ---
+            // Create JSON mapping for products
+            const productShowcaseLink = {
+                "product-iframe-1": "https://benable.com/fegoprint/16-best-canvas-city-skylines-wall-art-to-buy-online-2026/details?detail_id=20893490",
+                "product-iframe-2": "https://benable.com/fegoprint/16-best-canvas-city-skylines-wall-art-to-buy-online-2026/details?detail_id=20893490",
+                "product-iframe-3": "https://benable.com/fegoprint/16-best-canvas-city-skylines-wall-art-to-buy-online-2026/details?detail_id=20893490",
+                "product-iframe-4": "https://benable.com/fegoprint/16-best-canvas-city-skylines-wall-art-to-buy-online-2026/details?detail_id=20893490",
+                "product-iframe-5": "https://benable.com/fegoprint/16-best-canvas-city-skylines-wall-art-to-buy-online-2026/details?detail_id=20893490"
+                // Easily extendable for up to N products
             };
 
-            // --- FUNCTION TO INITIALIZE SLIDER ARROWS AFTER INJECTION ---
-            function initArrowsForContainer(wrapper) {
-                const container = wrapper.querySelector('.pinterest-scroll-container');
-                const leftBtn = wrapper.querySelector('.left-arrow');
-                const rightBtn = wrapper.querySelector('.right-arrow');
+            const loadedIframes = new Set();
+            const productSectionsArr = Array.from(document.querySelectorAll('.product-section'));
 
-                if(leftBtn && rightBtn && container) {
-                    const updateArrows = () => {
-                        const scrollLeft = Math.ceil(container.scrollLeft);
-                        const maxScrollLeft = container.scrollWidth - container.clientWidth;
+            function injectIframe(index) {
+                if (loadedIframes.has(index)) return;
+                
+                const containerId = `product-iframe-${index + 1}`;
+                const container = document.getElementById(containerId);
+                let srcLink = productShowcaseLink[containerId];
 
-                        if (scrollLeft <= 5) {
-                            leftBtn.classList.add('disabled');
-                        } else {
-                            leftBtn.classList.remove('disabled');
-                        }
-
-                        if (scrollLeft >= maxScrollLeft - 5) {
-                            rightBtn.classList.add('disabled');
-                        } else {
-                            rightBtn.classList.remove('disabled');
-                        }
-                    };
-
-                    container.addEventListener('scroll', updateArrows);
-                    window.addEventListener('resize', updateArrows);
-
-                    // Re-check after iframe builds completely
-                    setTimeout(updateArrows, 1500); 
-
-                    leftBtn.addEventListener('click', () => {
-                        const scrollAmount = container.clientWidth * 0.85; 
-                        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-                    });
-                    rightBtn.addEventListener('click', () => {
-                        const scrollAmount = container.clientWidth * 0.85;
-                        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                    });
+                if (container && srcLink) {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = srcLink;
+                    iframe.style.width = "100%";
+                    iframe.style.height = "100%";
+                    iframe.style.minHeight = "600px";
+                    iframe.style.border = "none";
+                    iframe.setAttribute("scrolling", "yes"); 
+                    container.appendChild(iframe);
+                    loadedIframes.add(index);
                 }
             }
 
-            // --- LAZY LOAD INTERSECTION OBSERVER LOGIC ---
+            // 1. Initial Load: Product 1 first, then immediately 2, 3, 4 with slight delay
+            injectIframe(0); // Product 1
+            setTimeout(() => {
+                injectIframe(1); // Product 2
+                injectIframe(2); // Product 3
+                injectIframe(3); // Product 4
+            }, 100);
+
+            // 2. Intersection Observer for Scroll Logic (keeps 3 products ahead loaded)
             const observerOptions = {
                 root: null,
-                // Using 2000px rootMargin so it loads ~2 products ahead of the user view.
-                // On initial load, it will instantly intersect the first 2-3 products
-                // and only lazy load the rest when the user starts scrolling deep enough.
-                rootMargin: '2000px 0px', 
-                threshold: 0
+                rootMargin: '0px',
+                threshold: 0.1
             };
 
-            const pinObserver = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const scrollContainer = entry.target.querySelector('.pinterest-scroll-container');
+                        const sectionIndex = productSectionsArr.indexOf(entry.target);
+                        // When sectionIndex is reached, make sure up to (sectionIndex + 3) are injected
+                        const targetLoadCount = sectionIndex + 4; // sectionIndex(0-based) + 1 (current) + 3 (margin)
                         
-                        // Prevent re-injecting if already loaded
-                        if (scrollContainer && !scrollContainer.dataset.loaded) {
-                            const productId = scrollContainer.dataset.productId;
-                            const pins = pinsList[productId] || [];
-                            
-                            let pinsHtml = '';
-                            pins.forEach(pinUrl => {
-                                pinsHtml += `
-                                    <div class="pinterest-card">
-                                        <a data-pin-do="embedPin" data-pin-width="medium" href="${pinUrl}"></a>
-                                    </div>
-                                `;
-                            });
-                            
-                            scrollContainer.innerHTML = pinsHtml;
-                            scrollContainer.dataset.loaded = 'true';
-                            
-                            // Re-trigger Pinterest embed building script for newly added nodes
-                            if (window.PinUtils && typeof window.PinUtils.build === 'function') {
-                                window.PinUtils.build();
-                            }
-
-                            // Initialize scrolling logic for this specific wrapper
-                            const wrapper = entry.target.querySelector('.carousel-wrapper');
-                            initArrowsForContainer(wrapper);
-
-                            // Unobserve to save memory once loaded
-                            observer.unobserve(entry.target);
+                        for (let i = loadedIframes.size; i < targetLoadCount; i++) {
+                            // If user scrolled fast, ensure missing ones up to target load are caught
+                            injectIframe(i);
                         }
                     }
                 });
             }, observerOptions);
 
-            // Observe all product sections
-            document.querySelectorAll('.product-section').forEach(section => {
-                pinObserver.observe(section);
-            });
+            productSectionsArr.forEach(section => observer.observe(section));
 
-            // --- IMAGE MODAL JAVASCRIPT ---
+            // --- EXISTING IMAGE MODAL JAVASCRIPT (Retained as requested) ---
             const modal = document.getElementById('imageZoomModal');
             const modalClose = document.getElementById('modalCloseBtn');
             const modalWrapper = document.getElementById('modalWrapper');
@@ -813,8 +927,8 @@
             let initialPinchDistance = null;
             let initialScale = 1;
             let pinchCenter = { x: 0, y: 0 };
-            let lastTapTime = 0; 
-            let isPinching = false; 
+            let lastTapTime = 0; // Needed for touch double-tap detection
+            let isPinching = false; // Flag to stop double-taps firing right after a pinch
             let pinchTimeout;
 
             function updateTransform() {
@@ -823,7 +937,7 @@
             }
 
             function zoomToPoint(targetX, targetY, newScale) {
-                newScale = Math.max(0.5, Math.min(newScale, 5)); 
+                newScale = Math.max(0.5, Math.min(newScale, 5)); // Limits zoom to 0.5x - 5x
                 const ratio = newScale / scale;
                 translateX = targetX - (targetX - translateX) * ratio;
                 translateY = targetY - (targetY - translateY) * ratio;
@@ -835,7 +949,7 @@
                 scale = 1;
                 const child = modalTarget.firstElementChild;
                 if (child) {
-                    modalTarget.style.transform = 'none'; 
+                    modalTarget.style.transform = 'none'; // Clear transform temporarily to get true width/height
                     const wrapperRect = modalWrapper.getBoundingClientRect();
                     const childRect = child.getBoundingClientRect();
                     
@@ -848,21 +962,57 @@
                 updateTransform();
             }
 
+            // Open Modal Logic
+            document.querySelectorAll('.product-img, img').forEach(imgEl => {
+                imgEl.addEventListener('click', function () {
+                    modalTarget.innerHTML = ''; 
+                    
+                    const clone = this.cloneNode(true);
+                    
+                    // Formatting the clone so it looks like an image even if it's the text placeholder div
+                    if (this.tagName !== 'IMG') {
+                        clone.className = 'modal-dummy-img';
+                        clone.innerText = this.innerText;
+                    } else {
+                        clone.style.maxWidth = '90vw';
+                        clone.style.maxHeight = '90vh';
+                        clone.style.width = 'auto'; // Disable 85% width inside modal
+                        clone.style.height = 'auto'; // Disable fixed height inside modal
+                        clone.style.objectFit = 'contain'; 
+                        clone.draggable = false;
+                        clone.classList.remove('product-img');
+                    }
+                    
+                    modalTarget.appendChild(clone);
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Stop background scrolling
+                    
+                    // Push state to intercept browser back button
+                    window.history.pushState({ modalOpen: true }, "");
+                    
+                    // Small timeout to allow element to render and get dimensions for perfect centering
+                    setTimeout(() => resetZoom(), 10);
+                });
+            });
+
+            // Close Modal
             modalClose.addEventListener('click', () => {
                 modal.classList.remove('active');
-                document.body.style.overflow = ''; 
+                document.body.style.overflow = ''; // Restore background scrolling
                 if (window.history.state && window.history.state.modalOpen) {
                     window.history.back();
                 }
             });
 
+            // Handle Browser Back Button
             window.addEventListener('popstate', () => {
                 if (modal.classList.contains('active')) {
                     modal.classList.remove('active');
-                    document.body.style.overflow = ''; 
+                    document.body.style.overflow = ''; // Restore background scrolling
                 }
             });
 
+            // Button Zoom
             zoomInBtn.addEventListener('click', () => {
                 const rect = modalWrapper.getBoundingClientRect();
                 zoomToPoint(rect.width / 2, rect.height / 2, scale + 0.25);
@@ -873,6 +1023,7 @@
                 zoomToPoint(rect.width / 2, rect.height / 2, scale - 0.25);
             });
 
+            // Double Click Zoom (Mouse Support)
             modalWrapper.addEventListener('dblclick', (e) => {
                 const rect = modalWrapper.getBoundingClientRect();
                 const clickX = e.clientX - rect.left;
@@ -880,12 +1031,13 @@
 
                 if (scale >= 2.5) {
                     zoomToPoint(clickX, clickY, 1);
-                    setTimeout(() => resetZoom(), 10); 
+                    setTimeout(() => resetZoom(), 10); // Fully reset position if zooming all the way out
                 } else {
                     zoomToPoint(clickX, clickY, scale * 2);
                 }
             });
 
+            // Mouse Drag to Pan
             modalWrapper.addEventListener('mousedown', (e) => {
                 if (e.target === zoomInBtn || e.target === zoomOutBtn || e.target === modalClose) return;
                 e.preventDefault();
@@ -907,6 +1059,7 @@
                 isDragging = false;
             });
 
+            // Touch Gestures (Pinch to Zoom, Double Tap, & Drag to Pan)
             function getTouchDistance(touches) {
                 const dx = touches[0].clientX - touches[1].clientX;
                 const dy = touches[0].clientY - touches[1].clientY;
@@ -932,18 +1085,18 @@
                     }
                 } else if (e.touches.length === 2) {
                     isDragging = false; 
-                    isPinching = true; 
-                    clearTimeout(pinchTimeout); 
+                    isPinching = true; // Mark as pinching to avoid double-tap conflict
+                    clearTimeout(pinchTimeout); // Clear reset timeout if actively pinching again
                     initialPinchDistance = getTouchDistance(e.touches);
                     initialScale = scale;
                     pinchCenter = getTouchMidpoint(e.touches);
-                    lastTapTime = 0; 
+                    lastTapTime = 0; // Cancel any pending tap logic
                 }
             }, { passive: false });
 
             modalWrapper.addEventListener('touchmove', (e) => {
                 if(modal.classList.contains('active')) {
-                    e.preventDefault(); 
+                    e.preventDefault(); // Stop underlying page scroll while modal is active
                 }
                 
                 if (isDragging && e.touches.length === 1 && !isPinching) {
@@ -961,6 +1114,7 @@
                 const currentTime = new Date().getTime();
                 const tapLength = currentTime - lastTapTime;
 
+                // Handle Double Tap Zoom - ONLY if we weren't just pinching
                 if (!isPinching && e.touches.length === 0 && e.changedTouches.length === 1 && tapLength > 0 && tapLength < 300) {
                     const rect = modalWrapper.getBoundingClientRect();
                     const clickX = e.changedTouches[0].clientX - rect.left;
@@ -973,7 +1127,7 @@
                         zoomToPoint(clickX, clickY, scale * 2);
                     }
                     e.preventDefault();
-                    lastTapTime = 0; 
+                    lastTapTime = 0; // Reset
                 } else if (!isPinching && e.touches.length === 0 && e.changedTouches.length === 1) {
                     lastTapTime = currentTime;
                 }
@@ -983,6 +1137,7 @@
                 }
                 
                 if (e.touches.length === 1 && !isPinching) {
+                    // Resume drag if one finger is left
                     isDragging = true;
                     startX = e.touches[0].clientX;
                     startY = e.touches[0].clientY;
@@ -994,6 +1149,7 @@
 
                 if (e.touches.length === 0) {
                     if (isPinching) {
+                        // Small delay before unflagging pinch to prevent subsequent release triggering double tap
                         pinchTimeout = setTimeout(() => {
                             isPinching = false;
                         }, 300);
