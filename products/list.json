@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Traditional Wall Art for Dining",
+    "link": "https://benable.com/fegoprint/traditional-wall-art-dining",
+    "price": 40,
+    "space": "Dining Room",
+    "image": "https://images.pexels.com/photos/1080696/pexels-photo-1080696.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    "name": "Minimalist Kitchen Tools",
+    "link": "https://benable.com/fegoprint/kitchen-under-10",
+    "price": 10,
+    "space": "Kitchen",
+    "image": "https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    "name": "Modern Living Room Accents",
+    "link": "https://benable.com/fegoprint/living-room-40",
+    "price": 40,
+    "space": "Living Room",
+    "image": "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    "name": "Table Decor Essentials",
+    "link": "https://benable.com/fegoprint/table-under-10",
+    "price": 10,
+    "space": "Table",
+    "image": "https://images.pexels.com/photos/1099816/pexels-photo-1099816.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    "name": "Digital Skyline Prints",
+    "link": "https://benable.com/fegoprint/skyline-art-5",
+    "price": 5,
+    "space": "Bedroom",
+    "image": "https://images.pexels.com/photos/3316918/pexels-photo-3316918.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    "name": "Garden Sculpture Collection",
+    "link": "https://benable.com/fegoprint/garden-modern",
+    "price": 40,
+    "space": "Garden",
+    "image": "https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    "name": "Bathroom Organizers",
+    "link": "https://benable.com/fegoprint/bathroom-under-10",
+    "price": 10,
+    "space": "Bathroom",
+    "image": "https://images.pexels.com/photos/3958957/pexels-photo-3958957.jpeg?auto=compress&cs=tinysrgb&w=800"
+  }
+]
