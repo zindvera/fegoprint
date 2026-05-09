@@ -153,12 +153,11 @@
             border-bottom: 1px solid #e5e7eb;
         }
 
-        /* Reverted wrapping style for sticky panels */
         .sticky-btn-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 0.75rem;
-            justify-content: flex-start; /* Aligned to start */
+            justify-content: flex-start;
         }
     </style>
 </head>
@@ -211,9 +210,9 @@
         
         <!-- Header -->
         <div class="text-center mb-16 px-6">
-            <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">We Find the Best Decor For You</h1>
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-4"> We Find the Best Decor Items For You</h1>
             <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-                Skip the endless searching. Select your space and budget to see our handpicked decor collections.
+                Select your space and budget, See list of decor items.
             </p>
         </div>
 
@@ -297,6 +296,66 @@
         const dynamicText = document.getElementById('dynamic-text');
         const stickyFilterBar = document.getElementById('sticky-filter');
         const mainFilters = document.getElementById('main-filters');
+
+        // Function to horizontally center the active pill
+        function centerActivePill(containerId, activeBtn) {
+            const container = document.getElementById(containerId);
+            if (!container || !activeBtn) return;
+
+            // setTimeout ensures the DOM is fully laid out before calculating scroll position
+            setTimeout(() => {
+                const btnRect = activeBtn.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                
+                // Calculate absolute position inside the scroll container
+                const absoluteLeft = (btnRect.left - containerRect.left) + container.scrollLeft;
+                
+                // Calculate target scroll position to center the button
+                const scrollPos = absoluteLeft - (container.offsetWidth / 2) + (btnRect.width / 2);
+
+                container.scrollTo({ left: scrollPos, behavior: 'smooth' });
+                
+                // Update arrows after scrolling finishes
+                setTimeout(() => {
+                    updateArrowVisibility(containerId);
+                }, 300);
+            }, 50);
+        }
+
+        // Function to read URL parameters (e.g., ?space=living+room&budget=50)
+        function applyUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const spaceParam = params.get('space');
+            const budgetParam = params.get('budget'); // Using 'budget' in URL to map to 'price' internally
+
+            if (spaceParam) {
+                const spaceBtns = document.querySelectorAll('#space-filters .filter-btn');
+                // Find button matching ignoring case (e.g. "living room" matches "Living Room")
+                const targetBtn = Array.from(spaceBtns).find(btn => btn.getAttribute('data-value').toLowerCase() === spaceParam.toLowerCase());
+                
+                if (targetBtn) {
+                    spaceBtns.forEach(b => b.classList.remove('active'));
+                    targetBtn.classList.add('active');
+                    currentFilters.space = targetBtn.getAttribute('data-value');
+                    stickyFilters.space = currentFilters.space;
+                    centerActivePill('space-filters', targetBtn);
+                }
+            }
+
+            if (budgetParam) {
+                const priceBtns = document.querySelectorAll('#price-filters .filter-btn');
+                // Exact match for numbers
+                const targetBtn = Array.from(priceBtns).find(btn => btn.getAttribute('data-value') === budgetParam);
+                
+                if (targetBtn) {
+                    priceBtns.forEach(b => b.classList.remove('active'));
+                    targetBtn.classList.add('active');
+                    currentFilters.price = targetBtn.getAttribute('data-value');
+                    stickyFilters.price = currentFilters.price;
+                    centerActivePill('price-filters', targetBtn);
+                }
+            }
+        }
 
         // Fetch data from products/list.json
         async function fetchCurations() {
@@ -385,6 +444,14 @@
             
             closeStickyPanels();
             renderCards();
+
+            // Center pills automatically when applying sticky filters
+            const activeSpaceBtn = document.querySelector('#space-filters .filter-btn.active');
+            if (activeSpaceBtn) centerActivePill('space-filters', activeSpaceBtn);
+            
+            const activePriceBtn = document.querySelector('#price-filters .filter-btn.active');
+            if (activePriceBtn) centerActivePill('price-filters', activePriceBtn);
+
             window.scrollTo({ top: mainFilters.offsetTop - 100, behavior: 'smooth' });
         }
 
@@ -414,11 +481,17 @@
         }
 
         function renderCards() {
-            const filtered = curations.filter(c => {
-                const spaceMatch = currentFilters.space === 'all' || c.space === currentFilters.space;
-                const priceMatch = currentFilters.price === 'all' || c.price <= parseInt(currentFilters.price);
-                return spaceMatch && priceMatch;
-            });
+            let filtered = curations;
+            
+            // Only run filter calculations if a specific parameter/filter is active
+            // Otherwise, it skips this and displays the JSON exactly top-to-bottom
+            if (currentFilters.space !== 'all' || currentFilters.price !== 'all') {
+                filtered = curations.filter(c => {
+                    const spaceMatch = currentFilters.space === 'all' || c.space === currentFilters.space;
+                    const priceMatch = currentFilters.price === 'all' || c.price <= parseInt(currentFilters.price);
+                    return spaceMatch && priceMatch;
+                });
+            }
 
             grid.innerHTML = '';
             
@@ -468,6 +541,10 @@
 
             currentFilters[type] = value;
             stickyFilters[type] = value;
+            
+            // Re-center the newly clicked pill
+            centerActivePill(`${type}-filters`, btn);
+            
             renderCards();
         }
 
@@ -479,16 +556,37 @@
                 if (btn.getAttribute('data-value') === 'all') btn.classList.add('active');
             });
             renderCards();
+            
+            // Scroll back to start
+            document.getElementById('space-filters').scrollTo({ left: 0, behavior: 'smooth' });
+            document.getElementById('price-filters').scrollTo({ left: 0, behavior: 'smooth' });
         }
 
         document.getElementById('space-filters').addEventListener('click', handleFilterClick);
         document.getElementById('price-filters').addEventListener('click', handleFilterClick);
 
         window.onload = () => {
+            // Apply URL Parameters before fetching data
+            applyUrlParams();
+            
             fetchCurations();
+            
+            // Initial check for arrow visibility in case window is loaded without params
+            setTimeout(() => {
+                updateArrowVisibility('space-filters');
+                updateArrowVisibility('price-filters');
+            }, 100);
+
             window.addEventListener('resize', () => {
                 updateArrowVisibility('space-filters');
                 updateArrowVisibility('price-filters');
+                
+                // Recenter pills on window resize to maintain visual balance
+                const activeSpaceBtn = document.querySelector('#space-filters .filter-btn.active');
+                if (activeSpaceBtn) centerActivePill('space-filters', activeSpaceBtn);
+                
+                const activePriceBtn = document.querySelector('#price-filters .filter-btn.active');
+                if (activePriceBtn) centerActivePill('price-filters', activePriceBtn);
             });
         };
     </script>
